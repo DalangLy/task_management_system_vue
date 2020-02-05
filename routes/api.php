@@ -13,8 +13,12 @@ use Illuminate\Http\Request;
 |
 */
 
+//trust client route
+Route::get('v1/trust_client_token', 'API\V1\TrustClientController@getTrustClientToken');
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//user routes
 Route::middleware('client')->get('/users', 'API\V1\AuthController@users');

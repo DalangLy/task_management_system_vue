@@ -30,4 +30,16 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'passport_client_credentials' => [
+        'trust_client_end_point' => env('PASSPORT_TRUST_CLIENT_END_POINT'),
+        'client_id' => env('PASSPORT_CLIENT_CREDENTIALS_CLIENT_ID'),
+        'client_secret' => env('PASSPORT_CLIENT_CREDENTIALS_CLIENT_SECRET'),
+    ],
+
+    'passport' => [
+        'login_end_point' => env('PASSPORT_LOGIN_ENDPOINT'),
+        'client_id' => env('PASSPORT_CLIENT_ID'),
+        'client_secret' => env('PASSPORT_CLIENT_SECRET'),
+    ],
+
 ];

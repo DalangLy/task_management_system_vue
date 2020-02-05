@@ -27,6 +27,8 @@ Vue.component('master-component', require('./components/MasterComponent.vue').de
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+import store from './vuex/store';
 const app = new Vue({
     el: '#app',
+    store,
 });

@@ -17,7 +17,26 @@
 <script>
     export default {
         mounted() {
-            console.log('Component mounted.')
+            this.gettingTrustClientToken();
+        },
+        methods:{
+            async gettingTrustClientToken(){
+                await this.$store.dispatch('getTrustClientToken').then(response => {
+                    if(response.status === 200){
+                        const trust_client_token = response.data.access_token;
+                        this.$store.commit('storeTrustClientTokenValue', trust_client_token);
+                    }
+                }).catch(err => {
+                    if(err.response.status === 401){
+                        console.log("Unauthorized");
+                    }
+                    else{
+                        console.log("Err Getting Trust Client Token ", err.response);
+                    }
+                }).finally(() => {
+
+                });
+            }
         }
     }
 </script>
