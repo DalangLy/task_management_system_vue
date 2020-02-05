@@ -18,6 +18,9 @@
         <!-- Google font and icon -->
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Material+Icons">
 
+        <!-- Font Awesome 5 -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+
     </head>
     <body>
         <div id="app">

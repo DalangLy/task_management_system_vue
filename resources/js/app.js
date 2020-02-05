@@ -28,7 +28,9 @@ Vue.component('master-component', require('./components/MasterComponent.vue').de
  */
 
 import store from './vuex/store';
+import router from './router/router'
 const app = new Vue({
     el: '#app',
     store,
+    router,
 });
