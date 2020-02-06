@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="py-4 px-2">
 
 
         <!-- Start User Avatar-->
@@ -14,22 +14,81 @@
         <!-- End User Avatar-->
 
 
+        <div class="form-group">
+            <label for="txtName">Name</label>
+            <input v-model="data.name" style="width: 300px" type="text" class="form-control" id="txtName" aria-describedby="nameHelp" placeholder="Name">
+            <small id="nameHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
 
+        <div class="form-group">
+            <label for="txtEmail">Email</label>
+            <input v-model="data.email" style="width: 300px" type="email" class="form-control" id="txtEmail" aria-describedby="emailHelp" placeholder="Email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+
+        <div class="form-group">
+            <label for="txtName">Position</label>
+            <auto-complete v-model="data.position" :data="positions" selected-text="name" selected-value="id"></auto-complete>
+        </div>
+
+
+        <div class="form-group">
+            <button @click.prevent.stop="save" class="btn btn-primary">Save</button>
+        </div>
 
     </div>
 </template>
 
 <script>
+    import AutoComplete from "./partials/AutoComplete";
     export default {
         name: "AddUser",
+        components:{
+            'auto-complete': AutoComplete,
+        },
         data(){
             return{
                 data:{
                     avatar: null,
-                }
+                    name: null,
+                    email: null,
+                    position: null,
+                },
+                positions: [
+                    {
+                        id: 1,
+                        name: 'Web Developer'
+                    },
+                    {
+                        id: 2,
+                        name: 'Accountant Executing'
+                    },
+                    {
+                        id: 3,
+                        name: 'Project Manager'
+                    },
+                    {
+                        id: 4,
+                        name: 'Admin'
+                    }
+                ],
             }
         },
         methods:{
+            async save(){
+                //get user token from auth module
+                const userToken = JSON.parse(this.$store.getters.getUserToken);
+                const accessToken = userToken[0].accessToken;
+                axios.defaults.headers.common['Authorization'] = 'Bearer '+ accessToken;
+
+                await axios.post('api/v1/users/store', this.data).then(response => {
+                    if(response.status === 200){
+                        console.log(response);
+                    }
+                }).catch(err => {
+                    console.log(err);
+                });
+            },
             // start user avatar script
             openFileDialog(){
                 const input = document.getElementById('inputFile');
@@ -124,7 +183,7 @@
         height: 100%;
         object-fit: cover;
     }
-    input{
+    #inputFile{
         display: none;
     }
     /* end user avatar style */

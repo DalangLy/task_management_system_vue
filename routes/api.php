@@ -25,3 +25,4 @@ Route::middleware('client')->post('v1/issue_new_access_token', 'API\V1\AuthContr
 
 //user routes
 Route::middleware('auth:api')->get('v1/users', 'API\V1\UserController@users');
+Route::middleware('auth:api')->post('v1/users/store', 'API\V1\UserController@store');
