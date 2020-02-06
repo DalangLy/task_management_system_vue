@@ -16,10 +16,12 @@ use Illuminate\Http\Request;
 //trust client route
 Route::get('v1/trust_client_token', 'API\V1\TrustClientController@getTrustClientToken');
 
-
-
 //auth routes
 Route::middleware('client')->post('v1/login', 'API\V1\AuthController@login');
 Route::middleware('auth:api')->post('v1/logout', 'API\V1\AuthController@logout');
 Route::middleware('auth:api')->get('/user', 'API\V1\AuthController@user');
 Route::middleware('client')->post('v1/issue_new_access_token', 'API\V1\AuthController@issueNewAccessToken');
+
+
+//user routes
+Route::middleware('auth:api')->get('v1/users', 'API\V1\UserController@users');

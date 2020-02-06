@@ -8,6 +8,11 @@ import Login from '../components/Auth/Login'
 import Logout from '../components/Auth/Logout'
 import Dashboard from '../components/Dashboard/DashboardMaster'
 
+//users
+import UserMaster from '../components/Users/UserMaster'
+import UserList from '../components/Users/UserList'
+import AddUser from '../components/Users/AddUser'
+
 const routes = [
     {
         path: '/login',
@@ -31,7 +36,25 @@ const routes = [
         component: Dashboard,
         meta: {
             requireAuth: true,
-        }
+        },
+        children: [
+            {
+                path: '/users',
+                component: UserMaster,
+                children: [
+                    {
+                        path: '/users',
+                        name: 'users',
+                        component: UserList,
+                    },
+                    {
+                        path: '/users/create',
+                        name: 'users.create',
+                        component: AddUser,
+                    }
+                ]
+            }
+        ]
     }
 ];
 

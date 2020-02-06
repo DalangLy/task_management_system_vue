@@ -1,5 +1,5 @@
 <template>
-    <div @click.prevent.stop="windowClickEvent()">
+    <div @click="windowClickEvent()">
         <!--start sidebar-->
         <div class="sidebar" @mouseover="maximizeSideBarOnMouseOver" @mouseout="minimizeSideBarOnMouseOver">
             <div class="sidebar-inner">
@@ -26,7 +26,7 @@
                     <li class="nav-item">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fas fa-users" style="color: purple;"></i></span>
-                            <span @click.prevent="$router.push({name: 'users.list'})" class="title">Users</span>
+                            <span @click.prevent="$router.push({name: 'users'})" class="title">Users</span>
                         </span>
                     </li>
                     <li class="nav-item">
