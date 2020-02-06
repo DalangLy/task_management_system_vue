@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '../vuex/store'
 
 Vue.use(VueRouter);
 
@@ -12,16 +13,25 @@ const routes = [
         path: '/login',
         name: 'login',
         component: Login,
+        meta:{
+            requireVisitor: true,
+        }
     },
     {
         path: '/logout',
         name: 'logout',
         component: Logout,
+        meta: {
+            requireAuth: true,
+        }
     },
     {
         path: '/',
         name: 'dashboard',
-        component: Dashboard
+        component: Dashboard,
+        meta: {
+            requireAuth: true,
+        }
     }
 ];
 
@@ -30,6 +40,35 @@ const routes = [
 // keep it simple for now.
 const router = new VueRouter({
     routes // short for `routes: routes`
+});
+
+
+/*
+* Protect Route to prevent user typing manual url
+* */
+router.beforeEach((to, from, next) => {
+    /******** User **********/
+    if (to.matched.some(record => record.meta.requireVisitor)){
+        if (!store.getters.isUserLoggedIn) {
+            next();
+        } else {
+            next({
+                name: 'dashboard',
+            });
+        }
+    }
+    else if (to.matched.some(record => record.meta.requireAuth)){
+        if (!store.getters.isUserLoggedIn) {
+            next({
+                name: 'login',
+            });
+        } else {
+            next();
+        }
+    }
+    else {
+        next() // make sure to always call next()!
+    }
 });
 
 export default router;

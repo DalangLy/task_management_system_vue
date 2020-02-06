@@ -56385,9 +56385,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var _components_Auth_Login__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Auth/Login */ "./resources/js/components/Auth/Login.vue");
-/* harmony import */ var _components_Auth_Logout__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Auth/Logout */ "./resources/js/components/Auth/Logout.vue");
-/* harmony import */ var _components_Dashboard_DashboardMaster__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Dashboard/DashboardMaster */ "./resources/js/components/Dashboard/DashboardMaster.vue");
+/* harmony import */ var _vuex_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../vuex/store */ "./resources/js/vuex/store.js");
+/* harmony import */ var _components_Auth_Login__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Auth/Login */ "./resources/js/components/Auth/Login.vue");
+/* harmony import */ var _components_Auth_Logout__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Auth/Logout */ "./resources/js/components/Auth/Logout.vue");
+/* harmony import */ var _components_Dashboard_DashboardMaster__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/Dashboard/DashboardMaster */ "./resources/js/components/Dashboard/DashboardMaster.vue");
+
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
@@ -56397,15 +56399,24 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
 var routes = [{
   path: '/login',
   name: 'login',
-  component: _components_Auth_Login__WEBPACK_IMPORTED_MODULE_2__["default"]
+  component: _components_Auth_Login__WEBPACK_IMPORTED_MODULE_3__["default"],
+  meta: {
+    requireVisitor: true
+  }
 }, {
   path: '/logout',
   name: 'logout',
-  component: _components_Auth_Logout__WEBPACK_IMPORTED_MODULE_3__["default"]
+  component: _components_Auth_Logout__WEBPACK_IMPORTED_MODULE_4__["default"],
+  meta: {
+    requireAuth: true
+  }
 }, {
   path: '/',
   name: 'dashboard',
-  component: _components_Dashboard_DashboardMaster__WEBPACK_IMPORTED_MODULE_4__["default"]
+  component: _components_Dashboard_DashboardMaster__WEBPACK_IMPORTED_MODULE_5__["default"],
+  meta: {
+    requireAuth: true
+  }
 }]; // 3. Create the router instance and pass the `routes` option
 // You can pass in additional options here, but let's
 // keep it simple for now.
@@ -56413,6 +56424,36 @@ var routes = [{
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: routes // short for `routes: routes`
 
+});
+/*
+* Protect Route to prevent user typing manual url
+* */
+
+router.beforeEach(function (to, from, next) {
+  /******** User **********/
+  if (to.matched.some(function (record) {
+    return record.meta.requireVisitor;
+  })) {
+    if (!_vuex_store__WEBPACK_IMPORTED_MODULE_2__["default"].getters.isUserLoggedIn) {
+      next();
+    } else {
+      next({
+        name: 'dashboard'
+      });
+    }
+  } else if (to.matched.some(function (record) {
+    return record.meta.requireAuth;
+  })) {
+    if (!_vuex_store__WEBPACK_IMPORTED_MODULE_2__["default"].getters.isUserLoggedIn) {
+      next({
+        name: 'login'
+      });
+    } else {
+      next();
+    }
+  } else {
+    next(); // make sure to always call next()!
+  }
 });
 /* harmony default export */ __webpack_exports__["default"] = (router);
 
