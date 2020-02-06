@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div @click.prevent.stop="windowClickEvent()">
         <!--start sidebar-->
         <div class="sidebar" @mouseover="maximizeSideBarOnMouseOver" @mouseout="minimizeSideBarOnMouseOver">
             <div class="sidebar-inner">
@@ -116,7 +116,7 @@
                                     <router-link to="/profile">
                                         <span class="user-account-dropdown-item"><i class="fas fa-user-circle"></i> Account</span>
                                     </router-link>
-                                    <span class="user-account-dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</span>
+                                    <span @click.prevent.stop="$router.push({name : 'logout'});" class="user-account-dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</span>
                                 </div>
                             </div>
                             <!-- end account dropdown container -->
@@ -156,12 +156,6 @@
                 isSidebarOpen: true,
                 isUserAccountDropdownOpen: false,
             }
-        },
-        created(){
-            let thisKeyword = this;
-            window.addEventListener('click', function(event){
-                thisKeyword.windowClickEvent(event);//use to remove user account dropdown when it opened (click everywhere on screen to close it)
-            });
         },
         methods:{
             toggleSidebarOnClick(){
@@ -219,9 +213,7 @@
                 }
                 this.isUserAccountDropdownOpen = !this.isUserAccountDropdownOpen;
             },
-            windowClickEvent(e){
-                e.stopPropagation();
-
+            windowClickEvent(){
                 const userAccountDropDown = document.querySelector('.user-account-dropdown-container');
                 if(this.isUserAccountDropdownOpen){
                     userAccountDropDown.classList.remove('open');

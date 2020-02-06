@@ -3,16 +3,24 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter);
 
-import Login from '../components/Login/Login'
+import Login from '../components/Auth/Login'
+import Logout from '../components/Auth/Logout'
 import Dashboard from '../components/Dashboard/DashboardMaster'
 
 const routes = [
     {
         path: '/login',
+        name: 'login',
         component: Login,
     },
     {
+        path: '/logout',
+        name: 'logout',
+        component: Logout,
+    },
+    {
         path: '/',
+        name: 'dashboard',
         component: Dashboard
     }
 ];

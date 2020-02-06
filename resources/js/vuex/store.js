@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex);
 
 import TrustClientModule from "./trust_client_module";
+import AuthModule from "./auth_module";
 
 const store = new Vuex.Store({
     state: {
@@ -20,6 +21,7 @@ const store = new Vuex.Store({
     },
     modules:{
         TrustClientModule,
+        AuthModule,
     }
 });
 
