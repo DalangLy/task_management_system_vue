@@ -16,6 +16,10 @@ import AddUser from '../components/Users/AddUser'
 import ProfileMaster from "../components/profile/ProfileMaster";
 import Profile from "../components/profile/Profile";
 
+//clients
+import ClientMaster from "../components/Client/ClientMaster";
+import ClientList from "../components/Client/ClientList";
+
 const routes = [
     {
         path: '/login',
@@ -44,6 +48,17 @@ const routes = [
                 path: '/',
                 name: 'dashboard',
                 component: Dashboard
+            },
+            {
+                path: '/clients',
+                component: ClientMaster,
+                children: [
+                    {
+                        path: '/clients',
+                        name: 'clients',
+                        component: ClientList,
+                    }
+                ]
             },
             {
                 path: '/users',

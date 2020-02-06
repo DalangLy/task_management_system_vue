@@ -32,7 +32,7 @@
                     <li class="nav-item">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fab fa-accusoft" style="color:blue"></i></span>
-                            <span class="title">Clients</span>
+                            <span @click.prevent="$router.push({name: 'clients'})" class="title">Clients</span>
                         </span>
                     </li>
                     <li class="nav-item">
