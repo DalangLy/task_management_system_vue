@@ -24,7 +24,7 @@
         created(){
             const thisKeyword = this;
             window.addEventListener('click', function(event){
-                event.preventDefault();
+                event.stopPropagation();
                 thisKeyword.showAutoCompleteWrapper(false);
             });
         },

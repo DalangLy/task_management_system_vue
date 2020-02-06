@@ -20,7 +20,19 @@ class UserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         ]);
 
+        $photo = null;
+        if($request->avatar) {
+            $explodeRawImage = explode(',', $request->avatar);
+            $decodedImage = base64_decode($explodeRawImage[1]);
+            $generateRandomNumberForFileName = explode(" ", microtime());
+            $imageNameWithExtension = $generateRandomNumberForFileName[0] . '.' . explode('/', explode(':', substr($request->avatar, 0, strpos($request->avatar, ';')))[1])[1];
+            $saveDirectory = storage_path() . '/app/public/user_avatars/' . $imageNameWithExtension;
+            file_put_contents($saveDirectory, $decodedImage);
+            $photo = 'storage/user_avatars/'.$imageNameWithExtension;
+        }
+
         User::create([
+            'avatar' => $photo,
             'name' => $request->name,
             'email' => $request->email,
             'email_verified_at' => now(),

@@ -20,18 +20,29 @@
         <table class="table">
             <thead class="thead-dark">
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th class="text-center align-middle" scope="col">#</th>
+                <th class="text-center align-middle" scope="col">Avatar</th>
+                <th class="text-center align-middle" scope="col">Name</th>
+                <th class="text-center align-middle" scope="col">Username</th>
+                <th class="text-center align-middle" scope="col">Email</th>
+                <th class="text-center align-middle" scope="col">Action</th>
             </tr>
             </thead>
             <tbody>
                 <tr v-for="(user, index) in allUsers">
-                    <th scope="row">{{index}}</th>
-                    <td>{{user.name}}</td>
-                    <td>{{user.username}}</td>
-                    <td>{{user.email}}</td>
+                    <th class="align-middle" scope="row">{{index}}</th>
+                    <td class="d-flex justify-content-center align-items-center">
+                        <div class="avatar-container">
+                            <img v-if="user.avatar" :src="user.avatar" alt="">
+                            <img v-else src="https://c7.uihere.com/icons/216/669/123/user-management-1e8bf7cb3c23335e2af745696a1e3f91.png" alt="">
+                        </div>
+                    </td>
+                    <td class="align-middle">{{user.name}}</td>
+                    <td class="align-middle">{{user.username}}</td>
+                    <td class="align-middle">{{user.email}}</td>
+                    <td class="align-middle">
+                        <button class="btn btn-warning"><i class="fas fa-edit"></i></button>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -93,5 +104,18 @@
 </script>
 
 <style scoped>
-
+    .avatar-container{
+        width: 30px;
+        height: 30px;
+        border-radius: 3px;
+        background-color: #fff;
+        overflow: hidden;
+        border: 1px solid lightgray;
+    }
+    .avatar-container img{
+        width: 100%;
+        height: 100%;
+        vertical-align: middle;
+        object-fit: cover;
+    }
 </style>
