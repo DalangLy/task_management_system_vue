@@ -100,22 +100,21 @@
 
                             <!-- start user avatar -->
                             <div class="user-avatar">
-                                <img src="http://www.gstatic.com/tv/thumb/persons/733885/733885_v9_bb.jpg">
+                                <img v-if="userData.avatar" :src="userData.avatar">
+                                <img v-else src="https://c7.uihere.com/icons/216/669/123/user-management-1e8bf7cb3c23335e2af745696a1e3f91.png">
                             </div>
                             <!-- end user avatar -->
 
                             <!-- start user name -->
 
-                            <span class="username">Dalang</span>
+                            <span class="username">{{userData.name}}</span>
 
                             <!-- end user name -->
 
                             <!-- start account dropdown container -->
                             <div class="user-account-dropdown-container">
                                 <div class="user-account-dropdown-container-inner">
-                                    <router-link to="/profile">
-                                        <span class="user-account-dropdown-item"><i class="fas fa-user-circle"></i> Account</span>
-                                    </router-link>
+                                    <span @click.prevent.stop="$router.push({name: 'profile'})" class="user-account-dropdown-item"><i class="fas fa-user-circle"></i> Account</span>
                                     <span @click.prevent.stop="$router.push({name : 'logout'});" class="user-account-dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</span>
                                 </div>
                             </div>
@@ -155,9 +154,45 @@
             return {
                 isSidebarOpen: true,
                 isUserAccountDropdownOpen: false,
+                userData: [],
             }
         },
+        created(){
+            this.getUserInfo();
+        },
         methods:{
+            async getUserInfo(){
+                //get user token from auth module
+                const userToken = JSON.parse(this.$store.getters.getUserToken);
+                const accessToken = userToken[0].accessToken;
+                axios.defaults.headers.common['Authorization'] = 'Bearer '+ accessToken;
+
+                await axios.get('api/v1/user').then(response => {
+                    if(response.status === 200){
+                        this.userData = response.data;
+                        this.$store.commit('setUserInfo', response.data);
+                    }
+                }).catch(err => {
+                    if(err.response.status === 401){//check if unauthorized of access token expired
+                        if(this.isStudentLoggedIn){//if student already logged in so it mean access token expired, thus issue new access token using refresh token
+                            this.requestNewAccessToken();
+                        }
+                    }
+                });
+            },
+            async requestNewAccessToken(){
+                await this.$store.dispatch('issueNewUserAccessToken').then(response => {
+                    if(response.status === 200) {//200 = success and return new access token and refresh token
+                        this.$store.commit('replaceUserTokenValue', response.data);//store token in vuex state
+                        this.getUserInfo();
+                    }
+                }).catch(err => {
+                    if(err.response.status === 401){
+                        this.$store.commit('clearUserTokenIfRefreshTokenExpired');
+                        location.reload();//reload page to check login condition again
+                    }
+                })
+            },
             toggleSidebarOnClick(){
                 const header = document.querySelector('.header');
                 const sidebar = document.querySelector('.sidebar');
@@ -219,6 +254,11 @@
                     userAccountDropDown.classList.remove('open');
                     this.isUserAccountDropdownOpen = !this.isUserAccountDropdownOpen;
                 }
+            }
+        },
+        computed:{
+            isStudentLoggedIn(){
+                return this.$store.getters.isUserLoggedIn;
             }
         }
     }

@@ -12,6 +12,8 @@ import Dashboard from '../components/Dashboard/DashboardMaster'
 import UserMaster from '../components/Users/UserMaster'
 import UserList from '../components/Users/UserList'
 import AddUser from '../components/Users/AddUser'
+import ProfileMaster from "../components/profile/ProfileMaster";
+import Profile from "../components/profile/Profile";
 
 const routes = [
     {
@@ -51,6 +53,17 @@ const routes = [
                         path: '/users/create',
                         name: 'users.create',
                         component: AddUser,
+                    }
+                ]
+            },
+            {
+                path: '/profile',
+                component: ProfileMaster,
+                children: [
+                    {
+                        path: '/profile',
+                        name: 'profile',
+                        component: Profile,
                     }
                 ]
             }
