@@ -11,7 +11,8 @@
                             <div class="left">
 
                                 <div class="avatar">
-                                    <img src="http://www.gstatic.com/tv/thumb/persons/733885/733885_v9_bb.jpg" alt="">
+                                    <img v-if="userInfo.avatar" :src="userInfo.avatar" alt="">
+                                    <img v-else src="https://c7.uihere.com/icons/216/669/123/user-management-1e8bf7cb3c23335e2af745696a1e3f91.png" alt="">
                                 </div>
 
                             </div>
@@ -135,6 +136,7 @@
         height: 100px;
         overflow: hidden;
         border-radius: 50%;
+        border: 1px solid darkgray;
     }
     .avatar img{
         object-fit: cover;

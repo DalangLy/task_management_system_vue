@@ -39,7 +39,10 @@ class AuthController extends Controller
     }
 
     public function user(Request $request){
-        return $request->user();
+        return User::where('users.id', Auth::id())
+            ->join('genders', 'users.gender_id', 'genders.gender_id')
+            ->join('roles', 'users.role_id', 'roles.role_id')
+            ->join('positions', 'users.position_id', 'positions.position_id')->first();
     }
 
     public function issueNewAccessToken(Request $request){

@@ -1,18 +1,18 @@
 <template>
-    <div @click="windowClickEvent()">
+    <div @click.prevent="windowClickEvent()">
         <!--start sidebar-->
         <div class="sidebar" @mouseover="maximizeSideBarOnMouseOver" @mouseout="minimizeSideBarOnMouseOver">
             <div class="sidebar-inner">
 
                 <!-- start side bar logo -->
-                <a class="sidebar-logo" href="">
+                <div @click.prevent="$router.push({name : 'dashboard'})" class="sidebar-logo">
                     <div class="peers">
                         <div class="sidebar-logo-image">
                             <img src="storage/logo/oxygen logo.png" alt="Company Logo">
                         </div>
                         <span class="sidebar-logo-title"><img src="storage/logo/oxygen logo.png" alt="Oxygen"></span>
                     </div>
-                </a>
+                </div>
                 <!-- end side bar logo -->
 
                 <!-- start sidebar menu -->

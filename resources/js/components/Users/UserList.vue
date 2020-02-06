@@ -23,14 +23,15 @@
                 <th class="text-center align-middle" scope="col">#</th>
                 <th class="text-center align-middle" scope="col">Avatar</th>
                 <th class="text-center align-middle" scope="col">Name</th>
-                <th class="text-center align-middle" scope="col">Username</th>
                 <th class="text-center align-middle" scope="col">Email</th>
+                <th class="text-center align-middle" scope="col">Position</th>
+                <th class="text-center align-middle" scope="col">Role</th>
                 <th class="text-center align-middle" scope="col">Action</th>
             </tr>
             </thead>
             <tbody>
                 <tr v-for="(user, index) in allUsers">
-                    <th class="align-middle" scope="row">{{index}}</th>
+                    <th class="align-middle" scope="row">{{(index+1)}}</th>
                     <td class="d-flex justify-content-center align-items-center">
                         <div class="avatar-container">
                             <img v-if="user.avatar" :src="user.avatar" alt="">
@@ -38,8 +39,9 @@
                         </div>
                     </td>
                     <td class="align-middle">{{user.name}}</td>
-                    <td class="align-middle">{{user.username}}</td>
                     <td class="align-middle">{{user.email}}</td>
+                    <td class="align-middle">{{user.position}}</td>
+                    <td class="align-middle">{{user.role_display_name}}</td>
                     <td class="align-middle">
                         <button class="btn btn-warning"><i class="fas fa-edit"></i></button>
                     </td>

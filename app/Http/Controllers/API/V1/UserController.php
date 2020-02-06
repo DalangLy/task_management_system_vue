@@ -11,7 +11,10 @@ use Illuminate\Support\Str;
 class UserController extends Controller
 {
     public function users(){
-        return response()->json(User::all());
+        $users = User::join('genders', 'users.gender_id', 'genders.gender_id')
+            ->join('roles', 'users.role_id', 'roles.role_id')
+            ->join('positions', 'users.position_id', 'positions.position_id')->get();
+        return response()->json($users);
     }
 
     public function store(Request $request){

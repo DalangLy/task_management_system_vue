@@ -17,10 +17,17 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('avatar')->nullable();
             $table->string('name');
+            $table->unsignedBigInteger('gender_id');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('username')->unique();
             $table->string('password');
+            $table->unsignedBigInteger('position_id');
+            $table->float('salary')->default(0);
+            $table->unsignedBigInteger('role_id');
+            $table->string('phone')->nullable();
+            $table->date('start_date');
+            $table->date('official_date');
             $table->rememberToken();
             $table->timestamps();
         });

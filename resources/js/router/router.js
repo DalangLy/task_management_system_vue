@@ -6,7 +6,8 @@ Vue.use(VueRouter);
 
 import Login from '../components/Auth/Login'
 import Logout from '../components/Auth/Logout'
-import Dashboard from '../components/Dashboard/DashboardMaster'
+import DashboardMaster from '../components/Dashboard/DashboardMaster'
+import Dashboard from "../components/Dashboard/Dashboard";
 
 //users
 import UserMaster from '../components/Users/UserMaster'
@@ -34,12 +35,16 @@ const routes = [
     },
     {
         path: '/',
-        name: 'dashboard',
-        component: Dashboard,
+        component: DashboardMaster,
         meta: {
             requireAuth: true,
         },
         children: [
+            {
+                path: '/',
+                name: 'dashboard',
+                component: Dashboard
+            },
             {
                 path: '/users',
                 component: UserMaster,
