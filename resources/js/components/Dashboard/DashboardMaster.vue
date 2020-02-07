@@ -44,25 +44,25 @@
                     <li class="nav-item">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fas fa-mug-hot" style="color: green"></i></span>
-                            <span class="title">Client Accounts</span>
+                            <span @click.prevent="$router.push({name: 'client_accounts'})" class="title">Client Accounts</span>
                         </span>
                     </li>
                     <li class="nav-item">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fas fa-project-diagram" style="color: cyan"></i></span>
-                            <span class="title">Projects</span>
+                            <span @click.prevent="$router.push({name: 'projects'})" class="title">Projects</span>
                         </span>
                     </li>
                     <li class="nav-item">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fas fa-briefcase" style="color: yellow"></i></span>
-                            <span class="title">Time Sheet</span>
+                            <span @click.prevent="$router.push({name: 'task_types'})"  class="title">Task Types</span>
                         </span>
                     </li>
                     <li class="nav-item">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fas fa-crosshairs" style="color: gray"></i></span>
-                            <span class="title">Positions</span>
+                            <span @click.prevent="$router.push({name: 'positions'})" class="title">Positions</span>
                         </span>
                     </li>
                     <li class="nav-item">

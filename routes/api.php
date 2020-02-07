@@ -34,3 +34,19 @@ Route::middleware('auth:api')->post('v1/clients/store', 'API\V1\ClientController
 //role routes
 Route::middleware('auth:api')->get('v1/roles', 'API\V1\RoleController@roles');
 Route::middleware('auth:api')->post('v1/roles/store', 'API\V1\RoleController@store');
+
+//client account routes
+Route::middleware('auth:api')->get('v1/client_accounts', 'API\V1\ClientAccountController@clientAccounts');
+Route::middleware('auth:api')->post('v1/client_accounts/store', 'API\V1\ClientAccountController@store');
+
+//project routes
+Route::middleware('auth:api')->get('v1/projects', 'API\V1\ProjectController@projects');
+Route::middleware('auth:api')->post('v1/projects/store', 'API\V1\ProjectController@store');
+
+//position routes
+Route::middleware('auth:api')->get('v1/positions', 'API\V1\PositionController@positions');
+Route::middleware('auth:api')->post('v1/positions/store', 'API\V1\PositionController@store');
+
+//task type routes
+Route::middleware('auth:api')->get('v1/task_types', 'API\V1\TaskTypeController@taskTypes');
+Route::middleware('auth:api')->post('v1/task_types/store', 'API\V1\TaskTypeController@store');

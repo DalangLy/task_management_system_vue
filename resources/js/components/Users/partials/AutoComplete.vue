@@ -4,7 +4,7 @@
         <div class="auto-complete-wrapper">
             <input @keyup="filterAutoCompleteResultList" type="text" class="auto-complete-input-field" placeholder="Type anything here">
             <ul class="auto-complete-result-container">
-                <li @click.prevent.stop="selectItem(item)" v-for="item in filteredData" class="auto-complete-result-item">{{item.name}}</li>
+                <li @click.prevent.stop="selectItem(item)" v-for="item in filteredData" class="auto-complete-result-item">{{item[selectedText]}}</li>
             </ul>
         </div>
 
@@ -37,6 +37,7 @@
             setDefaultSelectedValue(){
                 if(this.data){
                     if(this.data.length > 0){
+
                         const item = this.data[0];
 
                         this.$emit('input', item[this.selectedValue]);//pass data to component
@@ -108,6 +109,12 @@
                     return this.data;
                 }
             }
+        },
+        watch:{
+            data: function (val) {
+                //check if data is change so selected default value to auto complete
+                this.setDefaultSelectedValue();
+            },
         }
     }
 </script>
