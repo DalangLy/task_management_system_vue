@@ -74,6 +74,12 @@
                     <li class="nav-item">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fas fa-adjust" style="color: green"></i></span>
+                            <span @click.prevent="$router.push({name: 'purchase_types'})" class="title">Purchase Type</span>
+                        </span>
+                    </li>
+                    <li class="nav-item">
+                        <span class="sidebar-link">
+                            <span class="icon-holder"><i class="fas fa-adjust" style="color: green"></i></span>
                             <span class="title">Leave Request</span>
                         </span>
                     </li>

@@ -54,3 +54,7 @@ Route::middleware('auth:api')->post('v1/task_types/store', 'API\V1\TaskTypeContr
 //work routes
 Route::middleware('auth:api')->get('v1/works', 'API\V1\ProjectDetailController@works');
 Route::middleware('auth:api')->post('v1/works/store', 'API\V1\ProjectDetailController@store');
+
+//purchase types
+Route::middleware('auth:api')->get('v1/purchase_types', 'API\V1\PurchaseTypeController@purchaseTypes');
+Route::middleware('auth:api')->post('v1/purchase_types/store', 'API\V1\PurchaseTypeController@store');

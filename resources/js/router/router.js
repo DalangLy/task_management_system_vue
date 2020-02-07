@@ -51,6 +51,11 @@ import WorkMaster from "../components/work/WorkMaster";
 import WorkList from "../components/work/WorkList";
 import AddWork from "../components/work/AddWork";
 
+//purchase type
+import PurchaseTypeMaster from "../components/purchase_type/PurchaseTypeMaster";
+import PurchaseTypeList from "../components/purchase_type/PurchaseTypeList";
+import AddPurchaseType from "../components/purchase_type/AddPurchaseType";
+
 const routes = [
     {
         path: '/login',
@@ -189,6 +194,22 @@ const routes = [
                         path: '/works/create',
                         name: 'works.create',
                         component: AddWork,
+                    }
+                ]
+            },
+            {
+                path: '/purchase_types',
+                component: PurchaseTypeMaster,
+                children: [
+                    {
+                        path: '/purchase_types',
+                        name: 'purchase_types',
+                        component: PurchaseTypeList,
+                    },
+                    {
+                        path: '/purchase_types/create',
+                        name: 'purchase_types.create',
+                        component: AddPurchaseType,
                     }
                 ]
             },
