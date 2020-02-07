@@ -38,7 +38,7 @@
                     <li class="nav-item">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fas fa-user-tag" style="color: pink"></i></span>
-                            <span class="title">Roles</span>
+                            <span @click.prevent="$router.push({name: 'roles'})" class="title">Roles</span>
                         </span>
                     </li>
                     <li class="nav-item">

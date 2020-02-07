@@ -20,6 +20,9 @@ import Profile from "../components/profile/Profile";
 import ClientMaster from "../components/Client/ClientMaster";
 import ClientList from "../components/Client/ClientList";
 import AddClient from "../components/Client/AddClient";
+import RoleMaster from "../components/role/RoleMaster";
+import RoleList from "../components/role/RoleList";
+import AddRole from "../components/role/AddRole";
 
 const routes = [
     {
@@ -63,6 +66,22 @@ const routes = [
                         path: '/clients/create',
                         name: 'clients.create',
                         component: AddClient,
+                    }
+                ]
+            },
+            {
+                path: '/roles',
+                component: RoleMaster,
+                children: [
+                    {
+                        path: '/roles',
+                        name: 'roles',
+                        component: RoleList,
+                    },
+                    {
+                        path: '/roles/create',
+                        name: 'roles.create',
+                        component: AddRole,
                     }
                 ]
             },
