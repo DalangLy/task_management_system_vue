@@ -2114,6 +2114,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -2131,7 +2139,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "AddClient"
+  name: "AddClient",
+  data: function data() {
+    return {
+      data: {
+        client_name: null
+      }
+    };
+  },
+  methods: {
+    save: function save() {
+      var _this = this;
+
+      return _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var userToken, accessToken;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                //get user token from auth module
+                userToken = JSON.parse(_this.$store.getters.getUserToken);
+                accessToken = userToken[0].accessToken;
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + accessToken;
+                _context.next = 5;
+                return axios.post('api/v1/clients/store', _this.data).then(function (response) {
+                  if (response.status === 200) {
+                    console.log(response);
+                  }
+                })["catch"](function (err) {
+                  console.log(err);
+                });
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    }
+  }
 });
 
 /***/ }),
@@ -2153,10 +2202,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
-//
-//
-//
 //
 //
 //
@@ -40500,8 +40545,8 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.data,
-            expression: "data"
+            value: _vm.data.client_name,
+            expression: "data.client_name"
           }
         ],
         staticClass: "form-control",
@@ -40512,13 +40557,13 @@ var render = function() {
           "aria-describedby": "nameHelp",
           placeholder: "Name"
         },
-        domProps: { value: _vm.data },
+        domProps: { value: _vm.data.client_name },
         on: {
           input: function($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.data = $event.target.value
+            _vm.$set(_vm.data, "client_name", $event.target.value)
           }
         }
       }),
@@ -40600,7 +40645,7 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _c("table", { staticClass: "table" }, [
+    _c("table", { staticClass: "table table-bordered" }, [
       _vm._m(0),
       _vm._v(" "),
       _c(
@@ -40611,28 +40656,16 @@ var render = function() {
               _vm._v(_vm._s(index + 1))
             ]),
             _vm._v(" "),
-            _c(
-              "td",
-              {
-                staticClass: "d-flex justify-content-center align-items-center"
-              },
-              [_vm._v("hello")]
-            ),
+            _c("td", { staticClass: "align-middle" }, [
+              _vm._v(_vm._s(client.client_code))
+            ]),
+            _vm._v(" "),
+            _c("td", { staticClass: "align-middle" }, [
+              _vm._v(_vm._s(client.client_name))
+            ]),
             _vm._v(" "),
             _c("td", { staticClass: "align-middle" }, [
               _vm._v(_vm._s(client.name))
-            ]),
-            _vm._v(" "),
-            _c("td", { staticClass: "align-middle" }, [
-              _vm._v(_vm._s(client.email))
-            ]),
-            _vm._v(" "),
-            _c("td", { staticClass: "align-middle" }, [
-              _vm._v(_vm._s(client.position))
-            ]),
-            _vm._v(" "),
-            _c("td", { staticClass: "align-middle" }, [
-              _vm._v(_vm._s(client.role_display_name))
             ]),
             _vm._v(" "),
             _vm._m(1, true)
@@ -40659,31 +40692,19 @@ var staticRenderFns = [
         _c(
           "th",
           { staticClass: "text-center align-middle", attrs: { scope: "col" } },
-          [_vm._v("Avatar")]
+          [_vm._v("Client Code")]
         ),
         _vm._v(" "),
         _c(
           "th",
           { staticClass: "text-center align-middle", attrs: { scope: "col" } },
-          [_vm._v("Name")]
+          [_vm._v("Client Name")]
         ),
         _vm._v(" "),
         _c(
           "th",
           { staticClass: "text-center align-middle", attrs: { scope: "col" } },
-          [_vm._v("Email")]
-        ),
-        _vm._v(" "),
-        _c(
-          "th",
-          { staticClass: "text-center align-middle", attrs: { scope: "col" } },
-          [_vm._v("Position")]
-        ),
-        _vm._v(" "),
-        _c(
-          "th",
-          { staticClass: "text-center align-middle", attrs: { scope: "col" } },
-          [_vm._v("Role")]
+          [_vm._v("Creator")]
         ),
         _vm._v(" "),
         _c(

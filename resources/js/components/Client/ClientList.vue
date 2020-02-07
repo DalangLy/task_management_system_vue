@@ -17,26 +17,22 @@
 
 
 
-        <table class="table">
+        <table class="table table-bordered">
             <thead class="thead-dark">
             <tr>
                 <th class="text-center align-middle" scope="col">#</th>
-                <th class="text-center align-middle" scope="col">Avatar</th>
-                <th class="text-center align-middle" scope="col">Name</th>
-                <th class="text-center align-middle" scope="col">Email</th>
-                <th class="text-center align-middle" scope="col">Position</th>
-                <th class="text-center align-middle" scope="col">Role</th>
+                <th class="text-center align-middle" scope="col">Client Code</th>
+                <th class="text-center align-middle" scope="col">Client Name</th>
+                <th class="text-center align-middle" scope="col">Creator</th>
                 <th class="text-center align-middle" scope="col">Action</th>
             </tr>
             </thead>
             <tbody>
             <tr v-for="(client, index) in allData">
                 <th class="align-middle" scope="row">{{(index+1)}}</th>
-                <td class="d-flex justify-content-center align-items-center">hello</td>
+                <td class="align-middle">{{client.client_code}}</td>
+                <td class="align-middle">{{client.client_name}}</td>
                 <td class="align-middle">{{client.name}}</td>
-                <td class="align-middle">{{client.email}}</td>
-                <td class="align-middle">{{client.position}}</td>
-                <td class="align-middle">{{client.role_display_name}}</td>
                 <td class="align-middle">
                     <button class="btn btn-warning"><i class="fas fa-edit"></i></button>
                 </td>

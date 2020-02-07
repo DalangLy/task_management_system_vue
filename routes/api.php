@@ -29,3 +29,4 @@ Route::middleware('auth:api')->post('v1/users/store', 'API\V1\UserController@sto
 
 //client routes
 Route::middleware('auth:api')->get('v1/clients', 'API\V1\ClientController@clients');
+Route::middleware('auth:api')->post('v1/clients/store', 'API\V1\ClientController@store');
