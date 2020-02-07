@@ -11,7 +11,7 @@
         <!--        &lt;!&ndash; end breadcrumb &ndash;&gt;-->
 
         <div class="d-flex flex-row justify-content-between align-items-center my-3">
-            <button @click.prevent="$router.push({name: 'purchases.create'})" class="btn btn-primary"><i class="fas fa-plus"></i></button>
+            <button @click.prevent="$router.push({name: 'leave_requests.create'})" class="btn btn-primary"><i class="fas fa-plus"></i></button>
             <input @keyup="filterSearch" type="text" class="form-control w-25" placeholder="Search">
         </div>
 
@@ -21,30 +21,24 @@
             <thead class="thead-dark">
             <tr>
                 <th class="text-center align-middle" scope="col">#</th>
-                <th class="text-center align-middle" scope="col">Working Code</th>
-                <th class="text-center align-middle" scope="col">Task Name</th>
-                <th class="text-center align-middle" scope="col">Project</th>
-                <th class="text-center align-middle" scope="col">Subject</th>
-                <th class="text-center align-middle" scope="col">Purchase Type</th>
-                <th class="text-center align-middle" scope="col">Paid</th>
-                <th class="text-center align-middle" scope="col">Description</th>
-                <th class="text-center align-middle" scope="col">AE</th>
+                <th class="text-center align-middle" scope="col">Staff</th>
+                <th class="text-center align-middle" scope="col">Reason</th>
+                <th class="text-center align-middle" scope="col">From</th>
+                <th class="text-center align-middle" scope="col">To</th>
+                <th class="text-center align-middle" scope="col">Supervisor Approved</th>
                 <th class="text-center align-middle" scope="col">Approved</th>
                 <th class="text-center align-middle" scope="col">Action</th>
             </tr>
             </thead>
             <tbody>
-            <tr v-for="(purchase, index) in allData">
+            <tr v-for="(task_type, index) in allData">
                 <th class="align-middle" scope="row">{{(index+1)}}</th>
-                <td class="align-middle">{{purchase.working_code}}</td>
-                <td class="align-middle">{{purchase.task_name}}</td>
-                <td class="align-middle">{{purchase.project_name}}</td>
-                <td class="align-middle">{{purchase.subject}}</td>
-                <td class="align-middle">{{purchase.purchase_type_name}}</td>
-                <td class="align-middle">{{purchase.paid}}$</td>
-                <td class="align-middle">{{purchase.description}}</td>
-                <td class="align-middle">{{purchase.name}}</td>
-                <td class="align-middle">{{purchase.approved?'YES':'NO'}}</td>
+                <td class="align-middle">{{task_type.name}}</td>
+                <td class="align-middle">{{task_type.reason}}</td>
+                <td class="align-middle">{{task_type.leave_from}}</td>
+                <td class="align-middle">{{task_type.leave_to}}</td>
+                <td class="align-middle">{{task_type.supervisor_approved?'YES':'NO'}}</td>
+                <td class="align-middle">{{task_type.approved?'YES':'NO'}}</td>
                 <td class="align-middle">
                     <button class="btn btn-warning"><i class="fas fa-edit"></i></button>
                 </td>
@@ -58,10 +52,10 @@
 
 <script>
     export default {
-        name: "PurchaseList",
+        name: "LeaveRequestList",
         data(){
             return{
-                purchases: [],
+                leaveRequests: [],
                 searchResult: [],
             }
         },
@@ -75,9 +69,9 @@
                 const accessToken = userToken[0].accessToken;
                 axios.defaults.headers.common['Authorization'] = 'Bearer '+ accessToken;
 
-                await axios.get('api/v1/purchases').then(response => {
+                await axios.get('api/v1/leave_requests').then(response => {
                     if(response.status === 200){
-                        this.purchases = response.data;
+                        this.leaveRequests = response.data;
                     }
                 }).catch(err => {
                     console.log(err);
@@ -86,8 +80,8 @@
             filterSearch(e){
                 let keyword = e.target.value;
 
-                let found = this.purchases.filter(function(element) {
-                    return (element.purchase_type_name+'').toString().toLowerCase().includes(keyword.toLowerCase());
+                let found = this.leaveRequests.filter(function(element) {
+                    return (element.name+'').toString().toLowerCase().includes(keyword.toLowerCase());
                 });
                 if(keyword.length <= 0){
                     this.searchResult = [];
@@ -100,7 +94,7 @@
         computed:{
             allData(){
                 if(this.searchResult.length <= 0)
-                    return this.purchases;
+                    return this.leaveRequests;
                 else
                     return this.searchResult;
             }

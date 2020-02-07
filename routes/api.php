@@ -64,3 +64,7 @@ Route::middleware('auth:api')->get('v1/purchases', 'API\V1\PurchaseController@pu
 Route::middleware('auth:api')->post('v1/purchases/store', 'API\V1\PurchaseController@store');
 Route::middleware('auth:api')->get('v1/purchases/project_details', 'API\V1\PurchaseController@projectDetails');
 Route::middleware('auth:api')->get('v1/purchases/purchase_types', 'API\V1\PurchaseController@purchaseTypes');
+
+//leave request routes
+Route::middleware('auth:api')->get('v1/leave_requests', 'API\V1\LeaveRequestController@leaveRequests');
+Route::middleware('auth:api')->post('v1/leave_requests/store', 'API\V1\LeaveRequestController@store');

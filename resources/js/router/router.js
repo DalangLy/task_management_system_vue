@@ -61,6 +61,11 @@ import PurchaseMaster from "../components/purchase/PurchaseMaster";
 import PurchaseList from "../components/purchase/PurchaseList";
 import AddPurchase from "../components/purchase/AddPurchase";
 
+//leave request
+import LeaveRequestMaster from "../components/leave_request/LeaveRequestMaster";
+import LeaveRequestList from "../components/leave_request/LeaveRequestList";
+import AddLeaveRequest from "../components/leave_request/AddLeaveRequest";
+
 const routes = [
     {
         path: '/login',
@@ -231,6 +236,22 @@ const routes = [
                         path: '/purchases/create',
                         name: 'purchases.create',
                         component: AddPurchase,
+                    }
+                ]
+            },
+            {
+                path: '/leave_requests',
+                component: LeaveRequestMaster,
+                children: [
+                    {
+                        path: '/leave_requests',
+                        name: 'leave_requests',
+                        component: LeaveRequestList,
+                    },
+                    {
+                        path: '/leave_requests/create',
+                        name: 'leave_requests.create',
+                        component: AddLeaveRequest,
                     }
                 ]
             },
