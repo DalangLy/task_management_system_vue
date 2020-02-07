@@ -56,6 +56,11 @@ import PurchaseTypeMaster from "../components/purchase_type/PurchaseTypeMaster";
 import PurchaseTypeList from "../components/purchase_type/PurchaseTypeList";
 import AddPurchaseType from "../components/purchase_type/AddPurchaseType";
 
+//purchase
+import PurchaseMaster from "../components/purchase/PurchaseMaster";
+import PurchaseList from "../components/purchase/PurchaseList";
+import AddPurchase from "../components/purchase/AddPurchase";
+
 const routes = [
     {
         path: '/login',
@@ -210,6 +215,22 @@ const routes = [
                         path: '/purchase_types/create',
                         name: 'purchase_types.create',
                         component: AddPurchaseType,
+                    }
+                ]
+            },
+            {
+                path: '/purchases',
+                component: PurchaseMaster,
+                children: [
+                    {
+                        path: '/purchases',
+                        name: 'purchases',
+                        component: PurchaseList,
+                    },
+                    {
+                        path: '/purchases/create',
+                        name: 'purchases.create',
+                        component: AddPurchase,
                     }
                 ]
             },
