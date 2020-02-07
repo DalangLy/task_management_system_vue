@@ -19,6 +19,7 @@ import Profile from "../components/profile/Profile";
 //clients
 import ClientMaster from "../components/Client/ClientMaster";
 import ClientList from "../components/Client/ClientList";
+import AddClient from "../components/Client/AddClient";
 
 const routes = [
     {
@@ -57,6 +58,11 @@ const routes = [
                         path: '/clients',
                         name: 'clients',
                         component: ClientList,
+                    },
+                    {
+                        path: '/clients/create',
+                        name: 'clients.create',
+                        component: AddClient,
                     }
                 ]
             },

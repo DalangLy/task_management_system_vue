@@ -1,6 +1,5 @@
 <template>
     <div @click.prevent.stop="showAutoCompleteWrapper(true)" class="auto-complete">
-
         <div class="auto-complete-display form-control" style="cursor: pointer"></div>
         <div class="auto-complete-wrapper">
             <input @keyup="filterAutoCompleteResultList" type="text" class="auto-complete-input-field" placeholder="Type anything here">
@@ -21,17 +20,20 @@
                 isAutoCompleteWrapperVisible: false,
             }
         },
-        created(){
-            const thisKeyword = this;
-            window.addEventListener('click', function(event){
-                event.stopPropagation();
-                thisKeyword.showAutoCompleteWrapper(false);
-            });
-        },
         mounted(){
             this.setDefaultSelectedValue();
+
+            document.addEventListener('click', this.handleClickOutside);
+        },
+        destroyed(){
+            document.removeEventListener('click', this.handleClickOutside);
         },
         methods:{
+            handleClickOutside(evt) {
+                if (!this.$el.contains(evt.target)) {
+                    this.showAutoCompleteWrapper(false);
+                }
+            },
             setDefaultSelectedValue(){
                 if(this.data){
                     if(this.data.length > 0){
