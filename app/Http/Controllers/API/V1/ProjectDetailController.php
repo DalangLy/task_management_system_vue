@@ -30,6 +30,7 @@ class ProjectDetailController extends Controller
         ProjectDetail::create([
             'project_id' => $request->project_id,
             'task_type_id' => $request->task_type_id,
+            'working_code' => uniqid(),
             'task_name' => $request->task_name,
             'user_id' => Auth::id(),
             'fee' => $request->fee,

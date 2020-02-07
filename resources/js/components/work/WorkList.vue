@@ -21,6 +21,7 @@
             <thead class="thead-dark">
             <tr>
                 <th class="text-center align-middle" scope="col">#</th>
+                <th class="text-center align-middle" scope="col">Task Code</th>
                 <th class="text-center align-middle" scope="col">Task Name</th>
                 <th class="text-center align-middle" scope="col">Project Name</th>
                 <th class="text-center align-middle" scope="col">Task Type</th>
@@ -34,6 +35,7 @@
             <tbody>
             <tr v-for="(work, index) in allData">
                 <th class="align-middle" scope="row">{{(index+1)}}</th>
+                <td class="align-middle">{{work.working_code}}</td>
                 <td class="align-middle">{{work.task_name}}</td>
                 <td class="align-middle">{{work.project_name}}</td>
                 <td class="align-middle">{{work.task_type}}</td>

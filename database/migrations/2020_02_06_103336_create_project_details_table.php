@@ -17,6 +17,7 @@ class CreateProjectDetailsTable extends Migration
             $table->bigIncrements('project_detail_id');
             $table->unsignedBigInteger('project_id');
             $table->unsignedBigInteger('task_type_id');
+            $table->string('working_code')->unique();
             $table->string('task_name');
             $table->unsignedBigInteger('user_id');
             $table->float('fee');

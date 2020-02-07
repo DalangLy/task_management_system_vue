@@ -4955,6 +4955,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "WorkList",
   data: function data() {
@@ -45209,6 +45211,10 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("td", { staticClass: "align-middle" }, [
+              _vm._v(_vm._s(work.working_code))
+            ]),
+            _vm._v(" "),
+            _c("td", { staticClass: "align-middle" }, [
               _vm._v(_vm._s(work.task_name))
             ]),
             _vm._v(" "),
@@ -45255,6 +45261,12 @@ var staticRenderFns = [
           "th",
           { staticClass: "text-center align-middle", attrs: { scope: "col" } },
           [_vm._v("#")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          { staticClass: "text-center align-middle", attrs: { scope: "col" } },
+          [_vm._v("Task Code")]
         ),
         _vm._v(" "),
         _c(
