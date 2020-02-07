@@ -20,73 +20,73 @@
                     <li class="nav-item mT-30">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fas fa-address-card" style="color: red;"></i></span>
-                            <span class="title" @click.prevent="$router.push({name: 'dashboard'})">Dashboard</span>
+                            <span class="title" @click.prevent="$router.push({name: 'dashboard'}).catch(err => {})">Dashboard</span>
                         </span>
                     </li>
                     <li class="nav-item">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fas fa-users" style="color: purple;"></i></span>
-                            <span @click.prevent="$router.push({name: 'users'})" class="title">Users</span>
+                            <span @click.prevent="$router.push({name: 'users'}).catch(err => {})" class="title">Users</span>
                         </span>
                     </li>
                     <li class="nav-item">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fab fa-accusoft" style="color:blue"></i></span>
-                            <span @click.prevent="$router.push({name: 'clients'})" class="title">Clients</span>
+                            <span @click.prevent="$router.push({name: 'clients'}).catch(err => {})" class="title">Clients</span>
                         </span>
                     </li>
                     <li class="nav-item">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fas fa-user-tag" style="color: pink"></i></span>
-                            <span @click.prevent="$router.push({name: 'roles'})" class="title">Roles</span>
+                            <span @click.prevent="$router.push({name: 'roles'}).catch(err => {})" class="title">Roles</span>
                         </span>
                     </li>
                     <li class="nav-item">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fas fa-mug-hot" style="color: green"></i></span>
-                            <span @click.prevent="$router.push({name: 'client_accounts'})" class="title">Client Accounts</span>
+                            <span @click.prevent="$router.push({name: 'client_accounts'}).catch(err => {})" class="title">Client Accounts</span>
                         </span>
                     </li>
                     <li class="nav-item">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fas fa-project-diagram" style="color: cyan"></i></span>
-                            <span @click.prevent="$router.push({name: 'projects'})" class="title">Projects</span>
+                            <span @click.prevent="$router.push({name: 'projects'}).catch(err => {})" class="title">Projects</span>
                         </span>
                     </li>
                     <li class="nav-item">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fas fa-briefcase" style="color: yellow"></i></span>
-                            <span @click.prevent="$router.push({name: 'task_types'})"  class="title">Task Types</span>
+                            <span @click.prevent="$router.push({name: 'task_types'}).catch(err => {})"  class="title">Task Types</span>
                         </span>
                     </li>
                     <li class="nav-item">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fas fa-crosshairs" style="color: gray"></i></span>
-                            <span @click.prevent="$router.push({name: 'positions'})" class="title">Positions</span>
+                            <span @click.prevent="$router.push({name: 'positions'}).catch(err => {})" class="title">Positions</span>
                         </span>
                     </li>
                     <li class="nav-item">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fas fa-adjust" style="color: green"></i></span>
-                            <span @click.prevent="$router.push({name: 'works'})" class="title">Works</span>
+                            <span @click.prevent="$router.push({name: 'works'}).catch(err => {})" class="title">Works</span>
                         </span>
                     </li>
                     <li class="nav-item">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fas fa-adjust" style="color: green"></i></span>
-                            <span @click.prevent="$router.push({name: 'purchase_types'})" class="title">Purchase Type</span>
+                            <span @click.prevent="$router.push({name: 'purchase_types'}).catch(err => {})" class="title">Purchase Type</span>
                         </span>
                     </li>
                     <li class="nav-item">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fas fa-adjust" style="color: green"></i></span>
-                            <span @click.prevent="$router.push({name: 'purchases'})" class="title">Purchases</span>
+                            <span @click.prevent="$router.push({name: 'purchases'}).catch(err => {})" class="title">Purchases</span>
                         </span>
                     </li>
                     <li class="nav-item">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fas fa-adjust" style="color: green"></i></span>
-                            <span @click.prevent="$router.push({name: 'leave_requests'})" class="title">Leave Request</span>
+                            <span @click.prevent="$router.push({name: 'leave_requests'}).catch(err => {})" class="title">Leave Request</span>
                         </span>
                     </li>
 
@@ -132,8 +132,8 @@
                             <!-- start account dropdown container -->
                             <div class="user-account-dropdown-container">
                                 <div class="user-account-dropdown-container-inner">
-                                    <span @click.prevent.stop="$router.push({name: 'profile'})" class="user-account-dropdown-item"><i class="fas fa-user-circle"></i> Account</span>
-                                    <span @click.prevent.stop="$router.push({name : 'logout'});" class="user-account-dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</span>
+                                    <span @click.prevent.stop="gotoPage('account')" class="user-account-dropdown-item"><i class="fas fa-user-circle"></i> Account</span>
+                                    <span @click.prevent.stop="gotoPage('logout')" class="user-account-dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</span>
                                 </div>
                             </div>
                             <!-- end account dropdown container -->
@@ -179,6 +179,14 @@
             this.getUserInfo();
         },
         methods:{
+            gotoPage(pageName){
+                if(pageName === 'account')
+                    this.$router.push({name: 'profile'}).catch(err => {});
+                else
+                    this.$router.push({name : 'logout'}).catch(err => {});
+
+                this.windowClickEvent();
+            },
             async getUserInfo(){
                 //get user token from auth module
                 const userToken = JSON.parse(this.$store.getters.getUserToken);
@@ -272,7 +280,7 @@
                     userAccountDropDown.classList.remove('open');
                     this.isUserAccountDropdownOpen = !this.isUserAccountDropdownOpen;
                 }
-            }
+            },
         },
         computed:{
             isStudentLoggedIn(){

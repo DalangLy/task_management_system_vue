@@ -2549,6 +2549,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.getUserInfo();
   },
   methods: {
+    gotoPage: function gotoPage(pageName) {
+      if (pageName === 'account') this.$router.push({
+        name: 'profile'
+      })["catch"](function (err) {});else this.$router.push({
+        name: 'logout'
+      })["catch"](function (err) {});
+      this.windowClickEvent();
+    },
     getUserInfo: function getUserInfo() {
       var _this = this;
 
@@ -43395,7 +43403,9 @@ var render = function() {
                       on: {
                         click: function($event) {
                           $event.preventDefault()
-                          return _vm.$router.push({ name: "dashboard" })
+                          _vm.$router
+                            .push({ name: "dashboard" })
+                            .catch(function(err) {})
                         }
                       }
                     },
@@ -43415,7 +43425,9 @@ var render = function() {
                       on: {
                         click: function($event) {
                           $event.preventDefault()
-                          return _vm.$router.push({ name: "users" })
+                          _vm.$router
+                            .push({ name: "users" })
+                            .catch(function(err) {})
                         }
                       }
                     },
@@ -43435,7 +43447,9 @@ var render = function() {
                       on: {
                         click: function($event) {
                           $event.preventDefault()
-                          return _vm.$router.push({ name: "clients" })
+                          _vm.$router
+                            .push({ name: "clients" })
+                            .catch(function(err) {})
                         }
                       }
                     },
@@ -43455,7 +43469,9 @@ var render = function() {
                       on: {
                         click: function($event) {
                           $event.preventDefault()
-                          return _vm.$router.push({ name: "roles" })
+                          _vm.$router
+                            .push({ name: "roles" })
+                            .catch(function(err) {})
                         }
                       }
                     },
@@ -43475,7 +43491,9 @@ var render = function() {
                       on: {
                         click: function($event) {
                           $event.preventDefault()
-                          return _vm.$router.push({ name: "client_accounts" })
+                          _vm.$router
+                            .push({ name: "client_accounts" })
+                            .catch(function(err) {})
                         }
                       }
                     },
@@ -43495,7 +43513,9 @@ var render = function() {
                       on: {
                         click: function($event) {
                           $event.preventDefault()
-                          return _vm.$router.push({ name: "projects" })
+                          _vm.$router
+                            .push({ name: "projects" })
+                            .catch(function(err) {})
                         }
                       }
                     },
@@ -43515,7 +43535,9 @@ var render = function() {
                       on: {
                         click: function($event) {
                           $event.preventDefault()
-                          return _vm.$router.push({ name: "task_types" })
+                          _vm.$router
+                            .push({ name: "task_types" })
+                            .catch(function(err) {})
                         }
                       }
                     },
@@ -43535,7 +43557,9 @@ var render = function() {
                       on: {
                         click: function($event) {
                           $event.preventDefault()
-                          return _vm.$router.push({ name: "positions" })
+                          _vm.$router
+                            .push({ name: "positions" })
+                            .catch(function(err) {})
                         }
                       }
                     },
@@ -43555,7 +43579,9 @@ var render = function() {
                       on: {
                         click: function($event) {
                           $event.preventDefault()
-                          return _vm.$router.push({ name: "works" })
+                          _vm.$router
+                            .push({ name: "works" })
+                            .catch(function(err) {})
                         }
                       }
                     },
@@ -43575,7 +43601,9 @@ var render = function() {
                       on: {
                         click: function($event) {
                           $event.preventDefault()
-                          return _vm.$router.push({ name: "purchase_types" })
+                          _vm.$router
+                            .push({ name: "purchase_types" })
+                            .catch(function(err) {})
                         }
                       }
                     },
@@ -43595,7 +43623,9 @@ var render = function() {
                       on: {
                         click: function($event) {
                           $event.preventDefault()
-                          return _vm.$router.push({ name: "purchases" })
+                          _vm.$router
+                            .push({ name: "purchases" })
+                            .catch(function(err) {})
                         }
                       }
                     },
@@ -43615,7 +43645,9 @@ var render = function() {
                       on: {
                         click: function($event) {
                           $event.preventDefault()
-                          return _vm.$router.push({ name: "leave_requests" })
+                          _vm.$router
+                            .push({ name: "leave_requests" })
+                            .catch(function(err) {})
                         }
                       }
                     },
@@ -43688,7 +43720,7 @@ var render = function() {
                                 click: function($event) {
                                   $event.preventDefault()
                                   $event.stopPropagation()
-                                  return _vm.$router.push({ name: "profile" })
+                                  return _vm.gotoPage("account")
                                 }
                               }
                             },
@@ -43706,7 +43738,7 @@ var render = function() {
                                 click: function($event) {
                                   $event.preventDefault()
                                   $event.stopPropagation()
-                                  return _vm.$router.push({ name: "logout" })
+                                  return _vm.gotoPage("logout")
                                 }
                               }
                             },
