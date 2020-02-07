@@ -68,6 +68,12 @@
                     <li class="nav-item">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fas fa-adjust" style="color: green"></i></span>
+                            <span @click.prevent="$router.push({name: 'works'})" class="title">Works</span>
+                        </span>
+                    </li>
+                    <li class="nav-item">
+                        <span class="sidebar-link">
+                            <span class="icon-holder"><i class="fas fa-adjust" style="color: green"></i></span>
                             <span class="title">Leave Request</span>
                         </span>
                     </li>
@@ -479,9 +485,6 @@
         -moz-user-select: none; /* Firefox 2+ */
         -ms-user-select: none; /* IE 10+ */
         user-select: none; /* Standard syntax */
-        border: 1px solid #E3E5ED;
-        padding: 2px 4px;
-        border-radius: 35px;
     }
     .user-avatar-and-name-container .username{
         margin-left: 5px;

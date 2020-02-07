@@ -50,3 +50,7 @@ Route::middleware('auth:api')->post('v1/positions/store', 'API\V1\PositionContro
 //task type routes
 Route::middleware('auth:api')->get('v1/task_types', 'API\V1\TaskTypeController@taskTypes');
 Route::middleware('auth:api')->post('v1/task_types/store', 'API\V1\TaskTypeController@store');
+
+//work routes
+Route::middleware('auth:api')->get('v1/works', 'API\V1\ProjectDetailController@works');
+Route::middleware('auth:api')->post('v1/works/store', 'API\V1\ProjectDetailController@store');

@@ -1,9 +1,9 @@
 <template>
     <div @click.prevent.stop="showAutoCompleteWrapper(true)" class="auto-complete">
-        <div class="auto-complete-display form-control" style="cursor: pointer"></div>
-        <div class="auto-complete-wrapper">
+        <div ref="autoCompleteDisplayRef" class="auto-complete-display form-control" style="cursor: pointer"></div>
+        <div ref="autoCompleteWrapperRef" class="auto-complete-wrapper">
             <input @keyup="filterAutoCompleteResultList" type="text" class="auto-complete-input-field" placeholder="Type anything here">
-            <ul class="auto-complete-result-container">
+            <ul ref="autoCompleteResultContainerRef" class="auto-complete-result-container">
                 <li @click.prevent.stop="selectItem(item)" v-for="item in filteredData" class="auto-complete-result-item">{{item[selectedText]}}</li>
             </ul>
         </div>
@@ -35,6 +35,8 @@
                 }
             },
             setDefaultSelectedValue(){
+                const autoComplete = this.$refs.autoCompleteDisplayRef;
+
                 if(this.data){
                     if(this.data.length > 0){
 
@@ -43,8 +45,12 @@
                         this.$emit('input', item[this.selectedValue]);//pass data to component
 
                         //display selected name
-                        const autoComplete = document.querySelector('.auto-complete-display');
                         autoComplete.innerText = item[this.selectedText];
+                    }
+                    else{
+                        //console.log('no value');
+                        //remove selected name from auto complete
+                        autoComplete.innerText = '';
                     }
                 }
             },
@@ -53,7 +59,7 @@
                     this.$emit('input', item[this.selectedValue]);//pass data to component
 
                     //display selected name
-                    const autoComplete = document.querySelector('.auto-complete-display');
+                    const autoComplete = this.$refs.autoCompleteDisplayRef;
                     autoComplete.innerText = item[this.selectedText];
 
                     //invisible auto complete modal
@@ -61,8 +67,11 @@
                 }
             },
             showAutoCompleteWrapper(isShowing){
+
+                this.closeOtherOpeningAutoComplete();
+
                 if(this.selectedValue && this.selectedText) {
-                    const autoCompleteWrapper = document.querySelector('.auto-complete-wrapper');
+                    const autoCompleteWrapper = this.$refs.autoCompleteWrapperRef;
                     if (isShowing) {
                         autoCompleteWrapper.classList.add('visible');
                         if (this.data) {
@@ -77,6 +86,15 @@
                         this.isAutoCompleteWrapperVisible = true;
                     }
                 }
+            },
+            closeOtherOpeningAutoComplete(){
+                //close other opening auto complete
+                //protect if you use this auto complete more than one in a page, so when you open other so so the last one wont close
+                const otherAutoComplete = document.querySelectorAll('.auto-complete-wrapper');
+                otherAutoComplete.forEach(autoComplete => {
+                    autoComplete.classList.remove('visible');
+                    this.showAutoCompleteResultContainer(false);
+                });
             },
             filterAutoCompleteResultList(e){
                 const keyWord = (e.target.value).toLowerCase();
@@ -94,7 +112,7 @@
                 }
             },
             showAutoCompleteResultContainer(isShow){
-                const autoCompleteResultContainer = document.querySelector('.auto-complete-result-container');
+                const autoCompleteResultContainer = this.$refs.autoCompleteResultContainerRef;
                 if(isShow){
                     autoCompleteResultContainer.classList.add('visible');
                 }
@@ -126,13 +144,17 @@
     }
     .auto-complete-wrapper{
         margin-top: 3px;
-        border: 1px solid gray;
+        border: 1px solid #ced4da;
         border-radius: 5px;
         background-color: #fff;
         width: 100%;
         overflow: hidden;
         display: none;
         position: absolute;
+        z-index: 100;
+        -webkit-box-shadow: 3px 3px 13px 0px rgba(0,0,0,0.35);
+        -moz-box-shadow: 3px 3px 13px 0px rgba(0,0,0,0.35);
+        box-shadow: 3px 3px 13px 0px rgba(0,0,0,0.35);
     }
     .auto-complete-wrapper.visible{
         display: block;
@@ -159,7 +181,7 @@
     .auto-complete-result-item{
         padding: 10px;
         cursor: pointer;
-        border-bottom: 1px solid gray;
+        border-bottom: 1px solid #ced4da;
         transition: 0.3s ease;
         -webkit-transition: 0.3s ease;
         -o-transition: 0.3s ease;

@@ -30,15 +30,26 @@ import AddRole from "../components/role/AddRole";
 import ClientAccountMaster from "../components/client_account/ClientAccountMaster";
 import ClientAccountList from "../components/client_account/ClientAccountList";
 import AddClientAccount from "../components/client_account/AddClientAccount";
+
+//project
 import ProjectMaster from "../components/project/ProjectMaster";
 import ProjectList from "../components/project/ProjectList";
 import AddProject from "../components/project/AddProject";
+
+//position
 import PositionMaster from "../components/position/PositionMaster";
 import PositionList from "../components/position/PositionList";
 import AddPosition from "../components/position/AddPosition";
+
+//task type
 import TaskTypeMaster from "../components/task_type/TaskTypeMaster";
 import TaskTypeList from "../components/task_type/TaskTypeList";
 import AddTaskType from "../components/task_type/AddTaskType";
+
+//work
+import WorkMaster from "../components/work/WorkMaster";
+import WorkList from "../components/work/WorkList";
+import AddWork from "../components/work/AddWork";
 
 const routes = [
     {
@@ -162,6 +173,22 @@ const routes = [
                         path: '/task_types/create',
                         name: 'task_types.create',
                         component: AddTaskType,
+                    }
+                ]
+            },
+            {
+                path: '/works',
+                component: WorkMaster,
+                children: [
+                    {
+                        path: '/works',
+                        name: 'works',
+                        component: WorkList,
+                    },
+                    {
+                        path: '/works/create',
+                        name: 'works.create',
+                        component: AddWork,
                     }
                 ]
             },
