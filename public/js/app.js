@@ -5972,6 +5972,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "DatePicker",
   data: function data() {
@@ -47706,7 +47707,7 @@ var render = function() {
             [
               _vm._l(_vm.displayCalendar, function(day, index) {
                 return [
-                  index === 0
+                  index === 0 && day.dayName !== "Sunday"
                     ? _vm._l(day.dayRange, function(m) {
                         return _c("div", { staticClass: "blank-day-item" })
                       })

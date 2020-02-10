@@ -26,7 +26,8 @@
                         <template v-for="(day, index) in displayCalendar">
 
                             <!-- create blank day if start day is not monday-->
-                            <template v-if="index === 0">
+                            <!-- but if start day is monday so dont need to create black date-->
+                            <template v-if="index === 0 && day.dayName !== 'Sunday'">
                                 <div v-for="m in day.dayRange" class="blank-day-item"></div>
                             </template>
 
