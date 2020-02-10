@@ -52,16 +52,19 @@
             <button @click.prevent.stop="save" class="btn btn-primary">Save</button>
         </div>
 
+        <date-picker></date-picker>
 
     </div>
 </template>
 
 <script>
     import AutoComplete from "../Users/partials/AutoComplete";
+    import DatePicker from "./partials/DatePicker";
     export default {
         name: "AddWork",
         components:{
             'auto-complete': AutoComplete,
+            'date-picker': DatePicker,
         },
         data(){
             return{

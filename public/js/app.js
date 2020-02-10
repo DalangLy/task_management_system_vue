@@ -5473,6 +5473,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Users_partials_AutoComplete__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Users/partials/AutoComplete */ "./resources/js/components/Users/partials/AutoComplete.vue");
+/* harmony import */ var _partials_DatePicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./partials/DatePicker */ "./resources/js/components/work/partials/DatePicker.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -5537,11 +5538,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AddWork",
   components: {
-    'auto-complete': _Users_partials_AutoComplete__WEBPACK_IMPORTED_MODULE_1__["default"]
+    'auto-complete': _Users_partials_AutoComplete__WEBPACK_IMPORTED_MODULE_1__["default"],
+    'date-picker': _partials_DatePicker__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
@@ -5910,6 +5914,234 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "WorkMaster"
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/work/partials/DatePicker.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/work/partials/DatePicker.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "DatePicker",
+  data: function data() {
+    return {
+      years: [],
+      calendar: [],
+      changeDate: {
+        day: new Date().getDate(),
+        //day 1 - 31
+        month: new Date().getMonth() + 1,
+        //because return value is month 0 - 11 so to get 1 - 12 we add 1
+        year: new Date().getFullYear() // year 1 - 12
+
+      }
+    };
+  },
+  mounted: function mounted() {
+    this.years = this.createYear(2000, 2050);
+    this.calendar = this.createCalendar(this.years, this.getTwentyNineFebruaryYears(this.years), 'Saturday');
+  },
+  methods: {
+    changeMonth: function changeMonth(direction) {
+      if (direction === 'forwards') {
+        if (this.changeDate.year < 2050) {
+          if (this.changeDate.month < 12) this.changeDate.month++;else {
+            this.changeDate.month = 1;
+            this.changeDate.year++;
+          }
+        }
+      } else {
+        if (this.changeDate.year > 2000) {
+          if (this.changeDate.month > 1) this.changeDate.month--;else {
+            this.changeDate.month = 12;
+            this.changeDate.year--;
+          }
+        }
+      }
+    },
+    getTwentyNineFebruaryYears: function getTwentyNineFebruaryYears(arrayOfYears) {
+      if (Array.isArray(arrayOfYears)) {
+        //29 february happen only when year divided by 4 equal 0
+        //but year that divide by 100 === 0 but 400, february not 29
+        var noTwentyNineFebYear = [];
+        var twentyNineFebYears = [];
+        arrayOfYears.forEach(function (year) {
+          if (year % 100 === 0 && year % 400 > 0) {
+            noTwentyNineFebYear.push({
+              year: year
+            });
+          } else {
+            if (year % 4 === 0) {
+              twentyNineFebYears.push({
+                year: year
+              });
+            }
+          }
+        });
+        return twentyNineFebYears;
+      }
+
+      console.log('input year must be array');
+      return [];
+    },
+    createYear: function createYear(from, to) {
+      var years = [];
+
+      for (var i = from; i <= to; i++) {
+        years.push(i);
+      }
+
+      return years;
+    },
+    createCalendar: function createCalendar(arrayOfYears, arrayOfNotTwentyNineYears, startDayName) {
+      if (Array.isArray(arrayOfYears) && Array.isArray(arrayOfNotTwentyNineYears)) {
+        var calendar = [];
+        var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        var dayName = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        var startDayNameIndex = dayName.findIndex(function (dayName) {
+          return dayName.toLowerCase() === startDayName.toLowerCase();
+        });
+        var peakMonth = [1, 3, 5, 7, 8, 10, 12];
+        arrayOfYears.forEach(function (year) {
+          calendar.push({
+            year: year,
+            months: []
+          }); //check is it 29 feb?
+
+          var isTwentyNine = arrayOfNotTwentyNineYears.find(function (r) {
+            return parseInt(r.year) === year;
+          }) ? true : false; //inserting month
+
+          var insertedYear = calendar.findIndex(function (r) {
+            return parseInt(r.year) === parseInt(year);
+          });
+
+          var _loop = function _loop(month) {
+            calendar[insertedYear].months.push({
+              monthNum: month,
+              monthName: monthNames[month - 1],
+              days: []
+            }); //inserting day
+
+            var insertedMonthIndex = calendar[insertedYear].months.findIndex(function (r) {
+              return parseInt(r.monthNum) === month;
+            });
+            var maxDay = 31;
+
+            if (month === 2) {
+              if (isTwentyNine) {
+                maxDay = 29;
+              } else {
+                maxDay = 28;
+              }
+            } else {
+              if (peakMonth.find(function (m) {
+                return m === month;
+              })) {
+                maxDay = 31;
+              } else {
+                maxDay = 30;
+              }
+            }
+
+            for (var day = 1; day <= maxDay; day++) {
+              calendar[insertedYear].months[insertedMonthIndex].days.push({
+                dayRange: startDayNameIndex + 1,
+                //example monthday = 1, tuesday = 2, wednesday = 3... etc
+                dayNum: day,
+                dayName: dayName[startDayNameIndex],
+                currentDay: day === new Date().getDate() && insertedMonthIndex === new Date().getMonth() && year === new Date().getFullYear()
+              });
+              startDayNameIndex++;
+
+              if (startDayNameIndex > 6) {
+                startDayNameIndex = 0;
+              }
+            }
+          };
+
+          for (var month = 1; month <= 12; month++) {
+            _loop(month);
+          }
+        });
+        return calendar;
+      }
+    }
+  },
+  computed: {
+    displayCalendar: function displayCalendar() {
+      var _this = this;
+
+      if (this.calendar.length > 0) {
+        if (this.calendar[0].months.length > 0) {
+          if (this.calendar[0].months[0].days.length > 0) {
+            var selectedYear = this.calendar.find(function (y) {
+              return parseInt(y.year) === _this.changeDate.year;
+            });
+
+            if (selectedYear) {
+              var selectedMonth = selectedYear.months.find(function (m) {
+                return parseInt(m.monthNum) === _this.changeDate.month;
+              }); //let selectedDay = selectedMonth.days.find(d => parseInt(d.dayNum) === day);
+
+              return selectedMonth.days;
+            }
+          }
+        }
+      }
+    }
+  }
 });
 
 /***/ }),
@@ -10553,6 +10785,25 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 // module
 exports.push([module.i, "\n.user-profile-layout[data-v-5031abb0]{\n    width: auto;\n    min-height: 100vh;\n    background-color: #fff;\n    border-radius: 20px;\n    margin: 34px;\n    box-shadow: 3px 0px 10px 0px rgba(0,0,0,0.25);\n    overflow: hidden;\n    padding: 0 80px;\n}\n.container[data-v-5031abb0]{\n    width: 100%;\n    height: 100%;\n}\n.header[data-v-5031abb0]{\n    height: 80px;\n    border-bottom: 1px solid rgba(112,112,112,0.27);\n    display: flex;\n    align-items: center;\n}\n.avatar-container[data-v-5031abb0]{\n    display: inline-block;\n    border-bottom: 1px solid rgba(112,112,112,0.27);\n    padding: 30px 0;\n}\n.avatar-content[data-v-5031abb0]{\n    width: 100%;\n    display: flex;\n    align-items: stretch;\n}\n.left[data-v-5031abb0]{\n    flex: 1;\n    width: 200px;\n}\n.right[data-v-5031abb0]{\n    flex: 2;\n    width: 200px;\n    display: flex;\n    align-items: center;\n}\n.avatar[data-v-5031abb0]{\n    width: 100px;\n    height: 100px;\n    overflow: hidden;\n    border-radius: 50%;\n    border: 1px solid darkgray;\n}\n.avatar img[data-v-5031abb0]{\n    -o-object-fit: cover;\n       object-fit: cover;\n    vertical-align: middle;\n    width: 100%;\n    height: 100%;\n}\n.profile-name[data-v-5031abb0]{\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start;\n}\n.content-body[data-v-5031abb0]{\n    display: inline-block;\n    border-bottom: 1px solid rgba(112,112,112,0.27);\n}\n.content-body-inner[data-v-5031abb0]{\n    display: flex;\n    align-items: stretch;\n    margin: 20px 0;\n}\n.body-left[data-v-5031abb0]{\n    width: 200px;\n    flex-grow: 1;\n}\n.body-right[data-v-5031abb0]{\n    width: 200px;\n    flex-grow: 1;\n}\n.action-section[data-v-5031abb0]{\n    display: inline-block;\n    margin: 20px 0;\n}\n.action-section-inner[data-v-5031abb0]{\n    display: flex;\n    align-items: stretch;\n}\n.action-section-content[data-v-5031abb0]{\n    width: 100%;\n    flex-grow: 1;\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n}\n.action-btn[data-v-5031abb0]{\n    padding: 10px 20px;\n    border-radius: 20px;\n    background-color: #fff;\n    color: #FFC000;\n    outline: none;\n    border: 1px solid #FFC000;\n    cursor: pointer;\n    transition: 0.3s ease;\n    -webkit-transition: 0.3s ease;\n    -o-transition: 0.3s ease;\n    margin-right: 20px;\n    text-decoration: none;\n    font-size: 12px;\n}\n.action-btn[data-v-5031abb0]:hover{\n    background-color: #FFC000;\n    color: #fff;\n}\nh4[data-v-5031abb0], p[data-v-5031abb0], h3[data-v-5031abb0]{\n    padding: 0;\n    margin: 0;\n}\nh4[data-v-5031abb0]{\n    margin-bottom: 8px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/work/partials/DatePicker.vue?vue&type=style&index=0&id=72935234&scoped=true&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/work/partials/DatePicker.vue?vue&type=style&index=0&id=72935234&scoped=true&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.date-picker[data-v-72935234]{\n    position: relative;\n}\n.date-picker-container[data-v-72935234]{\n    border-radius: 5px;\n    border: 1px solid black;\n    width: 300px;\n    min-height: 300px;\n    background-color: white;\n    padding: 10px;\n    position: absolute;\n    margin-top: 5px;\n}\n.calendar-container[data-v-72935234]{\n}\n.calendar-header[data-v-72935234]{\n    display: flex;\n    border-bottom: 1px solid gray;\n    padding-bottom: 3px;\n    margin-bottom: 5px;\n}\n.header-item[data-v-72935234]{\n    flex-grow: 1;\n    min-width: 30px;\n    background-color: cornflowerblue;\n    border: 1px solid white;\n    height: 50px;\n    color: white;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    border-radius: 5px;\n}\n.calendar-body[data-v-72935234]{\n    display: flex;\n    flex-wrap: wrap;\n}\n.blank-day-item[data-v-72935234]{\n    width: 14.2857142857%;\n    border: 1px solid white;\n    height: 50px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n.day-item[data-v-72935234]{\n    width: 14.2857142857%;\n    background-color: gray;\n    border: 1px solid white;\n    height: 50px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    cursor: pointer;\n    color: white;\n    border-radius: 5px;\n    transition: 0.3s ease;\n}\n.current-day-highlight[data-v-72935234]{\n    background-color: #f7c6c5;\n}\n.day-item[data-v-72935234]:hover{\n    background-color: #f7c6c5;\n}\n.sunday[data-v-72935234]{\n    background-color: red;\n}\n", ""]);
 
 // exports
 
@@ -42312,6 +42563,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/work/partials/DatePicker.vue?vue&type=style&index=0&id=72935234&scoped=true&lang=css&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/work/partials/DatePicker.vue?vue&type=style&index=0&id=72935234&scoped=true&lang=css& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./DatePicker.vue?vue&type=style&index=0&id=72935234&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/work/partials/DatePicker.vue?vue&type=style&index=0&id=72935234&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/lib/addStyles.js":
 /*!****************************************************!*\
   !*** ./node_modules/style-loader/lib/addStyles.js ***!
@@ -46849,276 +47130,290 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "div",
-      { staticClass: "form-group" },
-      [
-        _c("label", { attrs: { for: "txtClient" } }, [_vm._v("Clients")]),
-        _vm._v(" "),
-        _c("auto-complete", {
-          attrs: {
-            data: _vm.allClient,
-            "selected-value": "client_id",
-            "selected-text": "client_name",
-            id: "txtClient"
-          },
-          model: {
-            value: _vm.clientId,
-            callback: function($$v) {
-              _vm.clientId = $$v
+  return _c(
+    "div",
+    [
+      _c(
+        "div",
+        { staticClass: "form-group" },
+        [
+          _c("label", { attrs: { for: "txtClient" } }, [_vm._v("Clients")]),
+          _vm._v(" "),
+          _c("auto-complete", {
+            attrs: {
+              data: _vm.allClient,
+              "selected-value": "client_id",
+              "selected-text": "client_name",
+              id: "txtClient"
             },
-            expression: "clientId"
-          }
-        })
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "form-group" },
-      [
-        _c("label", { attrs: { for: "txtClientAccount" } }, [
-          _vm._v("Client Account")
-        ]),
-        _vm._v(" "),
-        _c("auto-complete", {
-          attrs: {
-            data: _vm.allClientAccounts,
-            "selected-value": "client_account_id",
-            "selected-text": "client_account",
-            id: "txtClientAccount"
-          },
-          model: {
-            value: _vm.clientAccountId,
-            callback: function($$v) {
-              _vm.clientAccountId = $$v
+            model: {
+              value: _vm.clientId,
+              callback: function($$v) {
+                _vm.clientId = $$v
+              },
+              expression: "clientId"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "form-group" },
+        [
+          _c("label", { attrs: { for: "txtClientAccount" } }, [
+            _vm._v("Client Account")
+          ]),
+          _vm._v(" "),
+          _c("auto-complete", {
+            attrs: {
+              data: _vm.allClientAccounts,
+              "selected-value": "client_account_id",
+              "selected-text": "client_account",
+              id: "txtClientAccount"
             },
-            expression: "clientAccountId"
-          }
-        })
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "form-group" },
-      [
-        _c("label", { attrs: { for: "txtProject" } }, [_vm._v("Projects")]),
-        _vm._v(" "),
-        _c("auto-complete", {
-          attrs: {
-            data: _vm.allProjects,
-            "selected-value": "project_id",
-            "selected-text": "project_name",
-            id: "txtProject"
-          },
-          model: {
-            value: _vm.data.project_id,
-            callback: function($$v) {
-              _vm.$set(_vm.data, "project_id", $$v)
+            model: {
+              value: _vm.clientAccountId,
+              callback: function($$v) {
+                _vm.clientAccountId = $$v
+              },
+              expression: "clientAccountId"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "form-group" },
+        [
+          _c("label", { attrs: { for: "txtProject" } }, [_vm._v("Projects")]),
+          _vm._v(" "),
+          _c("auto-complete", {
+            attrs: {
+              data: _vm.allProjects,
+              "selected-value": "project_id",
+              "selected-text": "project_name",
+              id: "txtProject"
             },
-            expression: "data.project_id"
-          }
-        })
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "form-group" },
-      [
-        _c("label", { attrs: { for: "txtTaskType" } }, [_vm._v("Task Types")]),
-        _vm._v(" "),
-        _c("auto-complete", {
-          attrs: {
-            data: _vm.allTaskTypes,
-            "selected-value": "task_type_id",
-            "selected-text": "task_type",
-            id: "txtTaskType"
-          },
-          model: {
-            value: _vm.data.task_type_id,
-            callback: function($$v) {
-              _vm.$set(_vm.data, "task_type_id", $$v)
+            model: {
+              value: _vm.data.project_id,
+              callback: function($$v) {
+                _vm.$set(_vm.data, "project_id", $$v)
+              },
+              expression: "data.project_id"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "form-group" },
+        [
+          _c("label", { attrs: { for: "txtTaskType" } }, [
+            _vm._v("Task Types")
+          ]),
+          _vm._v(" "),
+          _c("auto-complete", {
+            attrs: {
+              data: _vm.allTaskTypes,
+              "selected-value": "task_type_id",
+              "selected-text": "task_type",
+              id: "txtTaskType"
             },
-            expression: "data.task_type_id"
-          }
-        })
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "txtTaskName" } }, [_vm._v("Task Name")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.data.task_name,
-            expression: "data.task_name"
-          }
-        ],
-        staticClass: "form-control",
-        staticStyle: { width: "300px" },
-        attrs: {
-          type: "text",
-          id: "txtTaskName",
-          "aria-describedby": "taskNameHelp",
-          placeholder: "Task Name"
-        },
-        domProps: { value: _vm.data.task_name },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+            model: {
+              value: _vm.data.task_type_id,
+              callback: function($$v) {
+                _vm.$set(_vm.data, "task_type_id", $$v)
+              },
+              expression: "data.task_type_id"
             }
-            _vm.$set(_vm.data, "task_name", $event.target.value)
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c(
-        "small",
-        { staticClass: "form-text text-muted", attrs: { id: "taskNameHelp" } },
-        [_vm._v("We'll never share your email with anyone else.")]
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "txtFee" } }, [_vm._v("Fee")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.data.fee,
-            expression: "data.fee"
-          }
+          })
         ],
-        staticClass: "form-control",
-        staticStyle: { width: "300px" },
-        attrs: {
-          type: "text",
-          id: "txtFee",
-          "aria-describedby": "feeHelp",
-          placeholder: "Fee"
-        },
-        domProps: { value: _vm.data.fee },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+        1
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "txtTaskName" } }, [_vm._v("Task Name")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.data.task_name,
+              expression: "data.task_name"
             }
-            _vm.$set(_vm.data, "fee", $event.target.value)
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c(
-        "small",
-        { staticClass: "form-text text-muted", attrs: { id: "feeHelp" } },
-        [_vm._v("We'll never share your email with anyone else.")]
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "txtStartDate" } }, [_vm._v("Start Date")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.data.start_date,
-            expression: "data.start_date"
-          }
-        ],
-        staticClass: "form-control",
-        staticStyle: { width: "300px" },
-        attrs: {
-          type: "text",
-          id: "txtStartDate",
-          "aria-describedby": "startDateHelp"
-        },
-        domProps: { value: _vm.data.start_date },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.$set(_vm.data, "start_date", $event.target.value)
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c(
-        "small",
-        { staticClass: "form-text text-muted", attrs: { id: "startDateHelp" } },
-        [_vm._v("We'll never share your email with anyone else.")]
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "txtEndDate" } }, [_vm._v("End Date")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.data.end_date,
-            expression: "data.end_date"
-          }
-        ],
-        staticClass: "form-control",
-        staticStyle: { width: "300px" },
-        attrs: {
-          type: "text",
-          id: "txtEndDate",
-          "aria-describedby": "endDateHelp"
-        },
-        domProps: { value: _vm.data.end_date },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.$set(_vm.data, "end_date", $event.target.value)
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c(
-        "small",
-        { staticClass: "form-text text-muted", attrs: { id: "endDateHelp" } },
-        [_vm._v("We'll never share your email with anyone else.")]
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary",
+          ],
+          staticClass: "form-control",
+          staticStyle: { width: "300px" },
+          attrs: {
+            type: "text",
+            id: "txtTaskName",
+            "aria-describedby": "taskNameHelp",
+            placeholder: "Task Name"
+          },
+          domProps: { value: _vm.data.task_name },
           on: {
-            click: function($event) {
-              $event.preventDefault()
-              $event.stopPropagation()
-              return _vm.save($event)
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.data, "task_name", $event.target.value)
             }
           }
-        },
-        [_vm._v("Save")]
-      )
-    ])
-  ])
+        }),
+        _vm._v(" "),
+        _c(
+          "small",
+          {
+            staticClass: "form-text text-muted",
+            attrs: { id: "taskNameHelp" }
+          },
+          [_vm._v("We'll never share your email with anyone else.")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "txtFee" } }, [_vm._v("Fee")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.data.fee,
+              expression: "data.fee"
+            }
+          ],
+          staticClass: "form-control",
+          staticStyle: { width: "300px" },
+          attrs: {
+            type: "text",
+            id: "txtFee",
+            "aria-describedby": "feeHelp",
+            placeholder: "Fee"
+          },
+          domProps: { value: _vm.data.fee },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.data, "fee", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "small",
+          { staticClass: "form-text text-muted", attrs: { id: "feeHelp" } },
+          [_vm._v("We'll never share your email with anyone else.")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "txtStartDate" } }, [_vm._v("Start Date")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.data.start_date,
+              expression: "data.start_date"
+            }
+          ],
+          staticClass: "form-control",
+          staticStyle: { width: "300px" },
+          attrs: {
+            type: "text",
+            id: "txtStartDate",
+            "aria-describedby": "startDateHelp"
+          },
+          domProps: { value: _vm.data.start_date },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.data, "start_date", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "small",
+          {
+            staticClass: "form-text text-muted",
+            attrs: { id: "startDateHelp" }
+          },
+          [_vm._v("We'll never share your email with anyone else.")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "txtEndDate" } }, [_vm._v("End Date")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.data.end_date,
+              expression: "data.end_date"
+            }
+          ],
+          staticClass: "form-control",
+          staticStyle: { width: "300px" },
+          attrs: {
+            type: "text",
+            id: "txtEndDate",
+            "aria-describedby": "endDateHelp"
+          },
+          domProps: { value: _vm.data.end_date },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.data, "end_date", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "small",
+          { staticClass: "form-text text-muted", attrs: { id: "endDateHelp" } },
+          [_vm._v("We'll never share your email with anyone else.")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                $event.stopPropagation()
+                return _vm.save($event)
+              }
+            }
+          },
+          [_vm._v("Save")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("date-picker")
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -47327,6 +47622,136 @@ var render = function() {
   return _c("router-view")
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/work/partials/DatePicker.vue?vue&type=template&id=72935234&scoped=true&":
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/work/partials/DatePicker.vue?vue&type=template&id=72935234&scoped=true& ***!
+  \***************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "date-picker" }, [
+      _c(
+        "div",
+        { staticClass: "form-control", staticStyle: { width: "300px" } },
+        [_vm._v("Select Date")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "date-picker-container" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "d-flex flex-row align-items-center justify-content-between my-2"
+          },
+          [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    $event.stopPropagation()
+                    return _vm.changeMonth("backwards")
+                  }
+                }
+              },
+              [_vm._v("<")]
+            ),
+            _vm._v(" "),
+            _c("h5", { staticClass: "font-weight-bold p-0 m-0" }, [
+              _vm._v(
+                _vm._s(_vm.changeDate.month) + "-" + _vm._s(_vm.changeDate.year)
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    $event.stopPropagation()
+                    return _vm.changeMonth("forwards")
+                  }
+                }
+              },
+              [_vm._v(">")]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "calendar-container" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "calendar-body" },
+            [
+              _vm._l(_vm.displayCalendar, function(day, index) {
+                return [
+                  index === 0
+                    ? _vm._l(day.dayRange, function(m) {
+                        return _c("div", { staticClass: "blank-day-item" })
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "day-item",
+                      class: day.currentDay ? "current-day-highlight" : ""
+                    },
+                    [_vm._v(_vm._s(day.dayNum))]
+                  )
+                ]
+              })
+            ],
+            2
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "calendar-header" }, [
+      _c("div", { staticClass: "header-item" }, [_vm._v("Mon")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "header-item" }, [_vm._v("Tue")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "header-item" }, [_vm._v("Wed")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "header-item" }, [_vm._v("Thu")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "header-item" }, [_vm._v("Fri")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "header-item" }, [_vm._v("Sat")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "header-item sunday" }, [_vm._v("Sun")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -68460,6 +68885,93 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WorkMaster_vue_vue_type_template_id_7f7ada94_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WorkMaster_vue_vue_type_template_id_7f7ada94_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/work/partials/DatePicker.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/work/partials/DatePicker.vue ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _DatePicker_vue_vue_type_template_id_72935234_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DatePicker.vue?vue&type=template&id=72935234&scoped=true& */ "./resources/js/components/work/partials/DatePicker.vue?vue&type=template&id=72935234&scoped=true&");
+/* harmony import */ var _DatePicker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DatePicker.vue?vue&type=script&lang=js& */ "./resources/js/components/work/partials/DatePicker.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _DatePicker_vue_vue_type_style_index_0_id_72935234_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DatePicker.vue?vue&type=style&index=0&id=72935234&scoped=true&lang=css& */ "./resources/js/components/work/partials/DatePicker.vue?vue&type=style&index=0&id=72935234&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _DatePicker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DatePicker_vue_vue_type_template_id_72935234_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _DatePicker_vue_vue_type_template_id_72935234_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "72935234",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/work/partials/DatePicker.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/work/partials/DatePicker.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/work/partials/DatePicker.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DatePicker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./DatePicker.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/work/partials/DatePicker.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DatePicker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/work/partials/DatePicker.vue?vue&type=style&index=0&id=72935234&scoped=true&lang=css&":
+/*!***********************************************************************************************************************!*\
+  !*** ./resources/js/components/work/partials/DatePicker.vue?vue&type=style&index=0&id=72935234&scoped=true&lang=css& ***!
+  \***********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DatePicker_vue_vue_type_style_index_0_id_72935234_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./DatePicker.vue?vue&type=style&index=0&id=72935234&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/work/partials/DatePicker.vue?vue&type=style&index=0&id=72935234&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DatePicker_vue_vue_type_style_index_0_id_72935234_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DatePicker_vue_vue_type_style_index_0_id_72935234_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DatePicker_vue_vue_type_style_index_0_id_72935234_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DatePicker_vue_vue_type_style_index_0_id_72935234_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DatePicker_vue_vue_type_style_index_0_id_72935234_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/work/partials/DatePicker.vue?vue&type=template&id=72935234&scoped=true&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/components/work/partials/DatePicker.vue?vue&type=template&id=72935234&scoped=true& ***!
+  \*********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DatePicker_vue_vue_type_template_id_72935234_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./DatePicker.vue?vue&type=template&id=72935234&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/work/partials/DatePicker.vue?vue&type=template&id=72935234&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DatePicker_vue_vue_type_template_id_72935234_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DatePicker_vue_vue_type_template_id_72935234_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

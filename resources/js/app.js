@@ -33,7 +33,7 @@ import router from './router/router'
 import vuelidation from "./vuelidation/vuelidation";
 
 //vue material
-Vue.use(VueMaterial.default)
+Vue.use(VueMaterial.default);
 
 const app = new Vue({
     el: '#app',
