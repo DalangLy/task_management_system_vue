@@ -40,6 +40,8 @@
             <small id="startDateHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
 
+
+
         <div class="form-group">
             <label for="txtEndDate">End Date</label>
             <input v-model="data.end_date" style="width: 300px" type="text" class="form-control" id="txtEndDate" aria-describedby="endDateHelp">
@@ -49,6 +51,7 @@
         <div class="form-group">
             <button @click.prevent.stop="save" class="btn btn-primary">Save</button>
         </div>
+
 
     </div>
 </template>
@@ -76,6 +79,7 @@
                 taskTypes: [],
                 clientId: null,
                 clientAccountId: null,
+                selectedDate: null,
             }
         },
         created(){

@@ -21,10 +21,21 @@
         <!-- Font Awesome 5 -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
 
+        <!-- Vue Material -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Material+Icons">
+        <link rel="stylesheet" href="https://unpkg.com/vue-material/dist/vue-material.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/vue-material/dist/theme/default.css">
+
+
     </head>
     <body>
         <div id="app">
             <master-component></master-component>
         </div>
+
+        <!-- Vue Material -->
+        <script src="https://unpkg.com/vue"></script>
+        <script src="https://unpkg.com/vue-material"></script>
+
     </body>
 </html>

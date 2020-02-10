@@ -5534,6 +5534,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AddWork",
@@ -5555,7 +5558,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       projects: [],
       taskTypes: [],
       clientId: null,
-      clientAccountId: null
+      clientAccountId: null,
+      selectedDate: null
     };
   },
   created: function created() {
@@ -65467,7 +65471,9 @@ Vue.component('master-component', __webpack_require__(/*! ./components/MasterCom
 
 
 
+ //vue material
 
+Vue.use(VueMaterial["default"]);
 var app = new Vue({
   el: '#app',
   store: _vuex_store__WEBPACK_IMPORTED_MODULE_0__["default"],
