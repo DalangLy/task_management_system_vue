@@ -36,7 +36,7 @@
 
         <div class="form-group">
             <label for="txtStartDate">Start Date</label>
-            <input v-model="data.start_date" style="width: 300px" type="text" class="form-control" id="txtStartDate" aria-describedby="startDateHelp">
+            <date-picker v-model="data.start_date" id="txtStartDate" aria-describedby="startDateHelp"></date-picker>
             <small id="startDateHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
 
@@ -44,7 +44,7 @@
 
         <div class="form-group">
             <label for="txtEndDate">End Date</label>
-            <input v-model="data.end_date" style="width: 300px" type="text" class="form-control" id="txtEndDate" aria-describedby="endDateHelp">
+            <date-picker v-model="data.end_date" id="txtEndDate" aria-describedby="endDateHelp"></date-picker>
             <small id="endDateHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
 
@@ -52,7 +52,7 @@
             <button @click.prevent.stop="save" class="btn btn-primary">Save</button>
         </div>
 
-        <date-picker></date-picker>
+
 
     </div>
 </template>

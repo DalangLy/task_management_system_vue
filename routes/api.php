@@ -68,3 +68,7 @@ Route::middleware('auth:api')->get('v1/purchases/purchase_types', 'API\V1\Purcha
 //leave request routes
 Route::middleware('auth:api')->get('v1/leave_requests', 'API\V1\LeaveRequestController@leaveRequests');
 Route::middleware('auth:api')->post('v1/leave_requests/store', 'API\V1\LeaveRequestController@store');
+
+
+//dashboard routes
+Route::middleware('auth:api')->get('v1/dashboards', 'API\V1\DashboardController@dashboards');

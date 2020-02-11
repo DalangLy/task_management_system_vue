@@ -1,11 +1,11 @@
 <template>
     <div>
 
-        <div class="date-picker">
+        <div class="date-picker" @click.prevent.stop="showCalendar">
 
+            <div ref="display" class="display form-control" style="width: 300px">Select Date</div>
 
-            <div class="form-control" style="width: 300px">Select Date</div>
-            <div class="date-picker-container">
+            <div ref="datePickerContainerRef" class="date-picker-container">
                 <div class="d-flex flex-row align-items-center justify-content-between my-2">
                     <button class="btn btn-primary" @click.prevent.stop="changeMonth('backwards')"><</button>
                     <h5 class="font-weight-bold p-0 m-0">{{changeDate.month}}-{{changeDate.year}}</h5>
@@ -31,7 +31,7 @@
                                 <div v-for="m in day.dayRange" class="blank-day-item"></div>
                             </template>
 
-                            <div class="day-item" :class="day.currentDay?'current-day-highlight':''">{{day.dayNum}}</div>
+                            <div @click.prevent="dateSelect(day.dayNum)" class="day-item" :class="day.currentDay?'current-day-highlight':''">{{day.dayNum}}</div>
                         </template>
 
                     </div>
@@ -55,15 +55,59 @@
                     day: new Date().getDate(), //day 1 - 31
                     month: (new Date().getMonth()+1), //because return value is month 0 - 11 so to get 1 - 12 we add 1
                     year: new Date().getFullYear(), // year 1 - 12
-                }
+                },
+                isCalendarVisible: false,
             }
         },
         mounted() {
             this.years = this.createYear(2000,2050);
 
             this.calendar = this.createCalendar(this.years, this.getTwentyNineFebruaryYears(this.years), 'Saturday');
+
+            document.addEventListener('click', this.handleClickOutside);
+
+            this.displaySelectedDate();
+        },
+        destroyed(){
+            document.removeEventListener('click', this.handleClickOutside);
         },
         methods:{
+            handleClickOutside(evt) {
+                if (!this.$el.contains(evt.target)) {
+                    this.showCalendar();
+                }
+            },
+            dateSelect(selectedDay){
+                this.changeDate.day = selectedDay;
+
+                this.displaySelectedDate();
+            },
+            displaySelectedDate(){
+                //display day
+                let value = this.changeDate.year +'-'+this.changeDate.month+''+'-'+this.changeDate.day;
+                this.$refs.display.innerHTML = value;
+
+                //emit value to component
+                this.$emit('input', value);
+            },
+            showCalendar(){
+                this.closeOtherOpeningDatePicker();
+
+                this.isCalendarVisible = !this.isCalendarVisible;
+
+                if(this.isCalendarVisible)
+                    this.$refs.datePickerContainerRef.classList.add('visible');
+                else
+                    this.$refs.datePickerContainerRef.classList.remove('visible');
+            },
+            closeOtherOpeningDatePicker(){
+                //close other opening auto complete
+                //protect if you use this auto complete more than one in a page, so when you open other so so the last one wont close
+                const otherDatePickers = document.querySelectorAll('.date-picker-container');
+                otherDatePickers.forEach(datePicker => {
+                    datePicker.classList.remove('visible');
+                });
+            },
             changeMonth(direction){
                 if(direction === 'forwards'){
                     if(this.changeDate.year < 2050){
@@ -205,25 +249,38 @@
 </script>
 
 <style scoped>
+    *{
+        box-sizing: border-box;
+    }
     .date-picker{
         position: relative;
+        display: inline-block;
+        cursor: pointer;
+    }
+    .display{
+        user-select: none;
     }
     .date-picker-container{
         border-radius: 5px;
-        border: 1px solid black;
+        border: 1px solid #ced4da;
         width: 300px;
-        min-height: 300px;
+        min-height: 250px;
         background-color: white;
         padding: 10px;
         position: absolute;
         margin-top: 5px;
+        display: none;
+        z-index: 1000;
+    }
+    .date-picker-container.visible{
+        display: block;
     }
     .calendar-container{
 
     }
     .calendar-header{
         display: flex;
-        border-bottom: 1px solid gray;
+        border-bottom: 1px solid #ced4da;
         padding-bottom: 3px;
         margin-bottom: 5px;
     }
@@ -232,7 +289,7 @@
         min-width: 30px;
         background-color: cornflowerblue;
         border: 1px solid white;
-        height: 50px;
+        height: 30px;
         color: white;
         display: flex;
         justify-content: center;
@@ -247,7 +304,7 @@
     .blank-day-item{
         width: 14.2857142857%;
         border: 1px solid white;
-        height: 50px;
+        height: 35px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -255,15 +312,15 @@
     }
     .day-item{
         width: 14.2857142857%;
-        background-color: gray;
-        border: 1px solid white;
-        height: 50px;
+        background-color: white;
+        border: 1px solid #ced4da;
+        height: 35px;
         display: flex;
         justify-content: center;
         align-items: center;
         user-select: none;
         cursor: pointer;
-        color: white;
+        color: black;
         border-radius: 5px;
         transition: 0.3s ease;
     }
@@ -272,6 +329,8 @@
     }
     .day-item:hover{
         background-color: #f7c6c5;
+        transform: scale(1.2);
+        z-index: 10;
     }
     .sunday{
         background-color: red;

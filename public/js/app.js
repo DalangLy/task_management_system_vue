@@ -2369,12 +2369,127 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "Dashboard"
+  name: "Dashboard",
+  data: function data() {
+    return {
+      works: [],
+      searchResult: []
+    };
+  },
+  created: function created() {
+    this.gettingData();
+  },
+  methods: {
+    gettingData: function gettingData() {
+      var _this = this;
+
+      return _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var userToken, accessToken;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                //get user token from auth module
+                userToken = JSON.parse(_this.$store.getters.getUserToken);
+                accessToken = userToken[0].accessToken;
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + accessToken;
+                _context.next = 5;
+                return axios.get('api/v1/dashboards').then(function (response) {
+                  if (response.status === 200) {
+                    console.log(response);
+                    _this.works = response.data;
+                  }
+                })["catch"](function (err) {
+                  console.log(err);
+                });
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    filterSearch: function filterSearch(e) {
+      var keyword = e.target.value;
+      var found = this.works.filter(function (element) {
+        return (element.task_name + '').toString().toLowerCase().includes(keyword.toLowerCase());
+      });
+
+      if (keyword.length <= 0) {
+        this.searchResult = [];
+      } else {
+        this.searchResult = found;
+      }
+    }
+  },
+  computed: {
+    allData: function allData() {
+      if (this.searchResult.length <= 0) return this.works;else return this.searchResult;
+    }
+  }
 });
 
 /***/ }),
@@ -5986,14 +6101,49 @@ __webpack_require__.r(__webpack_exports__);
         //because return value is month 0 - 11 so to get 1 - 12 we add 1
         year: new Date().getFullYear() // year 1 - 12
 
-      }
+      },
+      isCalendarVisible: false
     };
   },
   mounted: function mounted() {
     this.years = this.createYear(2000, 2050);
     this.calendar = this.createCalendar(this.years, this.getTwentyNineFebruaryYears(this.years), 'Saturday');
+    document.addEventListener('click', this.handleClickOutside);
+    this.displaySelectedDate();
+  },
+  destroyed: function destroyed() {
+    document.removeEventListener('click', this.handleClickOutside);
   },
   methods: {
+    handleClickOutside: function handleClickOutside(evt) {
+      if (!this.$el.contains(evt.target)) {
+        this.showCalendar();
+      }
+    },
+    dateSelect: function dateSelect(selectedDay) {
+      this.changeDate.day = selectedDay;
+      this.displaySelectedDate();
+    },
+    displaySelectedDate: function displaySelectedDate() {
+      //display day
+      var value = this.changeDate.year + '-' + this.changeDate.month + '' + '-' + this.changeDate.day;
+      this.$refs.display.innerHTML = value; //emit value to component
+
+      this.$emit('input', value);
+    },
+    showCalendar: function showCalendar() {
+      this.closeOtherOpeningDatePicker();
+      this.isCalendarVisible = !this.isCalendarVisible;
+      if (this.isCalendarVisible) this.$refs.datePickerContainerRef.classList.add('visible');else this.$refs.datePickerContainerRef.classList.remove('visible');
+    },
+    closeOtherOpeningDatePicker: function closeOtherOpeningDatePicker() {
+      //close other opening auto complete
+      //protect if you use this auto complete more than one in a page, so when you open other so so the last one wont close
+      var otherDatePickers = document.querySelectorAll('.date-picker-container');
+      otherDatePickers.forEach(function (datePicker) {
+        datePicker.classList.remove('visible');
+      });
+    },
     changeMonth: function changeMonth(direction) {
       if (direction === 'forwards') {
         if (this.changeDate.year < 2050) {
@@ -10804,7 +10954,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.date-picker[data-v-72935234]{\n    position: relative;\n}\n.date-picker-container[data-v-72935234]{\n    border-radius: 5px;\n    border: 1px solid black;\n    width: 300px;\n    min-height: 300px;\n    background-color: white;\n    padding: 10px;\n    position: absolute;\n    margin-top: 5px;\n}\n.calendar-container[data-v-72935234]{\n}\n.calendar-header[data-v-72935234]{\n    display: flex;\n    border-bottom: 1px solid gray;\n    padding-bottom: 3px;\n    margin-bottom: 5px;\n}\n.header-item[data-v-72935234]{\n    flex-grow: 1;\n    min-width: 30px;\n    background-color: cornflowerblue;\n    border: 1px solid white;\n    height: 50px;\n    color: white;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    border-radius: 5px;\n}\n.calendar-body[data-v-72935234]{\n    display: flex;\n    flex-wrap: wrap;\n}\n.blank-day-item[data-v-72935234]{\n    width: 14.2857142857%;\n    border: 1px solid white;\n    height: 50px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n.day-item[data-v-72935234]{\n    width: 14.2857142857%;\n    background-color: gray;\n    border: 1px solid white;\n    height: 50px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    cursor: pointer;\n    color: white;\n    border-radius: 5px;\n    transition: 0.3s ease;\n}\n.current-day-highlight[data-v-72935234]{\n    background-color: #f7c6c5;\n}\n.day-item[data-v-72935234]:hover{\n    background-color: #f7c6c5;\n}\n.sunday[data-v-72935234]{\n    background-color: red;\n}\n", ""]);
+exports.push([module.i, "\n*[data-v-72935234]{\n    box-sizing: border-box;\n}\n.date-picker[data-v-72935234]{\n    position: relative;\n    display: inline-block;\n    cursor: pointer;\n}\n.display[data-v-72935234]{\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n.date-picker-container[data-v-72935234]{\n    border-radius: 5px;\n    border: 1px solid #ced4da;\n    width: 300px;\n    min-height: 250px;\n    background-color: white;\n    padding: 10px;\n    position: absolute;\n    margin-top: 5px;\n    display: none;\n    z-index: 1000;\n}\n.date-picker-container.visible[data-v-72935234]{\n    display: block;\n}\n.calendar-container[data-v-72935234]{\n}\n.calendar-header[data-v-72935234]{\n    display: flex;\n    border-bottom: 1px solid #ced4da;\n    padding-bottom: 3px;\n    margin-bottom: 5px;\n}\n.header-item[data-v-72935234]{\n    flex-grow: 1;\n    min-width: 30px;\n    background-color: cornflowerblue;\n    border: 1px solid white;\n    height: 30px;\n    color: white;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    border-radius: 5px;\n}\n.calendar-body[data-v-72935234]{\n    display: flex;\n    flex-wrap: wrap;\n}\n.blank-day-item[data-v-72935234]{\n    width: 14.2857142857%;\n    border: 1px solid white;\n    height: 35px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n.day-item[data-v-72935234]{\n    width: 14.2857142857%;\n    background-color: white;\n    border: 1px solid #ced4da;\n    height: 35px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    cursor: pointer;\n    color: black;\n    border-radius: 5px;\n    transition: 0.3s ease;\n}\n.current-day-highlight[data-v-72935234]{\n    background-color: #f7c6c5;\n}\n.day-item[data-v-72935234]:hover{\n    background-color: #f7c6c5;\n    transform: scale(1.2);\n    z-index: 10;\n}\n.sunday[data-v-72935234]{\n    background-color: red;\n}\n", ""]);
 
 // exports
 
@@ -43674,9 +43824,138 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("Dashboard")])
+  return _c("div", [
+    _c(
+      "div",
+      {
+        staticClass:
+          "d-flex flex-row justify-content-between align-items-center my-3"
+      },
+      [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.$router.push({ name: "users.create" })
+              }
+            }
+          },
+          [_c("i", { staticClass: "fas fa-plus" })]
+        ),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control w-25",
+          attrs: { type: "text", placeholder: "Search" },
+          on: { keyup: _vm.filterSearch }
+        })
+      ]
+    ),
+    _vm._v(" "),
+    _vm._m(0)
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("table", { staticClass: "table" }, [
+      _c("thead", { staticClass: "thead-dark" }, [
+        _c("tr", [
+          _c(
+            "th",
+            {
+              staticClass: "text-center align-middle",
+              attrs: { scope: "col" }
+            },
+            [_vm._v("#")]
+          ),
+          _vm._v(" "),
+          _c(
+            "th",
+            {
+              staticClass: "text-center align-middle",
+              attrs: { scope: "col" }
+            },
+            [_vm._v("Account")]
+          ),
+          _vm._v(" "),
+          _c(
+            "th",
+            {
+              staticClass: "text-center align-middle",
+              attrs: { scope: "col" }
+            },
+            [_vm._v("Fee")]
+          ),
+          _vm._v(" "),
+          _c(
+            "th",
+            {
+              staticClass: "text-center align-middle",
+              attrs: { scope: "col" }
+            },
+            [_vm._v("Expense")]
+          ),
+          _vm._v(" "),
+          _c(
+            "th",
+            {
+              staticClass: "text-center align-middle",
+              attrs: { scope: "col" }
+            },
+            [_vm._v("Profit/Loss")]
+          ),
+          _vm._v(" "),
+          _c(
+            "th",
+            {
+              staticClass: "text-center align-middle",
+              attrs: { scope: "col" }
+            },
+            [_vm._v("Status")]
+          ),
+          _vm._v(" "),
+          _c(
+            "th",
+            {
+              staticClass: "text-center align-middle",
+              attrs: { scope: "col" }
+            },
+            [_vm._v("Action")]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("tbody", [
+        _c("tr", [
+          _c("th", { staticClass: "align-middle", attrs: { scope: "row" } }, [
+            _vm._v("1")
+          ]),
+          _vm._v(" "),
+          _c("td", { staticClass: "align-middle" }, [_vm._v("Task Name 1")]),
+          _vm._v(" "),
+          _c("td", { staticClass: "align-middle" }, [_vm._v("1000")]),
+          _vm._v(" "),
+          _c("td", { staticClass: "align-middle" }, [_vm._v("450$")]),
+          _vm._v(" "),
+          _c("td", { staticClass: "align-middle" }, [_vm._v("550$")]),
+          _vm._v(" "),
+          _c("td", { staticClass: "align-middle" }, [_vm._v("Finished")]),
+          _vm._v(" "),
+          _c("td", { staticClass: "align-middle" }, [
+            _c("button", { staticClass: "btn btn-warning" }, [
+              _c("i", { staticClass: "fas fa-edit" })
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -47131,219 +47410,199 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
-        "div",
-        { staticClass: "form-group" },
-        [
-          _c("label", { attrs: { for: "txtClient" } }, [_vm._v("Clients")]),
-          _vm._v(" "),
-          _c("auto-complete", {
-            attrs: {
-              data: _vm.allClient,
-              "selected-value": "client_id",
-              "selected-text": "client_name",
-              id: "txtClient"
-            },
-            model: {
-              value: _vm.clientId,
-              callback: function($$v) {
-                _vm.clientId = $$v
-              },
-              expression: "clientId"
-            }
-          })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "form-group" },
-        [
-          _c("label", { attrs: { for: "txtClientAccount" } }, [
-            _vm._v("Client Account")
-          ]),
-          _vm._v(" "),
-          _c("auto-complete", {
-            attrs: {
-              data: _vm.allClientAccounts,
-              "selected-value": "client_account_id",
-              "selected-text": "client_account",
-              id: "txtClientAccount"
-            },
-            model: {
-              value: _vm.clientAccountId,
-              callback: function($$v) {
-                _vm.clientAccountId = $$v
-              },
-              expression: "clientAccountId"
-            }
-          })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "form-group" },
-        [
-          _c("label", { attrs: { for: "txtProject" } }, [_vm._v("Projects")]),
-          _vm._v(" "),
-          _c("auto-complete", {
-            attrs: {
-              data: _vm.allProjects,
-              "selected-value": "project_id",
-              "selected-text": "project_name",
-              id: "txtProject"
-            },
-            model: {
-              value: _vm.data.project_id,
-              callback: function($$v) {
-                _vm.$set(_vm.data, "project_id", $$v)
-              },
-              expression: "data.project_id"
-            }
-          })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "form-group" },
-        [
-          _c("label", { attrs: { for: "txtTaskType" } }, [
-            _vm._v("Task Types")
-          ]),
-          _vm._v(" "),
-          _c("auto-complete", {
-            attrs: {
-              data: _vm.allTaskTypes,
-              "selected-value": "task_type_id",
-              "selected-text": "task_type",
-              id: "txtTaskType"
-            },
-            model: {
-              value: _vm.data.task_type_id,
-              callback: function($$v) {
-                _vm.$set(_vm.data, "task_type_id", $$v)
-              },
-              expression: "data.task_type_id"
-            }
-          })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "txtTaskName" } }, [_vm._v("Task Name")]),
+  return _c("div", [
+    _c(
+      "div",
+      { staticClass: "form-group" },
+      [
+        _c("label", { attrs: { for: "txtClient" } }, [_vm._v("Clients")]),
         _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.data.task_name,
-              expression: "data.task_name"
-            }
-          ],
-          staticClass: "form-control",
-          staticStyle: { width: "300px" },
+        _c("auto-complete", {
           attrs: {
-            type: "text",
-            id: "txtTaskName",
-            "aria-describedby": "taskNameHelp",
-            placeholder: "Task Name"
+            data: _vm.allClient,
+            "selected-value": "client_id",
+            "selected-text": "client_name",
+            id: "txtClient"
           },
-          domProps: { value: _vm.data.task_name },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.data, "task_name", $event.target.value)
-            }
+          model: {
+            value: _vm.clientId,
+            callback: function($$v) {
+              _vm.clientId = $$v
+            },
+            expression: "clientId"
           }
-        }),
+        })
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "form-group" },
+      [
+        _c("label", { attrs: { for: "txtClientAccount" } }, [
+          _vm._v("Client Account")
+        ]),
         _vm._v(" "),
-        _c(
-          "small",
+        _c("auto-complete", {
+          attrs: {
+            data: _vm.allClientAccounts,
+            "selected-value": "client_account_id",
+            "selected-text": "client_account",
+            id: "txtClientAccount"
+          },
+          model: {
+            value: _vm.clientAccountId,
+            callback: function($$v) {
+              _vm.clientAccountId = $$v
+            },
+            expression: "clientAccountId"
+          }
+        })
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "form-group" },
+      [
+        _c("label", { attrs: { for: "txtProject" } }, [_vm._v("Projects")]),
+        _vm._v(" "),
+        _c("auto-complete", {
+          attrs: {
+            data: _vm.allProjects,
+            "selected-value": "project_id",
+            "selected-text": "project_name",
+            id: "txtProject"
+          },
+          model: {
+            value: _vm.data.project_id,
+            callback: function($$v) {
+              _vm.$set(_vm.data, "project_id", $$v)
+            },
+            expression: "data.project_id"
+          }
+        })
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "form-group" },
+      [
+        _c("label", { attrs: { for: "txtTaskType" } }, [_vm._v("Task Types")]),
+        _vm._v(" "),
+        _c("auto-complete", {
+          attrs: {
+            data: _vm.allTaskTypes,
+            "selected-value": "task_type_id",
+            "selected-text": "task_type",
+            id: "txtTaskType"
+          },
+          model: {
+            value: _vm.data.task_type_id,
+            callback: function($$v) {
+              _vm.$set(_vm.data, "task_type_id", $$v)
+            },
+            expression: "data.task_type_id"
+          }
+        })
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "txtTaskName" } }, [_vm._v("Task Name")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
           {
-            staticClass: "form-text text-muted",
-            attrs: { id: "taskNameHelp" }
-          },
-          [_vm._v("We'll never share your email with anyone else.")]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "txtFee" } }, [_vm._v("Fee")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.data.fee,
-              expression: "data.fee"
-            }
-          ],
-          staticClass: "form-control",
-          staticStyle: { width: "300px" },
-          attrs: {
-            type: "text",
-            id: "txtFee",
-            "aria-describedby": "feeHelp",
-            placeholder: "Fee"
-          },
-          domProps: { value: _vm.data.fee },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.data, "fee", $event.target.value)
-            }
+            name: "model",
+            rawName: "v-model",
+            value: _vm.data.task_name,
+            expression: "data.task_name"
           }
-        }),
-        _vm._v(" "),
-        _c(
-          "small",
-          { staticClass: "form-text text-muted", attrs: { id: "feeHelp" } },
-          [_vm._v("We'll never share your email with anyone else.")]
-        )
-      ]),
+        ],
+        staticClass: "form-control",
+        staticStyle: { width: "300px" },
+        attrs: {
+          type: "text",
+          id: "txtTaskName",
+          "aria-describedby": "taskNameHelp",
+          placeholder: "Task Name"
+        },
+        domProps: { value: _vm.data.task_name },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.data, "task_name", $event.target.value)
+          }
+        }
+      }),
       _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
+      _c(
+        "small",
+        { staticClass: "form-text text-muted", attrs: { id: "taskNameHelp" } },
+        [_vm._v("We'll never share your email with anyone else.")]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "txtFee" } }, [_vm._v("Fee")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.data.fee,
+            expression: "data.fee"
+          }
+        ],
+        staticClass: "form-control",
+        staticStyle: { width: "300px" },
+        attrs: {
+          type: "text",
+          id: "txtFee",
+          "aria-describedby": "feeHelp",
+          placeholder: "Fee"
+        },
+        domProps: { value: _vm.data.fee },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.data, "fee", $event.target.value)
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "small",
+        { staticClass: "form-text text-muted", attrs: { id: "feeHelp" } },
+        [_vm._v("We'll never share your email with anyone else.")]
+      )
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "form-group" },
+      [
         _c("label", { attrs: { for: "txtStartDate" } }, [_vm._v("Start Date")]),
         _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.data.start_date,
-              expression: "data.start_date"
-            }
-          ],
-          staticClass: "form-control",
-          staticStyle: { width: "300px" },
-          attrs: {
-            type: "text",
-            id: "txtStartDate",
-            "aria-describedby": "startDateHelp"
-          },
-          domProps: { value: _vm.data.start_date },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.data, "start_date", $event.target.value)
-            }
+        _c("date-picker", {
+          attrs: { id: "txtStartDate", "aria-describedby": "startDateHelp" },
+          model: {
+            value: _vm.data.start_date,
+            callback: function($$v) {
+              _vm.$set(_vm.data, "start_date", $$v)
+            },
+            expression: "data.start_date"
           }
         }),
         _vm._v(" "),
@@ -47355,35 +47614,24 @@ var render = function() {
           },
           [_vm._v("We'll never share your email with anyone else.")]
         )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "form-group" },
+      [
         _c("label", { attrs: { for: "txtEndDate" } }, [_vm._v("End Date")]),
         _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.data.end_date,
-              expression: "data.end_date"
-            }
-          ],
-          staticClass: "form-control",
-          staticStyle: { width: "300px" },
-          attrs: {
-            type: "text",
-            id: "txtEndDate",
-            "aria-describedby": "endDateHelp"
-          },
-          domProps: { value: _vm.data.end_date },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.data, "end_date", $event.target.value)
-            }
+        _c("date-picker", {
+          attrs: { id: "txtEndDate", "aria-describedby": "endDateHelp" },
+          model: {
+            value: _vm.data.end_date,
+            callback: function($$v) {
+              _vm.$set(_vm.data, "end_date", $$v)
+            },
+            expression: "data.end_date"
           }
         }),
         _vm._v(" "),
@@ -47392,29 +47640,27 @@ var render = function() {
           { staticClass: "form-text text-muted", attrs: { id: "endDateHelp" } },
           [_vm._v("We'll never share your email with anyone else.")]
         )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary",
-            on: {
-              click: function($event) {
-                $event.preventDefault()
-                $event.stopPropagation()
-                return _vm.save($event)
-              }
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          on: {
+            click: function($event) {
+              $event.preventDefault()
+              $event.stopPropagation()
+              return _vm.save($event)
             }
-          },
-          [_vm._v("Save")]
-        )
-      ]),
-      _vm._v(" "),
-      _c("date-picker")
-    ],
-    1
-  )
+          }
+        },
+        [_vm._v("Save")]
+      )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -47645,90 +47891,122 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "date-picker" }, [
-      _c(
-        "div",
-        { staticClass: "form-control", staticStyle: { width: "300px" } },
-        [_vm._v("Select Date")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "date-picker-container" }, [
+    _c(
+      "div",
+      {
+        staticClass: "date-picker",
+        on: {
+          click: function($event) {
+            $event.preventDefault()
+            $event.stopPropagation()
+            return _vm.showCalendar($event)
+          }
+        }
+      },
+      [
         _c(
           "div",
           {
-            staticClass:
-              "d-flex flex-row align-items-center justify-content-between my-2"
+            ref: "display",
+            staticClass: "display form-control",
+            staticStyle: { width: "300px" }
+          },
+          [_vm._v("Select Date")]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            ref: "datePickerContainerRef",
+            staticClass: "date-picker-container"
           },
           [
             _c(
-              "button",
+              "div",
               {
-                staticClass: "btn btn-primary",
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    $event.stopPropagation()
-                    return _vm.changeMonth("backwards")
-                  }
-                }
+                staticClass:
+                  "d-flex flex-row align-items-center justify-content-between my-2"
               },
-              [_vm._v("<")]
+              [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        $event.stopPropagation()
+                        return _vm.changeMonth("backwards")
+                      }
+                    }
+                  },
+                  [_vm._v("<")]
+                ),
+                _vm._v(" "),
+                _c("h5", { staticClass: "font-weight-bold p-0 m-0" }, [
+                  _vm._v(
+                    _vm._s(_vm.changeDate.month) +
+                      "-" +
+                      _vm._s(_vm.changeDate.year)
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        $event.stopPropagation()
+                        return _vm.changeMonth("forwards")
+                      }
+                    }
+                  },
+                  [_vm._v(">")]
+                )
+              ]
             ),
             _vm._v(" "),
-            _c("h5", { staticClass: "font-weight-bold p-0 m-0" }, [
-              _vm._v(
-                _vm._s(_vm.changeDate.month) + "-" + _vm._s(_vm.changeDate.year)
+            _c("div", { staticClass: "calendar-container" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "calendar-body" },
+                [
+                  _vm._l(_vm.displayCalendar, function(day, index) {
+                    return [
+                      index === 0 && day.dayName !== "Sunday"
+                        ? _vm._l(day.dayRange, function(m) {
+                            return _c("div", { staticClass: "blank-day-item" })
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "day-item",
+                          class: day.currentDay ? "current-day-highlight" : "",
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.dateSelect(day.dayNum)
+                            }
+                          }
+                        },
+                        [_vm._v(_vm._s(day.dayNum))]
+                      )
+                    ]
+                  })
+                ],
+                2
               )
-            ]),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary",
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    $event.stopPropagation()
-                    return _vm.changeMonth("forwards")
-                  }
-                }
-              },
-              [_vm._v(">")]
-            )
+            ])
           ]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "calendar-container" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "calendar-body" },
-            [
-              _vm._l(_vm.displayCalendar, function(day, index) {
-                return [
-                  index === 0 && day.dayName !== "Sunday"
-                    ? _vm._l(day.dayRange, function(m) {
-                        return _c("div", { staticClass: "blank-day-item" })
-                      })
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "day-item",
-                      class: day.currentDay ? "current-day-highlight" : ""
-                    },
-                    [_vm._v(_vm._s(day.dayNum))]
-                  )
-                ]
-              })
-            ],
-            2
-          )
-        ])
-      ])
-    ])
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
