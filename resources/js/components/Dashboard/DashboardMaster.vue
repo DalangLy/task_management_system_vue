@@ -25,6 +25,12 @@
                     </li>
                     <li class="nav-item">
                         <span class="sidebar-link">
+                            <span class="icon-holder"><i class="fas fa-network-wired" style="color: yellow"></i></span>
+                            <span @click.prevent="$router.push({name: 'timesheets'}).catch(err => {})" class="title">Time Sheets</span>
+                        </span>
+                    </li>
+                    <li class="nav-item">
+                        <span class="sidebar-link">
                             <span class="icon-holder"><i class="fas fa-users" style="color: purple;"></i></span>
                             <span @click.prevent="$router.push({name: 'users'}).catch(err => {})" class="title">Users</span>
                         </span>

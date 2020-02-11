@@ -65,6 +65,8 @@ import AddPurchase from "../components/purchase/AddPurchase";
 import LeaveRequestMaster from "../components/leave_request/LeaveRequestMaster";
 import LeaveRequestList from "../components/leave_request/LeaveRequestList";
 import AddLeaveRequest from "../components/leave_request/AddLeaveRequest";
+import TimeSheetMaster from "../components/timesheet/TimeSheetMaster";
+import TimeSheet from "../components/timesheet/TimeSheet";
 
 const routes = [
     {
@@ -94,6 +96,17 @@ const routes = [
                 path: '/',
                 name: 'dashboard',
                 component: Dashboard
+            },
+            {
+                path: '/timesheets',
+                component: TimeSheetMaster,
+                children: [
+                    {
+                        path: '/timesheets',
+                        name: 'timesheets',
+                        component: TimeSheet,
+                    }
+                ]
             },
             {
                 path: '/clients',

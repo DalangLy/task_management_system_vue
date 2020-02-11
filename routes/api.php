@@ -72,3 +72,7 @@ Route::middleware('auth:api')->post('v1/leave_requests/store', 'API\V1\LeaveRequ
 
 //dashboard routes
 Route::middleware('auth:api')->get('v1/dashboards', 'API\V1\DashboardController@dashboards');
+
+//time sheet routes
+Route::middleware('auth:api')->post('v1/timesheets/store', 'API\V1\TimeSheetController@store');
+Route::middleware('auth:api')->get('v1/project_details', 'API\V1\TimeSheetController@projectDetails');

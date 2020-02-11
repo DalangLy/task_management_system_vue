@@ -74,7 +74,8 @@
         methods:{
             handleClickOutside(evt) {
                 if (!this.$el.contains(evt.target)) {
-                    this.showCalendar();
+                    this.isCalendarVisible = false;
+                    this.$refs.datePickerContainerRef.classList.remove('visible');
                 }
             },
             dateSelect(selectedDay){
