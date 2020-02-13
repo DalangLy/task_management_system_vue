@@ -33,8 +33,8 @@
 </template>
 
 <script>
-    import AutoCompleteSelection from "./partials/AutoCompleteSelection";
-    import AvatarInput from "./partials/AvatarInput";
+    import AutoCompleteSelection from "../Global_Components/AutoCompleteSelection";
+    import AvatarInput from "../Global_Components/AvatarInput";
     export default {
         name: "EditUser",
         components:{

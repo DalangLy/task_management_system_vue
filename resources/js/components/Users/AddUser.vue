@@ -40,7 +40,7 @@
 </template>
 
 <script>
-    import AutoComplete from "./partials/AutoCompleteSelection";
+    import AutoComplete from "../Global_Components/AutoCompleteSelection";
     export default {
         name: "AddUser",
         components:{

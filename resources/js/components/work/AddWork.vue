@@ -58,8 +58,8 @@
 </template>
 
 <script>
-    import AutoComplete from "../Users/partials/AutoCompleteSelection";
-    import DatePicker from "./partials/DatePicker";
+    import AutoComplete from "../Global_Components/AutoCompleteSelection";
+    import DatePicker from "../Global_Components/DatePicker";
     export default {
         name: "AddWork",
         components:{

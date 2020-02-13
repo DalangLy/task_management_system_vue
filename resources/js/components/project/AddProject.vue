@@ -17,7 +17,7 @@
 </template>
 
 <script>
-    import AutoComplete from "../Users/partials/AutoCompleteSelection";
+    import AutoComplete from "../Global_Components/AutoCompleteSelection";
     export default {
         name: "AddProject",
         components:{
