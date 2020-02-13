@@ -44435,7 +44435,37 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _vm._m(0)
+    _c("table", { staticClass: "table" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.allData, function(data, index) {
+          return _c("tr", [
+            _c("th", { staticClass: "align-middle", attrs: { scope: "row" } }, [
+              _vm._v(_vm._s(index + 1))
+            ]),
+            _vm._v(" "),
+            _c("td", { staticClass: "align-middle" }, [
+              _vm._v(_vm._s(data.task_name))
+            ]),
+            _vm._v(" "),
+            _c("td", { staticClass: "align-middle" }, [
+              _vm._v(_vm._s(data.fee) + "$")
+            ]),
+            _vm._v(" "),
+            _c("td", { staticClass: "align-middle" }, [_vm._v("450$")]),
+            _vm._v(" "),
+            _c("td", { staticClass: "align-middle" }, [_vm._v("550$")]),
+            _vm._v(" "),
+            _c("td", { staticClass: "align-middle" }, [_vm._v("Finished")]),
+            _vm._v(" "),
+            _vm._m(1, true)
+          ])
+        }),
+        0
+      )
+    ])
   ])
 }
 var staticRenderFns = [
@@ -44443,96 +44473,59 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("table", { staticClass: "table" }, [
-      _c("thead", { staticClass: "thead-dark" }, [
-        _c("tr", [
-          _c(
-            "th",
-            {
-              staticClass: "text-center align-middle",
-              attrs: { scope: "col" }
-            },
-            [_vm._v("#")]
-          ),
-          _vm._v(" "),
-          _c(
-            "th",
-            {
-              staticClass: "text-center align-middle",
-              attrs: { scope: "col" }
-            },
-            [_vm._v("Account")]
-          ),
-          _vm._v(" "),
-          _c(
-            "th",
-            {
-              staticClass: "text-center align-middle",
-              attrs: { scope: "col" }
-            },
-            [_vm._v("Fee")]
-          ),
-          _vm._v(" "),
-          _c(
-            "th",
-            {
-              staticClass: "text-center align-middle",
-              attrs: { scope: "col" }
-            },
-            [_vm._v("Expense")]
-          ),
-          _vm._v(" "),
-          _c(
-            "th",
-            {
-              staticClass: "text-center align-middle",
-              attrs: { scope: "col" }
-            },
-            [_vm._v("Profit/Loss")]
-          ),
-          _vm._v(" "),
-          _c(
-            "th",
-            {
-              staticClass: "text-center align-middle",
-              attrs: { scope: "col" }
-            },
-            [_vm._v("Status")]
-          ),
-          _vm._v(" "),
-          _c(
-            "th",
-            {
-              staticClass: "text-center align-middle",
-              attrs: { scope: "col" }
-            },
-            [_vm._v("Action")]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("tbody", [
-        _c("tr", [
-          _c("th", { staticClass: "align-middle", attrs: { scope: "row" } }, [
-            _vm._v("1")
-          ]),
-          _vm._v(" "),
-          _c("td", { staticClass: "align-middle" }, [_vm._v("Task Name 1")]),
-          _vm._v(" "),
-          _c("td", { staticClass: "align-middle" }, [_vm._v("1000")]),
-          _vm._v(" "),
-          _c("td", { staticClass: "align-middle" }, [_vm._v("450$")]),
-          _vm._v(" "),
-          _c("td", { staticClass: "align-middle" }, [_vm._v("550$")]),
-          _vm._v(" "),
-          _c("td", { staticClass: "align-middle" }, [_vm._v("Finished")]),
-          _vm._v(" "),
-          _c("td", { staticClass: "align-middle" }, [
-            _c("button", { staticClass: "btn btn-warning" }, [
-              _c("i", { staticClass: "fas fa-edit" })
-            ])
-          ])
-        ])
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c(
+          "th",
+          { staticClass: "text-center align-middle", attrs: { scope: "col" } },
+          [_vm._v("#")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          { staticClass: "text-center align-middle", attrs: { scope: "col" } },
+          [_vm._v("Account")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          { staticClass: "text-center align-middle", attrs: { scope: "col" } },
+          [_vm._v("Fee")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          { staticClass: "text-center align-middle", attrs: { scope: "col" } },
+          [_vm._v("Expense")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          { staticClass: "text-center align-middle", attrs: { scope: "col" } },
+          [_vm._v("Profit/Loss")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          { staticClass: "text-center align-middle", attrs: { scope: "col" } },
+          [_vm._v("Status")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          { staticClass: "text-center align-middle", attrs: { scope: "col" } },
+          [_vm._v("Action")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { staticClass: "align-middle" }, [
+      _c("button", { staticClass: "btn btn-warning" }, [
+        _c("i", { staticClass: "fas fa-edit" })
       ])
     ])
   }

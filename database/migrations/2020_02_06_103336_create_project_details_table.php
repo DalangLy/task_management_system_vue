@@ -23,6 +23,7 @@ class CreateProjectDetailsTable extends Migration
             $table->float('fee');
             $table->date('start_date');
             $table->date('end_date');
+            $table->boolean('finished')->default(false);
             $table->timestamps();
         });
     }

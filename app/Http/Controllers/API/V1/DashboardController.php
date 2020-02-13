@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     public function dashboards(){
-        $dashboard = ProjectDetail::all();
+        $dashboard = ProjectDetail::join('time_sheets', 'project_details.project_detail_id', 'time_sheets.project_detail_id')
+            ->get();
         return response()->json($dashboard);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
 use App\ProjectDetail;
+use App\TimeSheet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,7 +28,7 @@ class ProjectDetailController extends Controller
             'task_type_id' => 'required',
         ]);
 
-        ProjectDetail::create([
+        $projectDetailId = ProjectDetail::create([
             'project_id' => $request->project_id,
             'task_type_id' => $request->task_type_id,
             'working_code' => uniqid(),
@@ -36,6 +37,11 @@ class ProjectDetailController extends Controller
             'fee' => $request->fee,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
+        ])->project_detail_id;
+
+        TimeSheet::create([
+            'user_id' => Auth::id(),
+            'project_detail_id' => $projectDetailId,
         ]);
 
         return response()->json(['created']);

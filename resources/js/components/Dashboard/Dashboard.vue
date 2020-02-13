@@ -30,17 +30,17 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th class="align-middle" scope="row">1</th>
-                <td class="align-middle">Task Name 1</td>
-                <td class="align-middle">1000</td>
-                <td class="align-middle">450$</td>
-                <td class="align-middle">550$</td>
-                <td class="align-middle">Finished</td>
-                <td class="align-middle">
-                    <button class="btn btn-warning"><i class="fas fa-edit"></i></button>
-                </td>
-            </tr>
+                <tr v-for="(data, index) in allData">
+                    <th class="align-middle" scope="row">{{index+1}}</th>
+                    <td class="align-middle">{{data.task_name}}</td>
+                    <td class="align-middle">{{data.fee}}$</td>
+                    <td class="align-middle">450$</td>
+                    <td class="align-middle">550$</td>
+                    <td class="align-middle">Finished</td>
+                    <td class="align-middle">
+                        <button class="btn btn-warning"><i class="fas fa-edit"></i></button>
+                    </td>
+                </tr>
             </tbody>
         </table>
 

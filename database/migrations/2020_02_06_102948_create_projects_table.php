@@ -19,6 +19,7 @@ class CreateProjectsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('project_code')->unique();
             $table->string('project_name');
+            $table->boolean('disabled')->default(false);
             $table->timestamps();
         });
     }
