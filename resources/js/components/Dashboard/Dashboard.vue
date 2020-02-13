@@ -35,11 +35,11 @@
                     <td class="align-middle">{{data.task_name}}</td>
                     <td class="align-middle">{{data.client_account}}</td>
                     <td class="align-middle">{{data.fee}}$</td>
-                    <td class="align-middle">{{getTotalExpense(data.project_detail_id)}}$</td>
-                    <td class="align-middle">{{calculateProfit(data.fee, getTotalExpense(data.project_detail_id))}}$</td>
+                    <td class="align-middle">{{getTotalExpense(data.project_detail_id)+getTotalPSupply(data.project_detail_id)}}$</td>
+                    <td class="align-middle">{{calculateProfit(data.fee, getTotalExpense(data.project_detail_id)+getTotalPSupply(data.project_detail_id))}}$</td>
                     <td class="align-middle">{{data.finished?'Yes':'No'}}</td>
                     <td class="align-middle">
-                        <button class="btn btn-warning"><i class="fas fa-edit"></i></button>
+                        <button @click.prevent.stop="$router.push({name: 'dashboard.detail', params: { dashboardId: data.project_detail_id }})" class="btn btn-warning"><i class="fas fa-eye"></i></button>
                     </td>
                 </tr>
             </tbody>
@@ -96,6 +96,14 @@
                     totalExpense += employee.salary;
                 });
                 return totalExpense;
+            },
+            getTotalPSupply(projectDetailId){
+                const projectDetail = this.works.find(r => parseInt(r.project_detail_id) === parseInt(projectDetailId));
+                let totalSupply = 0;
+                projectDetail.purchases.forEach(purchase => {
+                    totalSupply += purchase.paid;
+                });
+                return totalSupply;
             },
             calculateProfit(fee, expense){
                 return parseFloat(fee) - parseFloat(expense);

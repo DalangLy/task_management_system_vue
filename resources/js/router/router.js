@@ -8,9 +8,13 @@ Vue.use(VueRouter);
 import Login from '../components/Auth/Login'
 import Logout from '../components/Auth/Logout'
 
-//dashboard routes
-import DashboardMaster from '../components/Dashboard/DashboardMaster'
+//layout routes
+import Layout from '../components/Dashboard/Layout'
+
+//dashboard
+import DashboardMaster from "../components/Dashboard/DashboardMaster";
 import Dashboard from "../components/Dashboard/Dashboard";
+import DashboardDetail from "../components/Dashboard/DashboardDetail";
 
 //user routes
 import UserMaster from '../components/Users/UserMaster'
@@ -95,15 +99,26 @@ const routes = [
     },
     {
         path: '/',
-        component: DashboardMaster,
+        component: Layout,
         meta: {
             requireAuth: true,
         },
         children: [
             {
                 path: '/',
-                name: 'dashboard',
-                component: Dashboard
+                component: DashboardMaster,
+                children:[
+                    {
+                        path: '/',
+                        name: 'dashboard',
+                        component: Dashboard,
+                    },
+                    {
+                        path: '/detail/:dashboardId',
+                        name: 'dashboard.detail',
+                        component: DashboardDetail,
+                    }
+                ]
             },
             {
                 path: '/timesheets',

@@ -27,9 +27,30 @@ class DashboardController extends Controller
                 ->get();
 
             $dashboard->employees = $employees;
-            $dashboard->purchase = $purchases;
+            $dashboard->purchases = $purchases;
         }
 
         return response()->json($dashboards);
+    }
+
+    public function dashboardDetail($id){
+        $selectedDashboards = ProjectDetail::join('projects', 'project_details.project_id', 'projects.project_id')
+            ->join('client_accounts', 'projects.client_account_id', 'client_accounts.client_account_id')
+            ->where('project_details.project_detail_id', $id)
+            ->first();
+
+        $employees = TimeSheet::join('users', 'time_sheets.user_id', 'users.id')
+            ->where('time_sheets.project_detail_id', $selectedDashboards->project_detail_id)
+            ->get();
+
+        $purchases = Purchase::where('purchases.project_detail_id', $selectedDashboards->project_detail_id)
+            ->where('purchases.approved', true)
+            ->get();
+
+        $selectedDashboards->employees = $employees;
+        $selectedDashboards->purchases = $purchases;
+
+
+        return response()->json($selectedDashboards);
     }
 }
