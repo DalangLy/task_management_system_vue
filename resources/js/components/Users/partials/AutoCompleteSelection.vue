@@ -2,17 +2,17 @@
     <div @click.prevent.stop="showAutoCompleteWrapper(true)" class="auto-complete">
         <div ref="autoCompleteDisplayRef" class="auto-complete-display form-control" style="cursor: pointer"></div>
         <div ref="autoCompleteWrapperRef" class="auto-complete-wrapper">
-            <input @keyup="filterAutoCompleteResultList" type="text" class="auto-complete-input-field" placeholder="Type anything here">
+            <input ref="autoCompleteInputRef" @keyup="filterAutoCompleteResultList" type="text" class="auto-complete-input-field" placeholder="Type anything here">
             <ul ref="autoCompleteResultContainerRef" class="auto-complete-result-container">
                 <li @click.prevent.stop="selectItem(item)" v-for="item in filteredData" class="auto-complete-result-item">{{item[selectedText]}}</li>
             </ul>
         </div>
-
     </div>
 </template>
 
 <script>
     export default {
+        name: "AutoCompleteSelection",
         props: ['data', 'selectedText', 'selectedValue', 'selectedItemId'],
         data(){
             return{
@@ -47,9 +47,12 @@
                         //if selected item existed then select the selected item value
                         if(this.selectedItemId){
                             const foundItem = this.data.findIndex(r => parseInt(r[this.selectedValue]) === parseInt(this.selectedItemId));
-                            item = this.data[foundItem];
+                            if(foundItem >= 0){
+                                item = this.data[foundItem];
+                            }else{
+                                console.log("can't find id");
+                            }
                         }
-
 
                         this.$emit('input', item[this.selectedValue]);//pass data to component
                         //display selected name
@@ -82,6 +85,8 @@
                     const autoCompleteWrapper = this.$refs.autoCompleteWrapperRef;
                     if (isShowing) {
                         autoCompleteWrapper.classList.add('visible');
+                        //focus search input
+                        this.$refs.autoCompleteInputRef.focus();
                         if (this.data) {
                             if (this.data.length > 0) {
                                 this.showAutoCompleteResultContainer(true);
@@ -152,6 +157,10 @@
     .auto-complete{
         width: 300px;
         position: relative;
+        user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        -moz-user-select: none;
     }
     .auto-complete-wrapper{
         margin-top: 3px;

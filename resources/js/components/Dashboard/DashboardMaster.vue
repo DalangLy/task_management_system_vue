@@ -1,5 +1,5 @@
 <template>
-    <div @click.prevent="windowClickEvent()">
+    <div>
         <!--start sidebar-->
         <div class="sidebar" @mouseover="maximizeSideBarOnMouseOver" @mouseout="minimizeSideBarOnMouseOver">
             <div class="sidebar-inner">
@@ -183,6 +183,12 @@
         },
         created(){
             this.getUserInfo();
+        },
+        mounted(){
+            const thisKeyword = this;
+            document.addEventListener('click', function(event){
+                thisKeyword.windowClickEvent();
+            });
         },
         methods:{
             gotoPage(pageName){

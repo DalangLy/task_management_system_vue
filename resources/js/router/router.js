@@ -4,67 +4,75 @@ import store from '../vuex/store'
 
 Vue.use(VueRouter);
 
+//auth routes
 import Login from '../components/Auth/Login'
 import Logout from '../components/Auth/Logout'
+
+//dashboard routes
 import DashboardMaster from '../components/Dashboard/DashboardMaster'
 import Dashboard from "../components/Dashboard/Dashboard";
 
-//users
+//user routes
 import UserMaster from '../components/Users/UserMaster'
 import UserList from '../components/Users/UserList'
 import AddUser from '../components/Users/AddUser'
+import EditUser from "../components/Users/EditUser";
+
+//profile routes
 import ProfileMaster from "../components/profile/ProfileMaster";
 import Profile from "../components/profile/Profile";
 
-//clients
+//client routes
 import ClientMaster from "../components/Client/ClientMaster";
 import ClientList from "../components/Client/ClientList";
 import AddClient from "../components/Client/AddClient";
 
-//roles
+//roles routes
 import RoleMaster from "../components/role/RoleMaster";
 import RoleList from "../components/role/RoleList";
 import AddRole from "../components/role/AddRole";
 
-//client account
+//client account routes
 import ClientAccountMaster from "../components/client_account/ClientAccountMaster";
 import ClientAccountList from "../components/client_account/ClientAccountList";
 import AddClientAccount from "../components/client_account/AddClientAccount";
 
-//project
+//project routes
 import ProjectMaster from "../components/project/ProjectMaster";
 import ProjectList from "../components/project/ProjectList";
 import AddProject from "../components/project/AddProject";
 
-//position
+//position routes
 import PositionMaster from "../components/position/PositionMaster";
 import PositionList from "../components/position/PositionList";
 import AddPosition from "../components/position/AddPosition";
 
-//task type
+//task type routes
 import TaskTypeMaster from "../components/task_type/TaskTypeMaster";
 import TaskTypeList from "../components/task_type/TaskTypeList";
 import AddTaskType from "../components/task_type/AddTaskType";
 
-//work
+//work routes
 import WorkMaster from "../components/work/WorkMaster";
 import WorkList from "../components/work/WorkList";
 import AddWork from "../components/work/AddWork";
 
-//purchase type
+//purchase type routes
 import PurchaseTypeMaster from "../components/purchase_type/PurchaseTypeMaster";
 import PurchaseTypeList from "../components/purchase_type/PurchaseTypeList";
 import AddPurchaseType from "../components/purchase_type/AddPurchaseType";
 
-//purchase
+//purchase routes
 import PurchaseMaster from "../components/purchase/PurchaseMaster";
 import PurchaseList from "../components/purchase/PurchaseList";
 import AddPurchase from "../components/purchase/AddPurchase";
 
-//leave request
+//leave request routes
 import LeaveRequestMaster from "../components/leave_request/LeaveRequestMaster";
 import LeaveRequestList from "../components/leave_request/LeaveRequestList";
 import AddLeaveRequest from "../components/leave_request/AddLeaveRequest";
+
+//time sheet routes
 import TimeSheetMaster from "../components/timesheet/TimeSheetMaster";
 import TimeSheet from "../components/timesheet/TimeSheet";
 
@@ -281,6 +289,11 @@ const routes = [
                         path: '/users/create',
                         name: 'users.create',
                         component: AddUser,
+                    },
+                    {
+                        path: '/users/edit/:userId',
+                        name: 'users.edit',
+                        component: EditUser,
                     }
                 ]
             },

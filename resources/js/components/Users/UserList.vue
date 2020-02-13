@@ -43,7 +43,7 @@
                     <td class="align-middle">{{user.position}}</td>
                     <td class="align-middle">{{user.role_display_name}}</td>
                     <td class="align-middle">
-                        <button class="btn btn-warning"><i class="fas fa-edit"></i></button>
+                        <button @click.prevent.stop="$router.push({name: 'users.edit', params: { userId: user.id }})" class="btn btn-warning"><i class="fas fa-edit"></i></button>
                     </td>
                 </tr>
             </tbody>

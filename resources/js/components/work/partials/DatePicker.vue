@@ -73,6 +73,7 @@
         },
         methods:{
             handleClickOutside(evt) {
+                evt.stopPropagation();
                 if (!this.$el.contains(evt.target)) {
                     this.isCalendarVisible = false;
                     this.$refs.datePickerContainerRef.classList.remove('visible');

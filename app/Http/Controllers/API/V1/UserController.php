@@ -17,6 +17,11 @@ class UserController extends Controller
         return response()->json($users);
     }
 
+    public function selectedUser($id){
+        $selectedUser = User::find($id);
+        return response()->json($selectedUser);
+    }
+
     public function store(Request $request){
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
