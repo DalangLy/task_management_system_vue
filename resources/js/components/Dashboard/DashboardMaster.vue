@@ -17,82 +17,82 @@
 
                 <!-- start sidebar menu -->
                 <ul class="sidebar-menu">
-                    <li class="nav-item mT-30">
+                    <li @click.prevent="$router.push({name: 'dashboard'}).catch(err => {})" class="nav-item mT-30">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fas fa-address-card" style="color: red;"></i></span>
-                            <span class="title" @click.prevent="$router.push({name: 'dashboard'}).catch(err => {})">Dashboard</span>
+                            <span class="title">Dashboard</span>
                         </span>
                     </li>
-                    <li class="nav-item">
+                    <li @click.prevent="$router.push({name: 'timesheets'}).catch(err => {})" class="nav-item">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fas fa-network-wired" style="color: yellow"></i></span>
-                            <span @click.prevent="$router.push({name: 'timesheets'}).catch(err => {})" class="title">Time Sheets</span>
+                            <span class="title">Time Sheets</span>
                         </span>
                     </li>
-                    <li class="nav-item">
+                    <li @click.prevent="$router.push({name: 'users'}).catch(err => {})" class="nav-item">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fas fa-users" style="color: purple;"></i></span>
-                            <span @click.prevent="$router.push({name: 'users'}).catch(err => {})" class="title">Users</span>
+                            <span class="title">Users</span>
                         </span>
                     </li>
-                    <li class="nav-item">
+                    <li @click.prevent="$router.push({name: 'clients'}).catch(err => {})" class="nav-item">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fab fa-accusoft" style="color:blue"></i></span>
-                            <span @click.prevent="$router.push({name: 'clients'}).catch(err => {})" class="title">Clients</span>
+                            <span class="title">Clients</span>
                         </span>
                     </li>
-                    <li class="nav-item">
+                    <li @click.prevent="$router.push({name: 'roles'}).catch(err => {})" class="nav-item">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fas fa-user-tag" style="color: pink"></i></span>
-                            <span @click.prevent="$router.push({name: 'roles'}).catch(err => {})" class="title">Roles</span>
+                            <span class="title">Roles</span>
                         </span>
                     </li>
-                    <li class="nav-item">
+                    <li @click.prevent="$router.push({name: 'client_accounts'}).catch(err => {})" class="nav-item">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fas fa-mug-hot" style="color: green"></i></span>
-                            <span @click.prevent="$router.push({name: 'client_accounts'}).catch(err => {})" class="title">Client Accounts</span>
+                            <span class="title">Client Accounts</span>
                         </span>
                     </li>
-                    <li class="nav-item">
+                    <li @click.prevent="$router.push({name: 'projects'}).catch(err => {})" class="nav-item">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fas fa-project-diagram" style="color: cyan"></i></span>
-                            <span @click.prevent="$router.push({name: 'projects'}).catch(err => {})" class="title">Projects</span>
+                            <span class="title">Projects</span>
                         </span>
                     </li>
-                    <li class="nav-item">
+                    <li @click.prevent="$router.push({name: 'task_types'}).catch(err => {})" class="nav-item">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fas fa-briefcase" style="color: yellow"></i></span>
-                            <span @click.prevent="$router.push({name: 'task_types'}).catch(err => {})"  class="title">Task Types</span>
+                            <span class="title">Task Types</span>
                         </span>
                     </li>
-                    <li class="nav-item">
+                    <li @click.prevent="$router.push({name: 'positions'}).catch(err => {})" class="nav-item">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fas fa-crosshairs" style="color: gray"></i></span>
-                            <span @click.prevent="$router.push({name: 'positions'}).catch(err => {})" class="title">Positions</span>
+                            <span class="title">Positions</span>
                         </span>
                     </li>
-                    <li class="nav-item">
+                    <li @click.prevent="$router.push({name: 'works'}).catch(err => {})" class="nav-item">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fas fa-adjust" style="color: green"></i></span>
-                            <span @click.prevent="$router.push({name: 'works'}).catch(err => {})" class="title">Works</span>
+                            <span class="title">Works</span>
                         </span>
                     </li>
-                    <li class="nav-item">
+                    <li @click.prevent="$router.push({name: 'purchase_types'}).catch(err => {})" class="nav-item">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fas fa-adjust" style="color: green"></i></span>
-                            <span @click.prevent="$router.push({name: 'purchase_types'}).catch(err => {})" class="title">Purchase Type</span>
+                            <span class="title">Purchase Type</span>
                         </span>
                     </li>
-                    <li class="nav-item">
+                    <li @click.prevent="$router.push({name: 'purchases'}).catch(err => {})" class="nav-item">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fas fa-adjust" style="color: green"></i></span>
-                            <span @click.prevent="$router.push({name: 'purchases'}).catch(err => {})" class="title">Purchases</span>
+                            <span class="title">Purchases</span>
                         </span>
                     </li>
-                    <li class="nav-item">
+                    <li @click.prevent="$router.push({name: 'leave_requests'}).catch(err => {})" class="nav-item">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fas fa-adjust" style="color: green"></i></span>
-                            <span @click.prevent="$router.push({name: 'leave_requests'}).catch(err => {})" class="title">Leave Request</span>
+                            <span class="title">Leave Request</span>
                         </span>
                     </li>
 

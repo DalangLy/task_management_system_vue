@@ -44606,291 +44606,207 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("ul", { staticClass: "sidebar-menu" }, [
-            _c("li", { staticClass: "nav-item mT-30" }, [
-              _c("span", { staticClass: "sidebar-link" }, [
-                _vm._m(1),
-                _vm._v(" "),
-                _c(
-                  "span",
-                  {
-                    staticClass: "title",
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.$router
-                          .push({ name: "dashboard" })
-                          .catch(function(err) {})
-                      }
-                    }
-                  },
-                  [_vm._v("Dashboard")]
-                )
-              ])
-            ]),
+            _c(
+              "li",
+              {
+                staticClass: "nav-item mT-30",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.$router
+                      .push({ name: "dashboard" })
+                      .catch(function(err) {})
+                  }
+                }
+              },
+              [_vm._m(1)]
+            ),
             _vm._v(" "),
-            _c("li", { staticClass: "nav-item" }, [
-              _c("span", { staticClass: "sidebar-link" }, [
-                _vm._m(2),
-                _vm._v(" "),
-                _c(
-                  "span",
-                  {
-                    staticClass: "title",
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.$router
-                          .push({ name: "timesheets" })
-                          .catch(function(err) {})
-                      }
-                    }
-                  },
-                  [_vm._v("Time Sheets")]
-                )
-              ])
-            ]),
+            _c(
+              "li",
+              {
+                staticClass: "nav-item",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.$router
+                      .push({ name: "timesheets" })
+                      .catch(function(err) {})
+                  }
+                }
+              },
+              [_vm._m(2)]
+            ),
             _vm._v(" "),
-            _c("li", { staticClass: "nav-item" }, [
-              _c("span", { staticClass: "sidebar-link" }, [
-                _vm._m(3),
-                _vm._v(" "),
-                _c(
-                  "span",
-                  {
-                    staticClass: "title",
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.$router
-                          .push({ name: "users" })
-                          .catch(function(err) {})
-                      }
-                    }
-                  },
-                  [_vm._v("Users")]
-                )
-              ])
-            ]),
+            _c(
+              "li",
+              {
+                staticClass: "nav-item",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.$router.push({ name: "users" }).catch(function(err) {})
+                  }
+                }
+              },
+              [_vm._m(3)]
+            ),
             _vm._v(" "),
-            _c("li", { staticClass: "nav-item" }, [
-              _c("span", { staticClass: "sidebar-link" }, [
-                _vm._m(4),
-                _vm._v(" "),
-                _c(
-                  "span",
-                  {
-                    staticClass: "title",
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.$router
-                          .push({ name: "clients" })
-                          .catch(function(err) {})
-                      }
-                    }
-                  },
-                  [_vm._v("Clients")]
-                )
-              ])
-            ]),
+            _c(
+              "li",
+              {
+                staticClass: "nav-item",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.$router
+                      .push({ name: "clients" })
+                      .catch(function(err) {})
+                  }
+                }
+              },
+              [_vm._m(4)]
+            ),
             _vm._v(" "),
-            _c("li", { staticClass: "nav-item" }, [
-              _c("span", { staticClass: "sidebar-link" }, [
-                _vm._m(5),
-                _vm._v(" "),
-                _c(
-                  "span",
-                  {
-                    staticClass: "title",
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.$router
-                          .push({ name: "roles" })
-                          .catch(function(err) {})
-                      }
-                    }
-                  },
-                  [_vm._v("Roles")]
-                )
-              ])
-            ]),
+            _c(
+              "li",
+              {
+                staticClass: "nav-item",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.$router.push({ name: "roles" }).catch(function(err) {})
+                  }
+                }
+              },
+              [_vm._m(5)]
+            ),
             _vm._v(" "),
-            _c("li", { staticClass: "nav-item" }, [
-              _c("span", { staticClass: "sidebar-link" }, [
-                _vm._m(6),
-                _vm._v(" "),
-                _c(
-                  "span",
-                  {
-                    staticClass: "title",
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.$router
-                          .push({ name: "client_accounts" })
-                          .catch(function(err) {})
-                      }
-                    }
-                  },
-                  [_vm._v("Client Accounts")]
-                )
-              ])
-            ]),
+            _c(
+              "li",
+              {
+                staticClass: "nav-item",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.$router
+                      .push({ name: "client_accounts" })
+                      .catch(function(err) {})
+                  }
+                }
+              },
+              [_vm._m(6)]
+            ),
             _vm._v(" "),
-            _c("li", { staticClass: "nav-item" }, [
-              _c("span", { staticClass: "sidebar-link" }, [
-                _vm._m(7),
-                _vm._v(" "),
-                _c(
-                  "span",
-                  {
-                    staticClass: "title",
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.$router
-                          .push({ name: "projects" })
-                          .catch(function(err) {})
-                      }
-                    }
-                  },
-                  [_vm._v("Projects")]
-                )
-              ])
-            ]),
+            _c(
+              "li",
+              {
+                staticClass: "nav-item",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.$router
+                      .push({ name: "projects" })
+                      .catch(function(err) {})
+                  }
+                }
+              },
+              [_vm._m(7)]
+            ),
             _vm._v(" "),
-            _c("li", { staticClass: "nav-item" }, [
-              _c("span", { staticClass: "sidebar-link" }, [
-                _vm._m(8),
-                _vm._v(" "),
-                _c(
-                  "span",
-                  {
-                    staticClass: "title",
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.$router
-                          .push({ name: "task_types" })
-                          .catch(function(err) {})
-                      }
-                    }
-                  },
-                  [_vm._v("Task Types")]
-                )
-              ])
-            ]),
+            _c(
+              "li",
+              {
+                staticClass: "nav-item",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.$router
+                      .push({ name: "task_types" })
+                      .catch(function(err) {})
+                  }
+                }
+              },
+              [_vm._m(8)]
+            ),
             _vm._v(" "),
-            _c("li", { staticClass: "nav-item" }, [
-              _c("span", { staticClass: "sidebar-link" }, [
-                _vm._m(9),
-                _vm._v(" "),
-                _c(
-                  "span",
-                  {
-                    staticClass: "title",
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.$router
-                          .push({ name: "positions" })
-                          .catch(function(err) {})
-                      }
-                    }
-                  },
-                  [_vm._v("Positions")]
-                )
-              ])
-            ]),
+            _c(
+              "li",
+              {
+                staticClass: "nav-item",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.$router
+                      .push({ name: "positions" })
+                      .catch(function(err) {})
+                  }
+                }
+              },
+              [_vm._m(9)]
+            ),
             _vm._v(" "),
-            _c("li", { staticClass: "nav-item" }, [
-              _c("span", { staticClass: "sidebar-link" }, [
-                _vm._m(10),
-                _vm._v(" "),
-                _c(
-                  "span",
-                  {
-                    staticClass: "title",
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.$router
-                          .push({ name: "works" })
-                          .catch(function(err) {})
-                      }
-                    }
-                  },
-                  [_vm._v("Works")]
-                )
-              ])
-            ]),
+            _c(
+              "li",
+              {
+                staticClass: "nav-item",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.$router.push({ name: "works" }).catch(function(err) {})
+                  }
+                }
+              },
+              [_vm._m(10)]
+            ),
             _vm._v(" "),
-            _c("li", { staticClass: "nav-item" }, [
-              _c("span", { staticClass: "sidebar-link" }, [
-                _vm._m(11),
-                _vm._v(" "),
-                _c(
-                  "span",
-                  {
-                    staticClass: "title",
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.$router
-                          .push({ name: "purchase_types" })
-                          .catch(function(err) {})
-                      }
-                    }
-                  },
-                  [_vm._v("Purchase Type")]
-                )
-              ])
-            ]),
+            _c(
+              "li",
+              {
+                staticClass: "nav-item",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.$router
+                      .push({ name: "purchase_types" })
+                      .catch(function(err) {})
+                  }
+                }
+              },
+              [_vm._m(11)]
+            ),
             _vm._v(" "),
-            _c("li", { staticClass: "nav-item" }, [
-              _c("span", { staticClass: "sidebar-link" }, [
-                _vm._m(12),
-                _vm._v(" "),
-                _c(
-                  "span",
-                  {
-                    staticClass: "title",
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.$router
-                          .push({ name: "purchases" })
-                          .catch(function(err) {})
-                      }
-                    }
-                  },
-                  [_vm._v("Purchases")]
-                )
-              ])
-            ]),
+            _c(
+              "li",
+              {
+                staticClass: "nav-item",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.$router
+                      .push({ name: "purchases" })
+                      .catch(function(err) {})
+                  }
+                }
+              },
+              [_vm._m(12)]
+            ),
             _vm._v(" "),
-            _c("li", { staticClass: "nav-item" }, [
-              _c("span", { staticClass: "sidebar-link" }, [
-                _vm._m(13),
-                _vm._v(" "),
-                _c(
-                  "span",
-                  {
-                    staticClass: "title",
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.$router
-                          .push({ name: "leave_requests" })
-                          .catch(function(err) {})
-                      }
-                    }
-                  },
-                  [_vm._v("Leave Request")]
-                )
-              ])
-            ])
+            _c(
+              "li",
+              {
+                staticClass: "nav-item",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.$router
+                      .push({ name: "leave_requests" })
+                      .catch(function(err) {})
+                  }
+                }
+              },
+              [_vm._m(13)]
+            )
           ])
         ])
       ]
@@ -45018,128 +44934,195 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon-holder" }, [
-      _c("i", {
-        staticClass: "fas fa-address-card",
-        staticStyle: { color: "red" }
-      })
+    return _c("span", { staticClass: "sidebar-link" }, [
+      _c("span", { staticClass: "icon-holder" }, [
+        _c("i", {
+          staticClass: "fas fa-address-card",
+          staticStyle: { color: "red" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "title" }, [_vm._v("Dashboard")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon-holder" }, [
-      _c("i", {
-        staticClass: "fas fa-network-wired",
-        staticStyle: { color: "yellow" }
-      })
+    return _c("span", { staticClass: "sidebar-link" }, [
+      _c("span", { staticClass: "icon-holder" }, [
+        _c("i", {
+          staticClass: "fas fa-network-wired",
+          staticStyle: { color: "yellow" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "title" }, [_vm._v("Time Sheets")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon-holder" }, [
-      _c("i", { staticClass: "fas fa-users", staticStyle: { color: "purple" } })
+    return _c("span", { staticClass: "sidebar-link" }, [
+      _c("span", { staticClass: "icon-holder" }, [
+        _c("i", {
+          staticClass: "fas fa-users",
+          staticStyle: { color: "purple" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "title" }, [_vm._v("Users")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon-holder" }, [
-      _c("i", {
-        staticClass: "fab fa-accusoft",
-        staticStyle: { color: "blue" }
-      })
+    return _c("span", { staticClass: "sidebar-link" }, [
+      _c("span", { staticClass: "icon-holder" }, [
+        _c("i", {
+          staticClass: "fab fa-accusoft",
+          staticStyle: { color: "blue" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "title" }, [_vm._v("Clients")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon-holder" }, [
-      _c("i", {
-        staticClass: "fas fa-user-tag",
-        staticStyle: { color: "pink" }
-      })
+    return _c("span", { staticClass: "sidebar-link" }, [
+      _c("span", { staticClass: "icon-holder" }, [
+        _c("i", {
+          staticClass: "fas fa-user-tag",
+          staticStyle: { color: "pink" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "title" }, [_vm._v("Roles")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon-holder" }, [
-      _c("i", {
-        staticClass: "fas fa-mug-hot",
-        staticStyle: { color: "green" }
-      })
+    return _c("span", { staticClass: "sidebar-link" }, [
+      _c("span", { staticClass: "icon-holder" }, [
+        _c("i", {
+          staticClass: "fas fa-mug-hot",
+          staticStyle: { color: "green" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "title" }, [_vm._v("Client Accounts")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon-holder" }, [
-      _c("i", {
-        staticClass: "fas fa-project-diagram",
-        staticStyle: { color: "cyan" }
-      })
+    return _c("span", { staticClass: "sidebar-link" }, [
+      _c("span", { staticClass: "icon-holder" }, [
+        _c("i", {
+          staticClass: "fas fa-project-diagram",
+          staticStyle: { color: "cyan" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "title" }, [_vm._v("Projects")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon-holder" }, [
-      _c("i", {
-        staticClass: "fas fa-briefcase",
-        staticStyle: { color: "yellow" }
-      })
+    return _c("span", { staticClass: "sidebar-link" }, [
+      _c("span", { staticClass: "icon-holder" }, [
+        _c("i", {
+          staticClass: "fas fa-briefcase",
+          staticStyle: { color: "yellow" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "title" }, [_vm._v("Task Types")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon-holder" }, [
-      _c("i", {
-        staticClass: "fas fa-crosshairs",
-        staticStyle: { color: "gray" }
-      })
+    return _c("span", { staticClass: "sidebar-link" }, [
+      _c("span", { staticClass: "icon-holder" }, [
+        _c("i", {
+          staticClass: "fas fa-crosshairs",
+          staticStyle: { color: "gray" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "title" }, [_vm._v("Positions")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon-holder" }, [
-      _c("i", { staticClass: "fas fa-adjust", staticStyle: { color: "green" } })
+    return _c("span", { staticClass: "sidebar-link" }, [
+      _c("span", { staticClass: "icon-holder" }, [
+        _c("i", {
+          staticClass: "fas fa-adjust",
+          staticStyle: { color: "green" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "title" }, [_vm._v("Works")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon-holder" }, [
-      _c("i", { staticClass: "fas fa-adjust", staticStyle: { color: "green" } })
+    return _c("span", { staticClass: "sidebar-link" }, [
+      _c("span", { staticClass: "icon-holder" }, [
+        _c("i", {
+          staticClass: "fas fa-adjust",
+          staticStyle: { color: "green" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "title" }, [_vm._v("Purchase Type")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon-holder" }, [
-      _c("i", { staticClass: "fas fa-adjust", staticStyle: { color: "green" } })
+    return _c("span", { staticClass: "sidebar-link" }, [
+      _c("span", { staticClass: "icon-holder" }, [
+        _c("i", {
+          staticClass: "fas fa-adjust",
+          staticStyle: { color: "green" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "title" }, [_vm._v("Purchases")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "icon-holder" }, [
-      _c("i", { staticClass: "fas fa-adjust", staticStyle: { color: "green" } })
+    return _c("span", { staticClass: "sidebar-link" }, [
+      _c("span", { staticClass: "icon-holder" }, [
+        _c("i", {
+          staticClass: "fas fa-adjust",
+          staticStyle: { color: "green" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "title" }, [_vm._v("Leave Request")])
     ])
   },
   function() {
