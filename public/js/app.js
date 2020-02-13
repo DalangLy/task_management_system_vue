@@ -2427,6 +2427,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Dashboard",
   data: function data() {
@@ -2457,7 +2458,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context.next = 5;
                 return axios.get('api/v1/dashboards').then(function (response) {
                   if (response.status === 200) {
-                    console.log(response);
                     _this.works = response.data;
                   }
                 })["catch"](function (err) {
@@ -2483,6 +2483,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       } else {
         this.searchResult = found;
       }
+    },
+    getTotalExpense: function getTotalExpense(projectDetailId) {
+      var projectDetail = this.works.find(function (r) {
+        return parseInt(r.project_detail_id) === parseInt(projectDetailId);
+      });
+      var totalExpense = 0;
+      projectDetail.employees.forEach(function (employee) {
+        totalExpense += employee.salary;
+      });
+      return totalExpense;
+    },
+    calculateProfit: function calculateProfit(fee, expense) {
+      return parseFloat(fee) - parseFloat(expense);
     }
   },
   computed: {
@@ -5011,6 +5024,12 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -44410,23 +44429,9 @@ var render = function() {
       "div",
       {
         staticClass:
-          "d-flex flex-row justify-content-between align-items-center my-3"
+          "d-flex flex-row justify-content-end align-items-center my-3"
       },
       [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary",
-            on: {
-              click: function($event) {
-                $event.preventDefault()
-                return _vm.$router.push({ name: "users.create" })
-              }
-            }
-          },
-          [_c("i", { staticClass: "fas fa-plus" })]
-        ),
-        _vm._v(" "),
         _c("input", {
           staticClass: "form-control w-25",
           attrs: { type: "text", placeholder: "Search" },
@@ -44451,14 +44456,31 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("td", { staticClass: "align-middle" }, [
+              _vm._v(_vm._s(data.client_account))
+            ]),
+            _vm._v(" "),
+            _c("td", { staticClass: "align-middle" }, [
               _vm._v(_vm._s(data.fee) + "$")
             ]),
             _vm._v(" "),
-            _c("td", { staticClass: "align-middle" }, [_vm._v("450$")]),
+            _c("td", { staticClass: "align-middle" }, [
+              _vm._v(_vm._s(_vm.getTotalExpense(data.project_detail_id)) + "$")
+            ]),
             _vm._v(" "),
-            _c("td", { staticClass: "align-middle" }, [_vm._v("550$")]),
+            _c("td", { staticClass: "align-middle" }, [
+              _vm._v(
+                _vm._s(
+                  _vm.calculateProfit(
+                    data.fee,
+                    _vm.getTotalExpense(data.project_detail_id)
+                  )
+                ) + "$"
+              )
+            ]),
             _vm._v(" "),
-            _c("td", { staticClass: "align-middle" }, [_vm._v("Finished")]),
+            _c("td", { staticClass: "align-middle" }, [
+              _vm._v(_vm._s(data.finished ? "Yes" : "No"))
+            ]),
             _vm._v(" "),
             _vm._m(1, true)
           ])
@@ -44479,6 +44501,12 @@ var staticRenderFns = [
           "th",
           { staticClass: "text-center align-middle", attrs: { scope: "col" } },
           [_vm._v("#")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          { staticClass: "text-center align-middle", attrs: { scope: "col" } },
+          [_vm._v("Task Name")]
         ),
         _vm._v(" "),
         _c(
@@ -47111,8 +47139,10 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
+    _vm._m(0),
+    _vm._v(" "),
     _c("table", { staticClass: "table table-bordered" }, [
-      _vm._m(0),
+      _vm._m(1),
       _vm._v(" "),
       _c(
         "tbody",
@@ -47142,7 +47172,11 @@ var render = function() {
               _vm._v(_vm._s(project.name))
             ]),
             _vm._v(" "),
-            _vm._m(1, true)
+            _c("td", { staticClass: "align-middle" }, [
+              _vm._v(_vm._s(project.disabled ? "Yes" : "No"))
+            ]),
+            _vm._v(" "),
+            _vm._m(2, true)
           ])
         }),
         0
@@ -47151,6 +47185,23 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group form-check" }, [
+      _c("input", {
+        staticClass: "form-check-input",
+        attrs: { type: "checkbox", id: "exampleCheck1" }
+      }),
+      _vm._v(" "),
+      _c(
+        "label",
+        { staticClass: "form-check-label", attrs: { for: "exampleCheck1" } },
+        [_vm._v("Show Disabled Projects")]
+      )
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -47191,6 +47242,12 @@ var staticRenderFns = [
           "th",
           { staticClass: "text-center align-middle", attrs: { scope: "col" } },
           [_vm._v("Creator")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          { staticClass: "text-center align-middle", attrs: { scope: "col" } },
+          [_vm._v("Disabled")]
         ),
         _vm._v(" "),
         _c(

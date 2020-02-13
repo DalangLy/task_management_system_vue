@@ -16,6 +16,10 @@
         </div>
 
 
+        <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Show Disabled Projects</label>
+        </div>
 
         <table class="table table-bordered">
             <thead class="thead-dark">
@@ -26,6 +30,7 @@
                 <th class="text-center align-middle" scope="col">Client Account</th>
                 <th class="text-center align-middle" scope="col">Client</th>
                 <th class="text-center align-middle" scope="col">Creator</th>
+                <th class="text-center align-middle" scope="col">Disabled</th>
                 <th class="text-center align-middle" scope="col">Action</th>
             </tr>
             </thead>
@@ -37,6 +42,7 @@
                 <td class="align-middle">{{project.client_account}}</td>
                 <td class="align-middle">{{project.client_name}}</td>
                 <td class="align-middle">{{project.name}}</td>
+                <td class="align-middle">{{project.disabled?'Yes':'No'}}</td>
                 <td class="align-middle">
                     <button class="btn btn-warning"><i class="fas fa-edit"></i></button>
                 </td>

@@ -13,6 +13,7 @@ class ProjectController extends Controller
         $projects = Project::join('users', 'projects.user_id', 'users.id')
             ->join('client_accounts', 'projects.client_account_id', 'client_accounts.client_account_id')
             ->join('clients', 'client_accounts.client_id', 'clients.client_id')
+            ->where('projects.disabled', false)
             ->get();
         return response()->json($projects);
     }

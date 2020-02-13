@@ -17,6 +17,7 @@ class TimeSheetController extends Controller
 
         TimeSheet::create([
             'user_id' => Auth::id(),
+            'salary' => Auth::user()->salary,
             'project_detail_id' => $request->project_detail_id,
         ]);
 

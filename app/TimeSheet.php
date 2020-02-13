@@ -9,6 +9,6 @@ class TimeSheet extends Model
     protected $primaryKey = 'time_sheet_id';
 
     protected $fillable = [
-        'user_id', 'project_detail_id',
+        'user_id', 'salary', 'project_detail_id',
     ];
 }

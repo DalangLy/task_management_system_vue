@@ -10,8 +10,7 @@
         <!--        </nav>-->
         <!--        &lt;!&ndash; end breadcrumb &ndash;&gt;-->
 
-        <div class="d-flex flex-row justify-content-between align-items-center my-3">
-            <button @click.prevent="$router.push({name: 'users.create'})" class="btn btn-primary"><i class="fas fa-plus"></i></button>
+        <div class="d-flex flex-row justify-content-end align-items-center my-3">
             <input @keyup="filterSearch" type="text" class="form-control w-25" placeholder="Search">
         </div>
 
@@ -21,6 +20,7 @@
             <thead class="thead-dark">
             <tr>
                 <th class="text-center align-middle" scope="col">#</th>
+                <th class="text-center align-middle" scope="col">Task Name</th>
                 <th class="text-center align-middle" scope="col">Account</th>
                 <th class="text-center align-middle" scope="col">Fee</th>
                 <th class="text-center align-middle" scope="col">Expense</th>
@@ -33,10 +33,11 @@
                 <tr v-for="(data, index) in allData">
                     <th class="align-middle" scope="row">{{index+1}}</th>
                     <td class="align-middle">{{data.task_name}}</td>
+                    <td class="align-middle">{{data.client_account}}</td>
                     <td class="align-middle">{{data.fee}}$</td>
-                    <td class="align-middle">450$</td>
-                    <td class="align-middle">550$</td>
-                    <td class="align-middle">Finished</td>
+                    <td class="align-middle">{{getTotalExpense(data.project_detail_id)}}$</td>
+                    <td class="align-middle">{{calculateProfit(data.fee, getTotalExpense(data.project_detail_id))}}$</td>
+                    <td class="align-middle">{{data.finished?'Yes':'No'}}</td>
                     <td class="align-middle">
                         <button class="btn btn-warning"><i class="fas fa-edit"></i></button>
                     </td>
@@ -69,7 +70,6 @@
 
                 await axios.get('api/v1/dashboards').then(response => {
                     if(response.status === 200){
-                        console.log(response);
                         this.works = response.data;
                     }
                 }).catch(err => {
@@ -88,6 +88,17 @@
                 else{
                     this.searchResult = found;
                 }
+            },
+            getTotalExpense(projectDetailId){
+                const projectDetail = this.works.find(r => parseInt(r.project_detail_id) === parseInt(projectDetailId));
+                let totalExpense = 0;
+                projectDetail.employees.forEach(employee => {
+                    totalExpense += employee.salary;
+                });
+                return totalExpense;
+            },
+            calculateProfit(fee, expense){
+                return parseFloat(fee) - parseFloat(expense);
             }
         },
         computed:{
@@ -96,7 +107,7 @@
                     return this.works;
                 else
                     return this.searchResult;
-            }
+            },
         }
     }
 </script>
