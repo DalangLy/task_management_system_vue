@@ -33,7 +33,6 @@
 </template>
 
 <script>
-    import AutoComplete from "./partials/AutoComplete";
     import AutoCompleteSelection from "./partials/AutoCompleteSelection";
     import AvatarInput from "./partials/AvatarInput";
     export default {

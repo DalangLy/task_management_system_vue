@@ -58,7 +58,7 @@
 </template>
 
 <script>
-    import AutoComplete from "../Users/partials/AutoComplete";
+    import AutoComplete from "../Users/partials/AutoCompleteSelection";
     import DatePicker from "./partials/DatePicker";
     export default {
         name: "AddWork",

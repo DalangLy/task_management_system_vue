@@ -2943,7 +2943,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _partials_AutoComplete__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./partials/AutoComplete */ "./resources/js/components/Users/partials/AutoComplete.vue");
+/* harmony import */ var _partials_AutoCompleteSelection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./partials/AutoCompleteSelection */ "./resources/js/components/Users/partials/AutoCompleteSelection.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2995,7 +2995,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AddUser",
   components: {
-    'auto-complete': _partials_AutoComplete__WEBPACK_IMPORTED_MODULE_1__["default"]
+    'auto-complete': _partials_AutoCompleteSelection__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
@@ -3111,9 +3111,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _partials_AutoComplete__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./partials/AutoComplete */ "./resources/js/components/Users/partials/AutoComplete.vue");
-/* harmony import */ var _partials_AutoCompleteSelection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./partials/AutoCompleteSelection */ "./resources/js/components/Users/partials/AutoCompleteSelection.vue");
-/* harmony import */ var _partials_AvatarInput__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./partials/AvatarInput */ "./resources/js/components/Users/partials/AvatarInput.vue");
+/* harmony import */ var _partials_AutoCompleteSelection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./partials/AutoCompleteSelection */ "./resources/js/components/Users/partials/AutoCompleteSelection.vue");
+/* harmony import */ var _partials_AvatarInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./partials/AvatarInput */ "./resources/js/components/Users/partials/AvatarInput.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -3156,12 +3155,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 
 
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "EditUser",
   components: {
-    'auto-complete': _partials_AutoCompleteSelection__WEBPACK_IMPORTED_MODULE_2__["default"],
-    'avatar-input': _partials_AvatarInput__WEBPACK_IMPORTED_MODULE_3__["default"]
+    'auto-complete': _partials_AutoCompleteSelection__WEBPACK_IMPORTED_MODULE_1__["default"],
+    'avatar-input': _partials_AvatarInput__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
@@ -3479,175 +3477,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Users/partials/AutoComplete.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Users/partials/AutoComplete.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['data', 'selectedText', 'selectedValue', 'selectedItemId'],
-  data: function data() {
-    return {
-      filtered: [],
-      isAutoCompleteWrapperVisible: false
-    };
-  },
-  mounted: function mounted() {
-    this.setDefaultSelectedValue();
-    document.addEventListener('click', this.handleClickOutside);
-  },
-  destroyed: function destroyed() {
-    document.removeEventListener('click', this.handleClickOutside);
-  },
-  methods: {
-    handleClickOutside: function handleClickOutside(evt) {
-      evt.stopPropagation(); //evt.preventDefault();
-
-      if (!this.$el.contains(evt.target)) {
-        this.showAutoCompleteWrapper(false);
-      }
-    },
-    setDefaultSelectedValue: function setDefaultSelectedValue() {
-      var _this = this;
-
-      var autoComplete = this.$refs.autoCompleteDisplayRef;
-
-      if (this.data) {
-        if (this.data.length > 0) {
-          //if no selected item then select the first one
-          var item = this.data[0]; //if selected item existed then select the selected item value
-
-          if (this.selectedItemId) {
-            var foundItem = this.data.findIndex(function (r) {
-              return parseInt(r[_this.selectedValue]) === parseInt(_this.selectedItemId);
-            });
-            item = this.data[foundItem];
-          }
-
-          this.$emit('input', item[this.selectedValue]); //pass data to component
-          //display selected name
-
-          autoComplete.innerText = item[this.selectedText];
-        } else {
-          //console.log('no value');
-          //remove selected name from auto complete
-          autoComplete.innerText = '';
-        }
-      }
-    },
-    selectItem: function selectItem(item) {
-      if (this.selectedValue && this.selectedText) {
-        this.$emit('input', item[this.selectedValue]); //pass data to component
-        //display selected name
-
-        var autoComplete = this.$refs.autoCompleteDisplayRef;
-        autoComplete.innerText = item[this.selectedText]; //invisible auto complete modal
-
-        this.showAutoCompleteWrapper(false);
-      }
-    },
-    showAutoCompleteWrapper: function showAutoCompleteWrapper(isShowing) {
-      this.closeOtherOpeningAutoComplete();
-
-      if (this.selectedValue && this.selectedText) {
-        var autoCompleteWrapper = this.$refs.autoCompleteWrapperRef;
-
-        if (isShowing) {
-          autoCompleteWrapper.classList.add('visible');
-
-          if (this.data) {
-            if (this.data.length > 0) {
-              this.showAutoCompleteResultContainer(true);
-            }
-          }
-
-          this.isAutoCompleteWrapperVisible = false;
-        } else {
-          autoCompleteWrapper.classList.remove('visible');
-          this.showAutoCompleteResultContainer(false);
-          this.isAutoCompleteWrapperVisible = true;
-        }
-      }
-    },
-    closeOtherOpeningAutoComplete: function closeOtherOpeningAutoComplete() {
-      var _this2 = this;
-
-      //close other opening auto complete
-      //protect if you use this auto complete more than one in a page, so when you open other so so the last one wont close
-      var otherAutoComplete = document.querySelectorAll('.auto-complete-wrapper');
-      otherAutoComplete.forEach(function (autoComplete) {
-        autoComplete.classList.remove('visible');
-
-        _this2.showAutoCompleteResultContainer(false);
-      });
-    },
-    filterAutoCompleteResultList: function filterAutoCompleteResultList(e) {
-      var _this3 = this;
-
-      var keyWord = e.target.value.toLowerCase();
-
-      if (this.data) {
-        if (this.data.length > 0) {
-          var result = this.data.filter(function (r) {
-            return r[_this3.selectedText].toLowerCase().includes(keyWord);
-          });
-
-          if (result.length > 0) {
-            this.filtered = result;
-            this.showAutoCompleteResultContainer(true);
-          } else {
-            this.filtered = this.data;
-          }
-        }
-      }
-    },
-    showAutoCompleteResultContainer: function showAutoCompleteResultContainer(isShow) {
-      var autoCompleteResultContainer = this.$refs.autoCompleteResultContainerRef;
-
-      if (isShow) {
-        autoCompleteResultContainer.classList.add('visible');
-      }
-    }
-  },
-  computed: {
-    filteredData: function filteredData() {
-      if (this.filtered.length > 0) {
-        return this.filtered;
-      } else {
-        return this.data;
-      }
-    }
-  },
-  watch: {
-    data: function data(val) {
-      //check if data is change so selected default value to auto complete
-      this.setDefaultSelectedValue();
-    },
-    selectedItemId: function selectedItemId(val) {
-      this.setDefaultSelectedValue();
-    }
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Users/partials/AutoCompleteSelection.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Users/partials/AutoCompleteSelection.vue?vue&type=script&lang=js& ***!
@@ -3915,7 +3744,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Users_partials_AutoComplete__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Users/partials/AutoComplete */ "./resources/js/components/Users/partials/AutoComplete.vue");
+/* harmony import */ var _Users_partials_AutoCompleteSelection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Users/partials/AutoCompleteSelection */ "./resources/js/components/Users/partials/AutoCompleteSelection.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -3944,7 +3773,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AddClientAccount",
   components: {
-    'auto-complete': _Users_partials_AutoComplete__WEBPACK_IMPORTED_MODULE_1__["default"]
+    'auto-complete': _Users_partials_AutoCompleteSelection__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
@@ -4780,7 +4609,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Users_partials_AutoComplete__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Users/partials/AutoComplete */ "./resources/js/components/Users/partials/AutoComplete.vue");
+/* harmony import */ var _Users_partials_AutoCompleteSelection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Users/partials/AutoCompleteSelection */ "./resources/js/components/Users/partials/AutoCompleteSelection.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -4809,7 +4638,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AddProject",
   components: {
-    'auto-complete': _Users_partials_AutoComplete__WEBPACK_IMPORTED_MODULE_1__["default"]
+    'auto-complete': _Users_partials_AutoCompleteSelection__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
@@ -5061,7 +4890,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Users_partials_AutoComplete__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Users/partials/AutoComplete */ "./resources/js/components/Users/partials/AutoComplete.vue");
+/* harmony import */ var _Users_partials_AutoCompleteSelection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Users/partials/AutoCompleteSelection */ "./resources/js/components/Users/partials/AutoCompleteSelection.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -5110,7 +4939,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AddPurchase",
   components: {
-    'auto-complete': _Users_partials_AutoComplete__WEBPACK_IMPORTED_MODULE_1__["default"]
+    'auto-complete': _Users_partials_AutoCompleteSelection__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
@@ -6093,7 +5922,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Users_partials_AutoComplete__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Users/partials/AutoComplete */ "./resources/js/components/Users/partials/AutoComplete.vue");
+/* harmony import */ var _Users_partials_AutoCompleteSelection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Users/partials/AutoCompleteSelection */ "./resources/js/components/Users/partials/AutoCompleteSelection.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -6120,7 +5949,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "TimeSheet",
   components: {
-    'auto-complete': _Users_partials_AutoComplete__WEBPACK_IMPORTED_MODULE_1__["default"]
+    'auto-complete': _Users_partials_AutoCompleteSelection__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
@@ -6238,7 +6067,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Users_partials_AutoComplete__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Users/partials/AutoComplete */ "./resources/js/components/Users/partials/AutoComplete.vue");
+/* harmony import */ var _Users_partials_AutoCompleteSelection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Users/partials/AutoCompleteSelection */ "./resources/js/components/Users/partials/AutoCompleteSelection.vue");
 /* harmony import */ var _partials_DatePicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./partials/DatePicker */ "./resources/js/components/work/partials/DatePicker.vue");
 
 
@@ -6310,7 +6139,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AddWork",
   components: {
-    'auto-complete': _Users_partials_AutoComplete__WEBPACK_IMPORTED_MODULE_1__["default"],
+    'auto-complete': _Users_partials_AutoCompleteSelection__WEBPACK_IMPORTED_MODULE_1__["default"],
     'date-picker': _partials_DatePicker__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
@@ -11551,7 +11380,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* start user avatar style*/\n.profile-avatar[data-v-0ddea667]{\n    display: inline-block;\n    position: relative;\n}\n.edit-avatar-icon[data-v-0ddea667]{\n    padding: 10px;\n    background-color: #fff;\n    border-radius: 50%;\n    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.16);\n    position: absolute;\n    top: -10px;\n    right: -10px;\n    cursor: pointer;\n}\n.remove-avatar-icon[data-v-0ddea667]{\n    padding: 6px 8px;\n    background-color: #fff;\n    border-radius: 50%;\n    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.16);\n    position: absolute;\n    bottom: -6px;\n    right: -8px;\n    cursor: pointer;\n    display: none;\n}\n.remove-avatar-icon.show[data-v-0ddea667]{\n    display: block;\n}\n.profile-container[data-v-0ddea667]{\n    width: 100px;\n    height: 100px;\n    border: 3px solid #fff;\n    border-radius: 5px;\n    overflow: hidden;\n    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.16);\n}\n.profile-container img[data-v-0ddea667]{\n    vertical-align: middle;\n    width: 100%;\n    height: 100%;\n    -o-object-fit: cover;\n       object-fit: cover;\n}\n#inputFile[data-v-0ddea667]{\n    display: none;\n}\n/* end user avatar style */\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* start user avatar style*/\n.profile-avatar[data-v-0ddea667]{\n    display: inline-block;\n    position: relative;\n}\n.edit-avatar-icon[data-v-0ddea667]{\n    padding: 10px;\n    background-color: #fff;\n    border-radius: 50%;\n    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.16);\n    position: absolute;\n    top: -10px;\n    right: -10px;\n    cursor: pointer;\n}\n.remove-avatar-icon[data-v-0ddea667]{\n    padding: 6px 8px;\n    background-color: #fff;\n    border-radius: 50%;\n    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.16);\n    position: absolute;\n    bottom: -6px;\n    right: -8px;\n    cursor: pointer;\n    display: none;\n}\n.remove-avatar-icon.show[data-v-0ddea667]{\n    display: block;\n}\n.profile-container[data-v-0ddea667]{\n    width: 100px;\n    height: 100px;\n    border: 3px solid #fff;\n    border-radius: 5px;\n    overflow: hidden;\n    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.16);\n}\n.profile-container img[data-v-0ddea667]{\n    vertical-align: middle;\n    width: 100%;\n    height: 100%;\n    -o-object-fit: cover;\n       object-fit: cover;\n}\n#inputFile[data-v-0ddea667]{\n    display: none;\n}\n/* end user avatar style */\n", ""]);
 
 // exports
 
@@ -11571,25 +11400,6 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 // module
 exports.push([module.i, "\n.avatar-container[data-v-ae70130a]{\n    width: 30px;\n    height: 30px;\n    border-radius: 3px;\n    background-color: #fff;\n    overflow: hidden;\n    border: 1px solid lightgray;\n}\n.avatar-container img[data-v-ae70130a]{\n    width: 100%;\n    height: 100%;\n    vertical-align: middle;\n    -o-object-fit: cover;\n       object-fit: cover;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Users/partials/AutoComplete.vue?vue&type=style&index=0&id=77e3e5ba&scoped=true&lang=css&":
-/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Users/partials/AutoComplete.vue?vue&type=style&index=0&id=77e3e5ba&scoped=true&lang=css& ***!
-  \*********************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.auto-complete[data-v-77e3e5ba]{\n    width: 300px;\n    position: relative;\n}\n.auto-complete-wrapper[data-v-77e3e5ba]{\n    margin-top: 3px;\n    border: 1px solid #ced4da;\n    border-radius: 5px;\n    background-color: #fff;\n    width: 100%;\n    overflow: hidden;\n    display: none;\n    position: absolute;\n    z-index: 100;\n    box-shadow: 3px 3px 13px 0px rgba(0,0,0,0.35);\n}\n.auto-complete-wrapper.visible[data-v-77e3e5ba]{\n    display: block;\n}\n.auto-complete-result-container[data-v-77e3e5ba]{\n    max-height: 200px;\n    width: 100%;\n    padding: 10px;\n    margin: 0;\n    list-style: none;\n    overflow: auto;\n    display: none;\n}\n.auto-complete-result-container.visible[data-v-77e3e5ba]{\n    display: block;\n}\n.auto-complete-input-field[data-v-77e3e5ba]{\n    outline: none;\n    border: none;\n    width: 100%;\n    font-size: 16px;\n    padding: 10px 12px;\n}\n.auto-complete-result-item[data-v-77e3e5ba]{\n    padding: 10px;\n    cursor: pointer;\n    border-bottom: 1px solid #ced4da;\n    transition: 0.3s ease;\n    -webkit-transition: 0.3s ease;\n    -o-transition: 0.3s ease;\n    -moz-transition: 0.3s ease;\n}\n.auto-complete-result-item[data-v-77e3e5ba]:hover{\n    background-color: #f7c6c5;\n    border-color: transparent;\n    border-radius: 5px;\n}\n", ""]);
 
 // exports
 
@@ -43395,36 +43205,6 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Users/partials/AutoComplete.vue?vue&type=style&index=0&id=77e3e5ba&scoped=true&lang=css&":
-/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Users/partials/AutoComplete.vue?vue&type=style&index=0&id=77e3e5ba&scoped=true&lang=css& ***!
-  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AutoComplete.vue?vue&type=style&index=0&id=77e3e5ba&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Users/partials/AutoComplete.vue?vue&type=style&index=0&id=77e3e5ba&scoped=true&lang=css&");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Users/partials/AutoCompleteSelection.vue?vue&type=style&index=0&id=b5de004e&scoped=true&lang=css&":
 /*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Users/partials/AutoCompleteSelection.vue?vue&type=style&index=0&id=b5de004e&scoped=true&lang=css& ***!
@@ -45904,86 +45684,6 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("router-view")
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Users/partials/AutoComplete.vue?vue&type=template&id=77e3e5ba&scoped=true&":
-/*!******************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Users/partials/AutoComplete.vue?vue&type=template&id=77e3e5ba&scoped=true& ***!
-  \******************************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass: "auto-complete",
-      on: {
-        click: function($event) {
-          $event.preventDefault()
-          $event.stopPropagation()
-          return _vm.showAutoCompleteWrapper(true)
-        }
-      }
-    },
-    [
-      _c("div", {
-        ref: "autoCompleteDisplayRef",
-        staticClass: "auto-complete-display form-control",
-        staticStyle: { cursor: "pointer" }
-      }),
-      _vm._v(" "),
-      _c(
-        "div",
-        { ref: "autoCompleteWrapperRef", staticClass: "auto-complete-wrapper" },
-        [
-          _c("input", {
-            staticClass: "auto-complete-input-field",
-            attrs: { type: "text", placeholder: "Type anything here" },
-            on: { keyup: _vm.filterAutoCompleteResultList }
-          }),
-          _vm._v(" "),
-          _c(
-            "ul",
-            {
-              ref: "autoCompleteResultContainerRef",
-              staticClass: "auto-complete-result-container"
-            },
-            _vm._l(_vm.filteredData, function(item) {
-              return _c(
-                "li",
-                {
-                  staticClass: "auto-complete-result-item",
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      $event.stopPropagation()
-                      return _vm.selectItem(item)
-                    }
-                  }
-                },
-                [_vm._v(_vm._s(item[_vm.selectedText]))]
-              )
-            }),
-            0
-          )
-        ]
-      )
-    ]
-  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -68373,93 +68073,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserMaster_vue_vue_type_template_id_464c70ff_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserMaster_vue_vue_type_template_id_464c70ff_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/Users/partials/AutoComplete.vue":
-/*!*****************************************************************!*\
-  !*** ./resources/js/components/Users/partials/AutoComplete.vue ***!
-  \*****************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _AutoComplete_vue_vue_type_template_id_77e3e5ba_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AutoComplete.vue?vue&type=template&id=77e3e5ba&scoped=true& */ "./resources/js/components/Users/partials/AutoComplete.vue?vue&type=template&id=77e3e5ba&scoped=true&");
-/* harmony import */ var _AutoComplete_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AutoComplete.vue?vue&type=script&lang=js& */ "./resources/js/components/Users/partials/AutoComplete.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _AutoComplete_vue_vue_type_style_index_0_id_77e3e5ba_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AutoComplete.vue?vue&type=style&index=0&id=77e3e5ba&scoped=true&lang=css& */ "./resources/js/components/Users/partials/AutoComplete.vue?vue&type=style&index=0&id=77e3e5ba&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _AutoComplete_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _AutoComplete_vue_vue_type_template_id_77e3e5ba_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _AutoComplete_vue_vue_type_template_id_77e3e5ba_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  "77e3e5ba",
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/Users/partials/AutoComplete.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/Users/partials/AutoComplete.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************!*\
-  !*** ./resources/js/components/Users/partials/AutoComplete.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AutoComplete_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AutoComplete.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Users/partials/AutoComplete.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AutoComplete_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/Users/partials/AutoComplete.vue?vue&type=style&index=0&id=77e3e5ba&scoped=true&lang=css&":
-/*!**************************************************************************************************************************!*\
-  !*** ./resources/js/components/Users/partials/AutoComplete.vue?vue&type=style&index=0&id=77e3e5ba&scoped=true&lang=css& ***!
-  \**************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AutoComplete_vue_vue_type_style_index_0_id_77e3e5ba_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AutoComplete.vue?vue&type=style&index=0&id=77e3e5ba&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Users/partials/AutoComplete.vue?vue&type=style&index=0&id=77e3e5ba&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AutoComplete_vue_vue_type_style_index_0_id_77e3e5ba_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AutoComplete_vue_vue_type_style_index_0_id_77e3e5ba_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AutoComplete_vue_vue_type_style_index_0_id_77e3e5ba_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AutoComplete_vue_vue_type_style_index_0_id_77e3e5ba_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AutoComplete_vue_vue_type_style_index_0_id_77e3e5ba_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
-
-/***/ }),
-
-/***/ "./resources/js/components/Users/partials/AutoComplete.vue?vue&type=template&id=77e3e5ba&scoped=true&":
-/*!************************************************************************************************************!*\
-  !*** ./resources/js/components/Users/partials/AutoComplete.vue?vue&type=template&id=77e3e5ba&scoped=true& ***!
-  \************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AutoComplete_vue_vue_type_template_id_77e3e5ba_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AutoComplete.vue?vue&type=template&id=77e3e5ba&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Users/partials/AutoComplete.vue?vue&type=template&id=77e3e5ba&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AutoComplete_vue_vue_type_template_id_77e3e5ba_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AutoComplete_vue_vue_type_template_id_77e3e5ba_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

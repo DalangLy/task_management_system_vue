@@ -37,7 +37,7 @@
 </template>
 
 <script>
-    import AutoComplete from "../Users/partials/AutoComplete";
+    import AutoComplete from "../Users/partials/AutoCompleteSelection";
     export default {
         name: "AddPurchase",
         components:{
