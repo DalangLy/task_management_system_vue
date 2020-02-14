@@ -44,7 +44,7 @@ class DashboardController extends Controller
             ->get();
 
         $purchases = Purchase::where('purchases.project_detail_id', $selectedDashboards->project_detail_id)
-            ->where('purchases.approved', true)
+            //->where('purchases.approved', true)
             ->get();
 
         $selectedDashboards->employees = $employees;

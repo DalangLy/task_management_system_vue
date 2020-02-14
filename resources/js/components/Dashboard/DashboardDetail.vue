@@ -1,8 +1,23 @@
 <template>
     <div>
         <h1>{{data.task_name}}</h1>
-        <h1 v-for="employee in data.employees">{{employee.name}}</h1>
-        <h1 v-for="purchase in data.purchases">{{purchase.subject}}</h1>
+
+        <h5>Employees</h5>
+        <ul>
+            <li v-for="employee in data.employees">
+                Employee Name : {{employee.name}}
+                Salary: {{employee.salary}}$
+            </li>
+        </ul>
+
+
+        <h5>Supply</h5>
+        <ul>
+            <li v-for="purchase in data.purchases">
+                <div>Subject : {{purchase.subject}}</div>
+                <div>Paid : {{purchase.paid}}</div>
+            </li>
+        </ul>
     </div>
 </template>
 

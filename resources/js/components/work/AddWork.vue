@@ -21,7 +21,6 @@
             <auto-complete v-model="data.task_type_id" :data="allTaskTypes" selected-value="task_type_id" selected-text="task_type" id="txtTaskType"></auto-complete>
         </div>
 
-
         <div class="form-group">
             <label for="txtTaskName">Task Name</label>
             <input v-model="data.task_name" style="width: 300px" type="text" class="form-control" id="txtTaskName" aria-describedby="taskNameHelp" placeholder="Task Name">
@@ -39,8 +38,6 @@
             <date-picker v-model="data.start_date" id="txtStartDate" aria-describedby="startDateHelp"></date-picker>
             <small id="startDateHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
-
-
 
         <div class="form-group">
             <label for="txtEndDate">End Date</label>

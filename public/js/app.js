@@ -2542,6 +2542,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "DashboardDetail",
   data: function data() {
@@ -6460,9 +6475,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
-//
-//
 //
 //
 //
@@ -44692,21 +44704,41 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("h1", [_vm._v(_vm._s(_vm.data.task_name))]),
-      _vm._v(" "),
+  return _c("div", [
+    _c("h1", [_vm._v(_vm._s(_vm.data.task_name))]),
+    _vm._v(" "),
+    _c("h5", [_vm._v("Employees")]),
+    _vm._v(" "),
+    _c(
+      "ul",
       _vm._l(_vm.data.employees, function(employee) {
-        return _c("h1", [_vm._v(_vm._s(employee.name))])
+        return _c("li", [
+          _vm._v(
+            "\n            Employee Name : " +
+              _vm._s(employee.name) +
+              "\n            Salary: " +
+              _vm._s(employee.salary) +
+              "$\n        "
+          )
+        ])
       }),
-      _vm._v(" "),
+      0
+    ),
+    _vm._v(" "),
+    _c("h5", [_vm._v("Supply")]),
+    _vm._v(" "),
+    _c(
+      "ul",
       _vm._l(_vm.data.purchases, function(purchase) {
-        return _c("h1", [_vm._v(_vm._s(purchase.subject))])
-      })
-    ],
-    2
-  )
+        return _c("li", [
+          _c("div", [_vm._v("Subject : " + _vm._s(purchase.subject))]),
+          _vm._v(" "),
+          _c("div", [_vm._v("Paid : " + _vm._s(purchase.paid))])
+        ])
+      }),
+      0
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -67786,15 +67818,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!***************************************************************!*\
   !*** ./resources/js/components/Dashboard/DashboardDetail.vue ***!
   \***************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DashboardDetail_vue_vue_type_template_id_42f9118f_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DashboardDetail.vue?vue&type=template&id=42f9118f&scoped=true& */ "./resources/js/components/Dashboard/DashboardDetail.vue?vue&type=template&id=42f9118f&scoped=true&");
 /* harmony import */ var _DashboardDetail_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DashboardDetail.vue?vue&type=script&lang=js& */ "./resources/js/components/Dashboard/DashboardDetail.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _DashboardDetail_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _DashboardDetail_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -67824,7 +67855,7 @@ component.options.__file = "resources/js/components/Dashboard/DashboardDetail.vu
 /*!****************************************************************************************!*\
   !*** ./resources/js/components/Dashboard/DashboardDetail.vue?vue&type=script&lang=js& ***!
   \****************************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
