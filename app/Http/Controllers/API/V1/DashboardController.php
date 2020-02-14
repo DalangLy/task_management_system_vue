@@ -43,13 +43,13 @@ class DashboardController extends Controller
             ->where('time_sheets.project_detail_id', $selectedDashboards->project_detail_id)
             ->get();
 
-        $purchases = Purchase::where('purchases.project_detail_id', $selectedDashboards->project_detail_id)
-            //->where('purchases.approved', true)
+        $purchases = Purchase::join('purchase_types', 'purchases.purchase_type_id', 'purchase_types.purchase_type_id')
+            ->where('purchases.project_detail_id', $selectedDashboards->project_detail_id)
+            ->where('purchases.approved', true)
             ->get();
 
         $selectedDashboards->employees = $employees;
         $selectedDashboards->purchases = $purchases;
-
 
         return response()->json($selectedDashboards);
     }

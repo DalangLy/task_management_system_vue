@@ -13,9 +13,10 @@
 
         <h5>Supply</h5>
         <ul>
-            <li v-for="purchase in data.purchases">
+            <li v-for="purchase in data.purchases" class="border-bottom d-block w-25">
                 <div>Subject : {{purchase.subject}}</div>
-                <div>Paid : {{purchase.paid}}</div>
+                <div>Purchase Type : {{purchase.purchase_type_name}}</div>
+                <div>Paid : {{purchase.paid}}$</div>
             </li>
         </ul>
     </div>
@@ -41,7 +42,7 @@
                 }).catch(err => {
                     console.log(err);
                 });
-            }
+            },
         }
     }
 </script>

@@ -16,8 +16,11 @@ class CreateTimeSheetsTable extends Migration
         Schema::create('time_sheets', function (Blueprint $table) {
             $table->bigIncrements('time_sheet_id');
             $table->unsignedBigInteger('user_id');
-            $table->float('salary');
+            $table->float('current_work_salary');
             $table->unsignedBigInteger('project_detail_id');
+            $table->date('working_date');
+            $table->string('start_time');
+            $table->string('end_time');
             $table->timestamps();
         });
     }

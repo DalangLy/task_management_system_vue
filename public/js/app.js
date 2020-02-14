@@ -2485,12 +2485,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     },
     getTotalExpense: function getTotalExpense(projectDetailId) {
+      var _this2 = this;
+
       var projectDetail = this.works.find(function (r) {
         return parseInt(r.project_detail_id) === parseInt(projectDetailId);
       });
       var totalExpense = 0;
       projectDetail.employees.forEach(function (employee) {
-        totalExpense += employee.salary;
+        var minPerMonth = 60 * 24 * 30;
+        var salaryPerMin = employee.salary / minPerMonth;
+
+        var workingHour = _this2.diff(employee.start_time, employee.end_time);
+
+        var workingMinutes = _this2.getMinutes(workingHour);
+
+        var expenseSalary = salaryPerMin * workingMinutes;
+        totalExpense += expenseSalary;
       });
       return totalExpense;
     },
@@ -2506,6 +2516,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     calculateProfit: function calculateProfit(fee, expense) {
       return parseFloat(fee) - parseFloat(expense);
+    },
+    getMinutes: function getMinutes(time) {
+      var hour = parseInt(time.substr(0, 2));
+      var minute = parseInt(time.substr(3, 5));
+      var totalMinutes = 0;
+
+      if (hour > 0) {
+        totalMinutes = hour * 60 + minute;
+      } else {
+        totalMinutes = minute;
+      }
+
+      return totalMinutes;
+    },
+    diff: function diff(start, end) {
+      start = start.split(":");
+      end = end.split(":");
+      var startDate = new Date(0, 0, 0, start[0], start[1], 0);
+      var endDate = new Date(0, 0, 0, end[0], end[1], 0);
+      var diff = endDate.getTime() - startDate.getTime();
+      var hours = Math.floor(diff / 1000 / 60 / 60);
+      diff -= hours * 1000 * 60 * 60;
+      var minutes = Math.floor(diff / 1000 / 60); // If using time pickers with 24 hours format, add the below line get exact hours
+
+      if (hours < 0) hours = hours + 24;
+      return (hours <= 9 ? "0" : "") + hours + ":" + (minutes <= 9 ? "0" : "") + minutes;
     }
   },
   computed: {
@@ -2534,6 +2570,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
 //
 //
 //
@@ -3512,6 +3549,30 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Global_Components/TimeSelection.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Global_Components/TimeSelection.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "TimeSelection"
 });
 
 /***/ }),
@@ -6323,6 +6384,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Global_Components_AutoCompleteSelection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Global_Components/AutoCompleteSelection */ "./resources/js/components/Global_Components/AutoCompleteSelection.vue");
+/* harmony import */ var _Global_Components_DatePicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Global_Components/DatePicker */ "./resources/js/components/Global_Components/DatePicker.vue");
+/* harmony import */ var _Global_Components_TimeSelection__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Global_Components/TimeSelection */ "./resources/js/components/Global_Components/TimeSelection.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -6345,17 +6408,61 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "TimeSheet",
   components: {
-    'auto-complete': _Global_Components_AutoCompleteSelection__WEBPACK_IMPORTED_MODULE_1__["default"]
+    'auto-complete': _Global_Components_AutoCompleteSelection__WEBPACK_IMPORTED_MODULE_1__["default"],
+    'date-picker': _Global_Components_DatePicker__WEBPACK_IMPORTED_MODULE_2__["default"],
+    'time-selection': _Global_Components_TimeSelection__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   data: function data() {
     return {
       data: {
-        project_detail_id: null
+        project_detail_id: null,
+        working_date: null
       },
+      startHour: '00',
+      startMin: '00',
+      endHour: '00',
+      endMin: '00',
       project_details: []
     };
   },
@@ -6369,7 +6476,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var userToken, accessToken;
+        var userToken, accessToken, newData;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -6378,8 +6485,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 userToken = JSON.parse(_this.$store.getters.getUserToken);
                 accessToken = userToken[0].accessToken;
                 axios.defaults.headers.common['Authorization'] = 'Bearer ' + accessToken;
-                _context.next = 5;
-                return axios.post('api/v1/timesheets/store', _this.data).then(function (response) {
+                newData = {
+                  project_detail_id: _this.data.project_detail_id,
+                  working_date: _this.data.working_date,
+                  startTime: _this.startHour + ':' + _this.startMin,
+                  endTime: _this.endHour + ':' + _this.endMin
+                };
+                _context.next = 6;
+                return axios.post('api/v1/timesheets/store', newData).then(function (response) {
                   if (response.status === 200) {
                     console.log(response);
                   }
@@ -6387,7 +6500,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   console.log(err);
                 });
 
-              case 5:
+              case 6:
               case "end":
                 return _context.stop();
             }
@@ -11453,7 +11566,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n*[data-v-8b59f1e0]{\n    padding: 0;\n    margin: 0;\n    box-sizing: border-box;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;\n}\nbody[data-v-8b59f1e0]{\n    color: #757575;\n}\nul[data-v-8b59f1e0]{\n    padding: 0;\n    margin: 0;\n    list-style: none;\n}\n\n/*start page container style*/\n.page-container[data-v-8b59f1e0]{\n    padding-left: 280px;\n    width: 100%;\n    transition: all 0.3s ease;\n    -webkit-transition: all 0.3s ease;\n    -o-transition: all 0.3s ease;\n}\n.page-container.collapsed[data-v-8b59f1e0]{\n    padding-left: 70px;\n}\n/*end page container style*/\n\n/*start header style*/\n.header[data-v-8b59f1e0]{\n    position: fixed;\n    right: 0;\n    top: 0;\n    left: 0;\n    height: 60px;\n    border-bottom: 1px solid rgba(0,0,0,.0625);\n    transition: all 0.3s ease;\n    -webkit-transition: all 0.3s ease;\n    -o-transition: all 0.3s ease;\n    background-color: #fff;\n    z-index: 100;\n    padding-left: 280px; /* use padding over margin because it not affect width */\n}\n.header.collapsed[data-v-8b59f1e0]{\n    padding-left: 70px;\n}\n.header-container[data-v-8b59f1e0]{\n    height: 100%;\n    clear: both;\n    content: \"\";\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n}\n.nav-left[data-v-8b59f1e0]{\n    float: left;\n    margin-left: 10px;\n}\n.nav-right[data-v-8b59f1e0]{\n    float: right;\n    margin-right: 10px;\n}\n/*end header style*/\n\n/*start side bar style*/\n.sidebar[data-v-8b59f1e0]{\n    width: 280px;\n    position: fixed;\n    bottom: 0;\n    left: 0;\n    top: 0;\n    background-color: #fff;\n    z-index: 1000;\n    border-right: 1px solid rgba(0,0,0,.0625);\n    transition: all 0.3s ease;\n    -webkit-transition: all 0.3s ease;\n    -o-transition: all 0.3s ease;\n    overflow: hidden;\n}\n.sidebar.collapsed[data-v-8b59f1e0]{\n    width: 70px;\n}\n.sidebar-inner[data-v-8b59f1e0]{\n    width: 280px;\n    height: 100%;\n}\n/*end side bar style*/\n\n\n/*start main content style*/\n.main-content[data-v-8b59f1e0]{\n    background-color: #f9fafb;\n    min-height: 100vh;\n    padding: 10px;\n    margin-top: 60px; /* to avoid hide content behind header */\n}\n/*end main content style*/\n\n/*start footer style*/\nfooter[data-v-8b59f1e0]{\n    height: 70px;\n    width: 100%;\n    background-color: #fff;\n    border-top: 1px solid rgba(0,0,0,.0625);\n}\n.footer-content[data-v-8b59f1e0]{\n    width: 100%;\n    height: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n/*end footer style*/\n\n/* start sidebar toggle button style */\n.sidebar-toggle[data-v-8b59f1e0]{\n    border: none;\n    background: none;\n    outline: none;\n    cursor: pointer;\n    font-size: 20px;\n}\n/* end sidebar toggle button style */\n\n/* start user avatar style*/\n.user-avatar[data-v-8b59f1e0]{\n    width: 40px;\n    height: 40px;\n    background-color: #fff;\n    border-radius: 50%;\n    border: 2px solid #FFC000;\n    cursor: pointer;\n    overflow: hidden;\n}\n.user-avatar img[data-v-8b59f1e0]{\n    width: 100%;\n    height: 100%;\n    -o-object-fit: cover;\n       object-fit: cover;\n    vertical-align: middle;\n}\n/* start user avatar style*/\n\n/*start side bar logo style*/\n.sidebar-logo[data-v-8b59f1e0]{\n    width: 100%;\n    height: 60px;\n    padding: 10px 5%; /* use percentage to get better sidebar collapsed style */\n    border-bottom: 1px solid rgba(0,0,0,.0625);\n    display: flex;\n    justify-content: flex-start;\n    align-items: center;\n    cursor: pointer;\n    -webkit-user-select: none; /* Safari 3.1+ */\n    -moz-user-select: none; /* Firefox 2+ */\n    -ms-user-select: none; /* IE 10+ */\n    user-select: none; /* Standard syntax */\n    text-decoration: none;\n    color: inherit;\n}\n.peers[data-v-8b59f1e0]{\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    transition: all 0.3s ease;\n    -webkit-transition: all 0.3s ease;\n    -o-transition: all 0.3s ease;\n}\n.sidebar-logo-image[data-v-8b59f1e0]{\n    width: 40px;\n    height: 40px;\n    transition: all 0.3s ease;\n    -webkit-transition: all 0.3s ease;\n    -o-transition: all 0.3s ease;\n}\n.sidebar-logo-image img[data-v-8b59f1e0]{\n    width: 100%;\n    height: 100%;\n    -o-object-fit: contain;\n       object-fit: contain;\n    vertical-align: middle;\n    transition: all 0.3s ease;\n    -webkit-transition: all 0.3s ease;\n    -o-transition: all 0.3s ease;\n}\n.sidebar-logo-title[data-v-8b59f1e0]{\n    height: 20px;\n    margin-left: 20px;\n    display: block;\n    transition: all 0.3s ease;\n    -webkit-transition: all 0.3s ease;\n    -o-transition: all 0.3s ease;\n    opacity: 1;\n}\n.sidebar-logo-title img[data-v-8b59f1e0]{\n    height: 100%;\n    vertical-align: middle;\n}\n.sidebar-logo-title.collapsed[data-v-8b59f1e0]{\n    opacity: 0;\n}\n/*end side bar logo style*/\n\n\n/* start right nav user avatar and name container style */\n.user-avatar-and-name-container[data-v-8b59f1e0]{\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    cursor: pointer;\n    -webkit-user-select: none; /* Safari 3.1+ */\n    -moz-user-select: none; /* Firefox 2+ */\n    -ms-user-select: none; /* IE 10+ */\n    user-select: none; /* Standard syntax */\n}\n.user-avatar-and-name-container .username[data-v-8b59f1e0]{\n    margin-left: 5px;\n}\n/* end right nav user avatar and name container style */\n\n/* start user account dropdown container style */\n.user-account-dropdown-container[data-v-8b59f1e0]{\n    width: 150px;\n    background-color: #fff;\n    position: absolute;\n    top: 65px;\n    right: 5px;\n    border: 1px solid rgba(0,0,0,.0625);\n    z-index: 1001;\n    border-radius: 5px;\n    box-shadow: 0px 0px 5px 0px rgba(168,168,168,1);\n    transition: all 0.3s ease;\n    -webkit-transition: all 0.3s ease;\n    -o-transition: all 0.3s ease;\n    transform: translateX(160px);\n    -webkit-transform: translateX(160px);\n    -o-transform: translateX(160px);\n}\n.user-account-dropdown-container.open[data-v-8b59f1e0]{\n    transform: translateX(0);\n    -webkit-transform: translateX(0);\n    -o-transform: translateX(0);\n}\n.user-account-dropdown-container-inner[data-v-8b59f1e0]{\n    padding: 10px;\n    width: 100%;\n    height: 100%;\n    display: flex;\n    flex-direction: column;\n}\n.user-account-dropdown-item[data-v-8b59f1e0]{\n    text-decoration: none;\n    margin: 10px;\n    color: inherit;\n    transition: color 0.3s ease;\n    -webkit-transition: color 0.3s ease;\n    -o-transition: color 0.3s ease;\n}\n.user-account-dropdown-item[data-v-8b59f1e0]:hover{\n    color: black;\n}\n/* end user account dropdown container style */\n\n\n/* start sidebar menu style */\n.sidebar-menu[data-v-8b59f1e0]{\n    width: 100%;\n    height: 100vh;\n    overflow: auto;\n}\n.nav-item[data-v-8b59f1e0]{\n    text-decoration: none;\n    cursor: pointer;\n}\n.nav-item:hover .title[data-v-8b59f1e0]{\n    color: black;\n}\n.mT-30[data-v-8b59f1e0]{\n    margin-top: 30px;\n}\n.sidebar-link[data-v-8b59f1e0]{\n    padding: 10px 19px;\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    text-decoration: none;\n    color: inherit;\n    text-decoration: none;\n}\n.icon-holder[data-v-8b59f1e0]{\n    font-size: 20px;\n    width: 30px;\n    height: 30px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n.sidebar-link .title[data-v-8b59f1e0]{\n    margin-left: 22px;\n    transition: color 0.3s ease;\n    -webkit-transition: color 0.3s ease;\n    -o-transition: color 0.3s ease;\n}\n/* end sidebar menu style */\n", ""]);
+exports.push([module.i, "\n*[data-v-8b59f1e0]{\n    padding: 0;\n    margin: 0;\n    box-sizing: border-box;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;\n}\nbody[data-v-8b59f1e0]{\n    color: #757575;\n}\nul[data-v-8b59f1e0]{\n    padding: 0;\n    margin: 0;\n    list-style: none;\n}\n\n/*start page container style*/\n.page-container[data-v-8b59f1e0]{\n    padding-left: 280px;\n    width: 100%;\n    transition: all 0.3s ease;\n    -webkit-transition: all 0.3s ease;\n    -o-transition: all 0.3s ease;\n}\n.page-container.collapsed[data-v-8b59f1e0]{\n    padding-left: 70px;\n}\n/*end page container style*/\n\n/*start header style*/\n.header[data-v-8b59f1e0]{\n    position: fixed;\n    right: 0;\n    top: 0;\n    left: 0;\n    height: 60px;\n    border-bottom: 1px solid rgba(0,0,0,.0625);\n    transition: all 0.3s ease;\n    -webkit-transition: all 0.3s ease;\n    -o-transition: all 0.3s ease;\n    background-color: #fff;\n    z-index: 100;\n    padding-left: 280px; /* use padding over margin because it not affect width */\n}\n.header.collapsed[data-v-8b59f1e0]{\n    padding-left: 70px;\n}\n.header-container[data-v-8b59f1e0]{\n    height: 100%;\n    clear: both;\n    content: \"\";\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n}\n.nav-left[data-v-8b59f1e0]{\n    float: left;\n    margin-left: 10px;\n}\n.nav-right[data-v-8b59f1e0]{\n    float: right;\n    margin-right: 10px;\n}\n/*end header style*/\n\n/*start side bar style*/\n.sidebar[data-v-8b59f1e0]{\n    width: 280px;\n    position: fixed;\n    bottom: 0;\n    left: 0;\n    top: 0;\n    background-color: #fff;\n    z-index: 1000;\n    border-right: 1px solid rgba(0,0,0,.0625);\n    transition: all 0.3s ease;\n    -webkit-transition: all 0.3s ease;\n    -o-transition: all 0.3s ease;\n    overflow: hidden;\n}\n.sidebar.collapsed[data-v-8b59f1e0]{\n    width: 70px;\n}\n.sidebar-inner[data-v-8b59f1e0]{\n    width: 280px;\n    height: 100%;\n}\n/*end side bar style*/\n\n\n/*start main content style*/\n.main-content[data-v-8b59f1e0]{\n    background-color: #f9fafb;\n    min-height: 100vh;\n    padding: 10px;\n    margin-top: 60px; /* to avoid hide content behind header */\n}\n/*end main content style*/\n\n/*start footer style*/\nfooter[data-v-8b59f1e0]{\n    height: 70px;\n    width: 100%;\n    background-color: #fff;\n    border-top: 1px solid rgba(0,0,0,.0625);\n}\n.footer-content[data-v-8b59f1e0]{\n    width: 100%;\n    height: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n/*end footer style*/\n\n/* start sidebar toggle button style */\n.sidebar-toggle[data-v-8b59f1e0]{\n    border: none;\n    background: none;\n    outline: none;\n    cursor: pointer;\n    font-size: 20px;\n}\n/* end sidebar toggle button style */\n\n/* start user avatar style*/\n.user-avatar[data-v-8b59f1e0]{\n    width: 40px;\n    height: 40px;\n    background-color: #fff;\n    border-radius: 50%;\n    border: 2px solid #FFC000;\n    cursor: pointer;\n    overflow: hidden;\n}\n.user-avatar img[data-v-8b59f1e0]{\n    width: 100%;\n    height: 100%;\n    -o-object-fit: cover;\n       object-fit: cover;\n    vertical-align: middle;\n}\n/* start user avatar style*/\n\n/*start side bar logo style*/\n.sidebar-logo[data-v-8b59f1e0]{\n    width: 100%;\n    height: 60px;\n    padding: 10px 5%; /* use percentage to get better sidebar collapsed style */\n    border-bottom: 1px solid rgba(0,0,0,.0625);\n    display: flex;\n    justify-content: flex-start;\n    align-items: center;\n    cursor: pointer;\n    -webkit-user-select: none; /* Safari 3.1+ */\n    -moz-user-select: none; /* Firefox 2+ */\n    -ms-user-select: none; /* IE 10+ */\n    user-select: none; /* Standard syntax */\n    text-decoration: none;\n    color: inherit;\n}\n.peers[data-v-8b59f1e0]{\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    transition: all 0.3s ease;\n    -webkit-transition: all 0.3s ease;\n    -o-transition: all 0.3s ease;\n}\n.sidebar-logo-image[data-v-8b59f1e0]{\n    width: 40px;\n    height: 40px;\n    transition: all 0.3s ease;\n    -webkit-transition: all 0.3s ease;\n    -o-transition: all 0.3s ease;\n}\n.sidebar-logo-image img[data-v-8b59f1e0]{\n    width: 100%;\n    height: 100%;\n    -o-object-fit: contain;\n       object-fit: contain;\n    vertical-align: middle;\n    transition: all 0.3s ease;\n    -webkit-transition: all 0.3s ease;\n    -o-transition: all 0.3s ease;\n}\n.sidebar-logo-title[data-v-8b59f1e0]{\n    height: 20px;\n    margin-left: 20px;\n    display: block;\n    transition: all 0.3s ease;\n    -webkit-transition: all 0.3s ease;\n    -o-transition: all 0.3s ease;\n    opacity: 1;\n}\n.sidebar-logo-title img[data-v-8b59f1e0]{\n    height: 100%;\n    vertical-align: middle;\n}\n.sidebar-logo-title.collapsed[data-v-8b59f1e0]{\n    opacity: 0;\n}\n/*end side bar logo style*/\n\n\n/* start right nav user avatar and name container style */\n.user-avatar-and-name-container[data-v-8b59f1e0]{\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    cursor: pointer;\n    -webkit-user-select: none; /* Safari 3.1+ */\n    -moz-user-select: none; /* Firefox 2+ */\n    -ms-user-select: none; /* IE 10+ */\n    user-select: none; /* Standard syntax */\n}\n.user-avatar-and-name-container .username[data-v-8b59f1e0]{\n    margin-left: 5px;\n}\n/* end right nav user avatar and name container style */\n\n/* start user account dropdown container style */\n.user-account-dropdown-container[data-v-8b59f1e0]{\n    width: 150px;\n    background-color: #fff;\n    position: absolute;\n    top: 65px;\n    right: 5px;\n    border: 1px solid rgba(0,0,0,.0625);\n    z-index: 1001;\n    border-radius: 5px;\n    box-shadow: 0px 0px 5px 0px rgba(168,168,168,1);\n    transition: all 0.3s ease;\n    -webkit-transition: all 0.3s ease;\n    -o-transition: all 0.3s ease;\n    transform: translateX(160px);\n    -webkit-transform: translateX(160px);\n    -o-transform: translateX(160px);\n}\n.user-account-dropdown-container.open[data-v-8b59f1e0]{\n    transform: translateX(0);\n    -webkit-transform: translateX(0);\n    -o-transform: translateX(0);\n}\n.user-account-dropdown-container-inner[data-v-8b59f1e0]{\n    padding: 10px;\n    width: 100%;\n    height: 100%;\n    display: flex;\n    flex-direction: column;\n}\n.user-account-dropdown-item[data-v-8b59f1e0]{\n    text-decoration: none;\n    margin: 10px;\n    color: inherit;\n    transition: color 0.3s ease;\n    -webkit-transition: color 0.3s ease;\n    -o-transition: color 0.3s ease;\n}\n.user-account-dropdown-item[data-v-8b59f1e0]:hover{\n    color: black;\n}\n/* end user account dropdown container style */\n\n\n/* start sidebar menu style */\n.sidebar-menu[data-v-8b59f1e0]{\n    width: 100%;\n    height: 100vh;\n    overflow: auto;\n}\n.nav-item[data-v-8b59f1e0]{\n    text-decoration: none;\n    cursor: pointer;\n}\n.nav-item:hover .title[data-v-8b59f1e0]{\n    color: black;\n}\n.mT-30[data-v-8b59f1e0]{\n    margin-top: 30px;\n}\n.sidebar-link[data-v-8b59f1e0]{\n    padding: 10px 19px;\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    text-decoration: none;\n    color: inherit;\n    cursor: pointer;\n}\n.icon-holder[data-v-8b59f1e0]{\n    font-size: 20px;\n    width: 30px;\n    height: 30px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n.sidebar-link .title[data-v-8b59f1e0]{\n    margin-left: 22px;\n    transition: color 0.3s ease;\n    -webkit-transition: color 0.3s ease;\n    -o-transition: color 0.3s ease;\n}\n/* end sidebar menu style */\n", ""]);
 
 // exports
 
@@ -11511,6 +11624,25 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 // module
 exports.push([module.i, "\n*[data-v-443cac44]{\n    box-sizing: border-box;\n}\n.date-picker[data-v-443cac44]{\n    position: relative;\n    display: inline-block;\n    cursor: pointer;\n}\n.display[data-v-443cac44]{\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n.date-picker-container[data-v-443cac44]{\n    border-radius: 5px;\n    border: 1px solid #ced4da;\n    width: 300px;\n    min-height: 250px;\n    background-color: white;\n    padding: 10px;\n    position: absolute;\n    margin-top: 5px;\n    display: none;\n    z-index: 1000;\n}\n.date-picker-container.visible[data-v-443cac44]{\n    display: block;\n}\n.calendar-container[data-v-443cac44]{\n}\n.calendar-header[data-v-443cac44]{\n    display: flex;\n    border-bottom: 1px solid #ced4da;\n    padding-bottom: 3px;\n    margin-bottom: 5px;\n}\n.header-item[data-v-443cac44]{\n    flex-grow: 1;\n    min-width: 30px;\n    background-color: cornflowerblue;\n    border: 1px solid white;\n    height: 30px;\n    color: white;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    border-radius: 5px;\n}\n.calendar-body[data-v-443cac44]{\n    display: flex;\n    flex-wrap: wrap;\n}\n.blank-day-item[data-v-443cac44]{\n    width: 14.2857142857%;\n    border: 1px solid white;\n    height: 35px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n.day-item[data-v-443cac44]{\n    width: 14.2857142857%;\n    background-color: white;\n    border: 1px solid #ced4da;\n    height: 35px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    cursor: pointer;\n    color: black;\n    border-radius: 5px;\n    transition: 0.3s ease;\n}\n.current-day-highlight[data-v-443cac44]{\n    background-color: #f7c6c5;\n}\n.day-item[data-v-443cac44]:hover{\n    background-color: #f7c6c5;\n    transform: scale(1.2);\n    z-index: 10;\n}\n.sunday[data-v-443cac44]{\n    background-color: red;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Global_Components/TimeSelection.vue?vue&type=style&index=0&id=6db12087&scoped=true&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Global_Components/TimeSelection.vue?vue&type=style&index=0&id=6db12087&scoped=true&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.time-selection-container[data-v-6db12087]{\n    width: 300px;\n    background-color: #fff;\n    position: fixed;\n    height: 300px;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%);\n    z-index: 1000001;\n}\n.time-selection-overlay[data-v-6db12087]{\n    background-color: rgba(0,0,0,0.5);\n    width: 100vw;\n    height: 100vh;\n    position: fixed;\n    left: 0;\n    top: 0;\n    z-index: 1000000;\n}\n.time-input[data-v-6db12087]{\n    font-size: 200px;\n    width: 250px;\n}\n", ""]);
 
 // exports
 
@@ -43305,6 +43437,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Global_Components/TimeSelection.vue?vue&type=style&index=0&id=6db12087&scoped=true&lang=css&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Global_Components/TimeSelection.vue?vue&type=style&index=0&id=6db12087&scoped=true&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./TimeSelection.vue?vue&type=style&index=0&id=6db12087&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Global_Components/TimeSelection.vue?vue&type=style&index=0&id=6db12087&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/MasterComponent.vue?vue&type=style&index=0&lang=css&":
 /*!*************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/MasterComponent.vue?vue&type=style&index=0&lang=css& ***!
@@ -44730,10 +44892,14 @@ var render = function() {
     _c(
       "ul",
       _vm._l(_vm.data.purchases, function(purchase) {
-        return _c("li", [
+        return _c("li", { staticClass: "border-bottom d-block w-25" }, [
           _c("div", [_vm._v("Subject : " + _vm._s(purchase.subject))]),
           _vm._v(" "),
-          _c("div", [_vm._v("Paid : " + _vm._s(purchase.paid))])
+          _c("div", [
+            _vm._v("Purchase Type : " + _vm._s(purchase.purchase_type_name))
+          ]),
+          _vm._v(" "),
+          _c("div", [_vm._v("Paid : " + _vm._s(purchase.paid) + "$")])
         ])
       }),
       0
@@ -45654,6 +45820,46 @@ var staticRenderFns = [
       _c("div", { staticClass: "header-item" }, [_vm._v("Sat")]),
       _vm._v(" "),
       _c("div", { staticClass: "header-item sunday" }, [_vm._v("Sun")])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Global_Components/TimeSelection.vue?vue&type=template&id=6db12087&scoped=true&":
+/*!**********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Global_Components/TimeSelection.vue?vue&type=template&id=6db12087&scoped=true& ***!
+  \**********************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("div", { staticClass: "time-selection-overlay" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "time-selection-container" }, [
+        _c("input", {
+          staticClass: "time-input",
+          attrs: { type: "text", value: "00" }
+        })
+      ])
     ])
   }
 ]
@@ -48675,6 +48881,238 @@ var render = function() {
       ],
       1
     ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "form-group" },
+      [
+        _c("label", { attrs: { for: "txtWorkingDate" } }, [
+          _vm._v("Working Date")
+        ]),
+        _vm._v(" "),
+        _c("date-picker", {
+          attrs: { id: "txtWorkingDate" },
+          model: {
+            value: _vm.data.working_date,
+            callback: function($$v) {
+              _vm.$set(_vm.data, "working_date", $$v)
+            },
+            expression: "data.working_date"
+          }
+        })
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group" }, [
+      _c("div", { staticClass: "d-inline-block" }, [
+        _c("label", { attrs: { for: "txtStartTime" } }, [_vm._v("Start")]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.startHour,
+                expression: "startHour"
+              }
+            ],
+            staticClass: "form-control",
+            staticStyle: { width: "150px" },
+            attrs: { id: "txtStartTime" },
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.startHour = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              }
+            }
+          },
+          _vm._l(23, function(n, index) {
+            return _c(
+              "option",
+              {
+                domProps: {
+                  value: index.toString().length < 2 ? "0" + index : index
+                }
+              },
+              [
+                _vm._v(
+                  _vm._s(index.toString().length < 2 ? "0" + index : index)
+                )
+              ]
+            )
+          }),
+          0
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "d-inline-block" }, [
+        _c("label"),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.startMin,
+                expression: "startMin"
+              }
+            ],
+            staticClass: "form-control",
+            staticStyle: { width: "150px" },
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.startMin = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              }
+            }
+          },
+          _vm._l(60, function(n, index) {
+            return _c(
+              "option",
+              {
+                domProps: {
+                  value: index.toString().length < 2 ? "0" + index : index
+                }
+              },
+              [
+                _vm._v(
+                  _vm._s(index.toString().length < 2 ? "0" + index : index)
+                )
+              ]
+            )
+          }),
+          0
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group" }, [
+      _c("div", { staticClass: "d-inline-block" }, [
+        _c("label", { attrs: { for: "txtEndTime" } }, [_vm._v("End Date")]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.endHour,
+                expression: "endHour"
+              }
+            ],
+            staticClass: "form-control",
+            staticStyle: { width: "150px" },
+            attrs: { id: "txtEndTime" },
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.endHour = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              }
+            }
+          },
+          _vm._l(23, function(n, index) {
+            return _c(
+              "option",
+              {
+                domProps: {
+                  value: index.toString().length < 2 ? "0" + index : index
+                }
+              },
+              [
+                _vm._v(
+                  _vm._s(index.toString().length < 2 ? "0" + index : index)
+                )
+              ]
+            )
+          }),
+          0
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "d-inline-block" }, [
+        _c("label"),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.endMin,
+                expression: "endMin"
+              }
+            ],
+            staticClass: "form-control",
+            staticStyle: { width: "150px" },
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.endMin = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              }
+            }
+          },
+          _vm._l(60, function(n, index) {
+            return _c(
+              "option",
+              {
+                domProps: {
+                  value: index.toString().length < 2 ? "0" + index : index
+                }
+              },
+              [
+                _vm._v(
+                  _vm._s(index.toString().length < 2 ? "0" + index : index)
+                )
+              ]
+            )
+          }),
+          0
+        )
+      ])
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "form-group" }, [
       _c(
@@ -68295,6 +68733,93 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DatePicker_vue_vue_type_template_id_443cac44_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DatePicker_vue_vue_type_template_id_443cac44_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Global_Components/TimeSelection.vue":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/Global_Components/TimeSelection.vue ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TimeSelection_vue_vue_type_template_id_6db12087_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TimeSelection.vue?vue&type=template&id=6db12087&scoped=true& */ "./resources/js/components/Global_Components/TimeSelection.vue?vue&type=template&id=6db12087&scoped=true&");
+/* harmony import */ var _TimeSelection_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TimeSelection.vue?vue&type=script&lang=js& */ "./resources/js/components/Global_Components/TimeSelection.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _TimeSelection_vue_vue_type_style_index_0_id_6db12087_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TimeSelection.vue?vue&type=style&index=0&id=6db12087&scoped=true&lang=css& */ "./resources/js/components/Global_Components/TimeSelection.vue?vue&type=style&index=0&id=6db12087&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _TimeSelection_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TimeSelection_vue_vue_type_template_id_6db12087_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TimeSelection_vue_vue_type_template_id_6db12087_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "6db12087",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Global_Components/TimeSelection.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Global_Components/TimeSelection.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/Global_Components/TimeSelection.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TimeSelection_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./TimeSelection.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Global_Components/TimeSelection.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TimeSelection_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Global_Components/TimeSelection.vue?vue&type=style&index=0&id=6db12087&scoped=true&lang=css&":
+/*!******************************************************************************************************************************!*\
+  !*** ./resources/js/components/Global_Components/TimeSelection.vue?vue&type=style&index=0&id=6db12087&scoped=true&lang=css& ***!
+  \******************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TimeSelection_vue_vue_type_style_index_0_id_6db12087_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./TimeSelection.vue?vue&type=style&index=0&id=6db12087&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Global_Components/TimeSelection.vue?vue&type=style&index=0&id=6db12087&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TimeSelection_vue_vue_type_style_index_0_id_6db12087_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TimeSelection_vue_vue_type_style_index_0_id_6db12087_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TimeSelection_vue_vue_type_style_index_0_id_6db12087_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TimeSelection_vue_vue_type_style_index_0_id_6db12087_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TimeSelection_vue_vue_type_style_index_0_id_6db12087_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Global_Components/TimeSelection.vue?vue&type=template&id=6db12087&scoped=true&":
+/*!****************************************************************************************************************!*\
+  !*** ./resources/js/components/Global_Components/TimeSelection.vue?vue&type=template&id=6db12087&scoped=true& ***!
+  \****************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TimeSelection_vue_vue_type_template_id_6db12087_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./TimeSelection.vue?vue&type=template&id=6db12087&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Global_Components/TimeSelection.vue?vue&type=template&id=6db12087&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TimeSelection_vue_vue_type_template_id_6db12087_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TimeSelection_vue_vue_type_template_id_6db12087_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

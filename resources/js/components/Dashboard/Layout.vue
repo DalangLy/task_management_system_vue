@@ -592,7 +592,7 @@
         align-items: center;
         text-decoration: none;
         color: inherit;
-        text-decoration: none;
+        cursor: pointer;
     }
     .icon-holder{
         font-size: 20px;
