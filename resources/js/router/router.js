@@ -5,31 +5,31 @@ import store from '../vuex/store'
 Vue.use(VueRouter);
 
 //auth routes
-import Login from '../components/Auth/Login'
-import Logout from '../components/Auth/Logout'
+import Login from '../components/auth/Login'
+import Logout from '../components/auth/Logout'
 
 //layout routes
-import Layout from '../components/Dashboard/Layout'
+import Layout from '../components/dashboard/Layout'
 
 //dashboard
-import DashboardMaster from "../components/Dashboard/DashboardMaster";
-import Dashboard from "../components/Dashboard/Dashboard";
-import DashboardDetail from "../components/Dashboard/DashboardDetail";
+import DashboardMaster from "../components/dashboard/DashboardMaster";
+import Dashboard from "../components/dashboard/Dashboard";
+import DashboardDetail from "../components/dashboard/DashboardDetail";
 
 //user routes
-import UserMaster from '../components/Users/UserMaster'
-import UserList from '../components/Users/UserList'
-import AddUser from '../components/Users/AddUser'
-import EditUser from "../components/Users/EditUser";
+import UserMaster from '../components/users/UserMaster'
+import UserList from '../components/users/UserList'
+import AddUser from '../components/users/AddUser'
+import EditUser from "../components/users/EditUser";
 
 //profile routes
 import ProfileMaster from "../components/profile/ProfileMaster";
 import Profile from "../components/profile/Profile";
 
 //client routes
-import ClientMaster from "../components/Client/ClientMaster";
-import ClientList from "../components/Client/ClientList";
-import AddClient from "../components/Client/AddClient";
+import ClientMaster from "../components/client/ClientMaster";
+import ClientList from "../components/client/ClientList";
+import AddClient from "../components/client/AddClient";
 
 //roles routes
 import RoleMaster from "../components/role/RoleMaster";

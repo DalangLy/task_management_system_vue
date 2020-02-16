@@ -17,7 +17,7 @@
 </template>
 
 <script>
-    import AutoComplete from "../Global_Components/AutoCompleteSelection";
+    import AutoComplete from "../global_components/AutoCompleteSelection";
     export default {
         name: "AddClientAccount",
         components:{

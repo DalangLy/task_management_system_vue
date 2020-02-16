@@ -21,7 +21,7 @@
                         console.log("Unauthorized");
                     }
                     else{
-                        console.log("Err Getting Trust Client Token ", err.response);
+                        console.log("Err Getting Trust client Token ", err.response);
                     }
                 }).finally(() => {
 

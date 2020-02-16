@@ -50,9 +50,9 @@
 </template>
 
 <script>
-    import AutoComplete from "../Global_Components/AutoCompleteSelection";
-    import DatePicker from "../Global_Components/DatePicker";
-    import TimeSelection from "../Global_Components/TimeSelection";
+    import AutoComplete from "../global_components/AutoCompleteSelection";
+    import DatePicker from "../global_components/DatePicker";
+    import TimeSelection from "../global_components/TimeSelection";
     export default {
         name: "TimeSheet",
         components:{
