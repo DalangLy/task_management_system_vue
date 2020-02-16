@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\V1;
 
+use App\CompanyStructure;
 use App\Http\Controllers\Controller;
 use App\ProjectDetail;
 use App\TimeSheet;
@@ -18,6 +19,8 @@ class TimeSheetController extends Controller
             'endTime' => 'required',
         ]);
 
+        $companyStructureId = CompanyStructure::where('using', true)->first()->company_structure_id;
+
         TimeSheet::create([
             'user_id' => Auth::id(),
             'current_work_salary' => Auth::user()->salary,
@@ -25,6 +28,7 @@ class TimeSheetController extends Controller
             'working_date' => $request->working_date,
             'start_time' => $request->startTime,
             'end_time' => $request->endTime,
+            'company_structure_id' => $companyStructureId,
         ]);
 
         return response()->json(['created']);

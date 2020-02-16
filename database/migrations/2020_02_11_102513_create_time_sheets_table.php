@@ -21,6 +21,7 @@ class CreateTimeSheetsTable extends Migration
             $table->date('working_date');
             $table->string('start_time');
             $table->string('end_time');
+            $table->unsignedBigInteger('company_structure_id');
             $table->timestamps();
         });
     }

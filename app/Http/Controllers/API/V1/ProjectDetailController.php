@@ -40,7 +40,6 @@ class ProjectDetailController extends Controller
             'fee' => $request->fee,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
-            'company_structure_id' => $companyStructureId,
         ])->project_detail_id;
 
         TimeSheet::create([
@@ -48,8 +47,9 @@ class ProjectDetailController extends Controller
             'current_work_salary' => Auth::user()->salary,
             'project_detail_id' => $projectDetailId,
             'working_date' => '2010-10-10',
-            'start_time' => '09',
-            'end_time' => '06',
+            'start_time' => '09:00',
+            'end_time' => '18:00',
+            'company_structure_id' => $companyStructureId,
         ]);
 
         return response()->json(['created']);

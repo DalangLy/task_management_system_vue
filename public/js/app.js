@@ -2491,9 +2491,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return parseInt(r.project_detail_id) === parseInt(projectDetailId);
       });
       var totalExpense = 0;
-      var workingHours = projectDetail.working_hours;
       projectDetail.employees.forEach(function (employee) {
-        var minPerMonth = 60 * workingHours * 30;
+        var minPerMonth = 60 * parseFloat(employee.working_hours) * 30;
         var salaryPerMin = employee.current_work_salary / minPerMonth;
 
         var workingHour = _this2.diff(employee.start_time, employee.end_time);

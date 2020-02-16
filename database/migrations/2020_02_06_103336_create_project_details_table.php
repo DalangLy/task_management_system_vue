@@ -24,7 +24,6 @@ class CreateProjectDetailsTable extends Migration
             $table->date('start_date');
             $table->date('end_date');
             $table->boolean('finished')->default(false);
-            $table->unsignedBigInteger('company_structure_id');
             $table->timestamps();
         });
     }

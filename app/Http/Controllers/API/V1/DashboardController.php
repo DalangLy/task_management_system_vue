@@ -14,12 +14,12 @@ class DashboardController extends Controller
     public function dashboards(){
         $dashboards = ProjectDetail::join('projects', 'project_details.project_id', 'projects.project_id')
             ->join('client_accounts', 'projects.client_account_id', 'client_accounts.client_account_id')
-            ->join('company_structures', 'project_details.company_structure_id', 'company_structures.company_structure_id')
             ->get();
 
 
         foreach ($dashboards as $dashboard){
             $employees = TimeSheet::join('users', 'time_sheets.user_id', 'users.id')
+                ->join('company_structures', 'time_sheets.company_structure_id', 'company_structures.company_structure_id')
                 ->where('time_sheets.project_detail_id', $dashboard->project_detail_id)
                 ->get();
 
