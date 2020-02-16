@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\V1;
 
+use App\CompanyStructure;
 use App\Http\Controllers\Controller;
 use App\ProjectDetail;
 use App\TimeSheet;
@@ -28,6 +29,8 @@ class ProjectDetailController extends Controller
             'task_type_id' => 'required',
         ]);
 
+        $companyStructureId = CompanyStructure::where('using', true)->first()->company_structure_id;
+
         $projectDetailId = ProjectDetail::create([
             'project_id' => $request->project_id,
             'task_type_id' => $request->task_type_id,
@@ -37,12 +40,16 @@ class ProjectDetailController extends Controller
             'fee' => $request->fee,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
+            'company_structure_id' => $companyStructureId,
         ])->project_detail_id;
 
         TimeSheet::create([
             'user_id' => Auth::id(),
-            'salary' => Auth::user()->salary,
+            'current_work_salary' => Auth::user()->salary,
             'project_detail_id' => $projectDetailId,
+            'working_date' => '2010-10-10',
+            'start_time' => '09',
+            'end_time' => '06',
         ]);
 
         return response()->json(['created']);

@@ -92,9 +92,10 @@
             getTotalExpense(projectDetailId){
                 const projectDetail = this.works.find(r => parseInt(r.project_detail_id) === parseInt(projectDetailId));
                 let totalExpense = 0;
+                let workingHours = projectDetail.working_hours;
                 projectDetail.employees.forEach(employee => {
-                    let minPerMonth = (60*24)*30;
-                    let salaryPerMin = employee.salary/minPerMonth;
+                    let minPerMonth = (60*workingHours)*30;
+                    let salaryPerMin = employee.current_work_salary/minPerMonth;
 
                     let workingHour = this.diff(employee.start_time, employee.end_time);
 

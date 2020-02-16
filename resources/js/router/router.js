@@ -80,6 +80,10 @@ import AddLeaveRequest from "../components/leave_request/AddLeaveRequest";
 import TimeSheetMaster from "../components/timesheet/TimeSheetMaster";
 import TimeSheet from "../components/timesheet/TimeSheet";
 
+//
+import CompanyMaster from "../components/company/CompanyMaster";
+import CompanyInfo from "../components/company/CompanyInfo";
+
 const routes = [
     {
         path: '/login',
@@ -117,6 +121,17 @@ const routes = [
                         path: '/detail/:dashboardId',
                         name: 'dashboard.detail',
                         component: DashboardDetail,
+                    }
+                ]
+            },
+            {
+                path: '/company',
+                component: CompanyMaster,
+                children: [
+                    {
+                        path: '/company',
+                        name: 'company',
+                        component: CompanyInfo,
                     }
                 ]
             },

@@ -23,6 +23,12 @@
                             <span class="title">Dashboard</span>
                         </span>
                     </li>
+                    <li @click.prevent="$router.push({name: 'company'}).catch(err => {})" class="nav-item">
+                        <span class="sidebar-link">
+                            <span class="icon-holder"><i class="fas fa-address-card" style="color: red;"></i></span>
+                            <span class="title">Company</span>
+                        </span>
+                    </li>
                     <li @click.prevent="$router.push({name: 'timesheets'}).catch(err => {})" class="nav-item">
                         <span class="sidebar-link">
                             <span class="icon-holder"><i class="fas fa-network-wired" style="color: yellow"></i></span>

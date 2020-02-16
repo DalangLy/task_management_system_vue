@@ -14,6 +14,7 @@ class DashboardController extends Controller
     public function dashboards(){
         $dashboards = ProjectDetail::join('projects', 'project_details.project_id', 'projects.project_id')
             ->join('client_accounts', 'projects.client_account_id', 'client_accounts.client_account_id')
+            ->join('company_structures', 'project_details.company_structure_id', 'company_structures.company_structure_id')
             ->get();
 
 
