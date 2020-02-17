@@ -24,7 +24,7 @@ class DashboardController extends Controller
                 ->get();
 
             $purchases = Purchase::where('purchases.project_detail_id', $dashboard->project_detail_id)
-                ->where('purchases.approved', true)
+                //->where('purchases.approved', true)
                 ->get();
 
             $dashboard->employees = $employees;
@@ -46,7 +46,7 @@ class DashboardController extends Controller
 
         $purchases = Purchase::join('purchase_types', 'purchases.purchase_type_id', 'purchase_types.purchase_type_id')
             ->where('purchases.project_detail_id', $selectedDashboards->project_detail_id)
-            ->where('purchases.approved', true)
+            //->where('purchases.approved', true)
             ->get();
 
         $selectedDashboards->employees = $employees;

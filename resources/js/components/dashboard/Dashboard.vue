@@ -25,7 +25,7 @@
                 <th class="text-center align-middle" scope="col">Fee</th>
                 <th class="text-center align-middle" scope="col">Expense</th>
                 <th class="text-center align-middle" scope="col">Profit/Loss</th>
-                <th class="text-center align-middle" scope="col">Status</th>
+                <th class="text-center align-middle" scope="col">Finished</th>
                 <th class="text-center align-middle" scope="col">Action</th>
             </tr>
             </thead>
@@ -35,8 +35,8 @@
                     <td class="align-middle">{{data.task_name}}</td>
                     <td class="align-middle">{{data.client_account}}</td>
                     <td class="align-middle">{{data.fee}}$</td>
-                    <td class="align-middle">{{getTotalExpense(data.project_detail_id)+getTotalPSupply(data.project_detail_id)}}$</td>
-                    <td class="align-middle">{{calculateProfit(data.fee, getTotalExpense(data.project_detail_id)+getTotalPSupply(data.project_detail_id))}}$</td>
+                    <td class="align-middle">{{splitFloatingPointerNumberToTwoDigitAfterComma(getTotalExpense(data.project_detail_id)+getTotalPSupply(data.project_detail_id))}}$</td>
+                    <td class="align-middle">{{splitFloatingPointerNumberToTwoDigitAfterComma(calculateProfit(data.fee, getTotalExpense(data.project_detail_id)+getTotalPSupply(data.project_detail_id)))}}$</td>
                     <td class="align-middle">{{data.finished?'Yes':'No'}}</td>
                     <td class="align-middle">
                         <button @click.prevent.stop="$router.push({name: 'dashboard.detail', params: { dashboardId: data.project_detail_id }})" class="btn btn-warning"><i class="fas fa-eye"></i></button>
@@ -144,7 +144,10 @@
                     hours = hours + 24;
 
                 return (hours <= 9 ? "0" : "") + hours + ":" + (minutes <= 9 ? "0" : "") + minutes;
-            }
+            },
+            splitFloatingPointerNumberToTwoDigitAfterComma(value){
+                return value.toString().replace(/(.*\.\d\d).*/g, '$1');
+            },
         },
         computed:{
             allData(){

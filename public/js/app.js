@@ -2921,6 +2921,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       if (hours < 0) hours = hours + 24;
       return (hours <= 9 ? "0" : "") + hours + ":" + (minutes <= 9 ? "0" : "") + minutes;
+    },
+    splitFloatingPointerNumberToTwoDigitAfterComma: function splitFloatingPointerNumberToTwoDigitAfterComma(value) {
+      return value.toString().replace(/(.*\.\d\d).*/g, '$1');
     }
   },
   computed: {
@@ -3054,6 +3057,34 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -45104,8 +45135,10 @@ var render = function() {
             _c("td", { staticClass: "align-middle" }, [
               _vm._v(
                 _vm._s(
-                  _vm.getTotalExpense(data.project_detail_id) +
-                    _vm.getTotalPSupply(data.project_detail_id)
+                  _vm.splitFloatingPointerNumberToTwoDigitAfterComma(
+                    _vm.getTotalExpense(data.project_detail_id) +
+                      _vm.getTotalPSupply(data.project_detail_id)
+                  )
                 ) + "$"
               )
             ]),
@@ -45113,10 +45146,12 @@ var render = function() {
             _c("td", { staticClass: "align-middle" }, [
               _vm._v(
                 _vm._s(
-                  _vm.calculateProfit(
-                    data.fee,
-                    _vm.getTotalExpense(data.project_detail_id) +
-                      _vm.getTotalPSupply(data.project_detail_id)
+                  _vm.splitFloatingPointerNumberToTwoDigitAfterComma(
+                    _vm.calculateProfit(
+                      data.fee,
+                      _vm.getTotalExpense(data.project_detail_id) +
+                        _vm.getTotalPSupply(data.project_detail_id)
+                    )
                   )
                 ) + "$"
               )
@@ -45198,7 +45233,7 @@ var staticRenderFns = [
         _c(
           "th",
           { staticClass: "text-center align-middle", attrs: { scope: "col" } },
-          [_vm._v("Status")]
+          [_vm._v("Finished")]
         ),
         _vm._v(" "),
         _c(
@@ -45706,8 +45741,8 @@ var staticRenderFns = [
     return _c("span", { staticClass: "sidebar-link" }, [
       _c("span", { staticClass: "icon-holder" }, [
         _c("i", {
-          staticClass: "fas fa-address-card",
-          staticStyle: { color: "red" }
+          staticClass: "fab fa-adn",
+          staticStyle: { color: "darkblue" }
         })
       ]),
       _vm._v(" "),
@@ -45841,7 +45876,7 @@ var staticRenderFns = [
     return _c("span", { staticClass: "sidebar-link" }, [
       _c("span", { staticClass: "icon-holder" }, [
         _c("i", {
-          staticClass: "fas fa-adjust",
+          staticClass: "fas fa-spinner",
           staticStyle: { color: "green" }
         })
       ]),
@@ -45855,10 +45890,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "sidebar-link" }, [
       _c("span", { staticClass: "icon-holder" }, [
-        _c("i", {
-          staticClass: "fas fa-adjust",
-          staticStyle: { color: "green" }
-        })
+        _c("i", { staticClass: "fas fa-tape", staticStyle: { color: "green" } })
       ]),
       _vm._v(" "),
       _c("span", { staticClass: "title" }, [_vm._v("Purchase Type")])
