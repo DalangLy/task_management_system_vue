@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\API\V1;
 
+use App\ClientAccount;
 use App\Http\Controllers\Controller;
+use App\Project;
 use App\ProjectDetail;
 use App\Purchase;
 use App\TimeSheet;
@@ -11,27 +13,36 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
+//    public function dashboards(){
+//        $dashboards = ProjectDetail::join('projects', 'project_details.project_id', 'projects.project_id')
+//            ->join('client_accounts', 'projects.client_account_id', 'client_accounts.client_account_id')
+//            ->get();
+//
+//
+//        foreach ($dashboards as $dashboard){
+//            $employees = TimeSheet::join('users', 'time_sheets.user_id', 'users.id')
+//                ->join('company_structures', 'time_sheets.company_structure_id', 'company_structures.company_structure_id')
+//                ->where('time_sheets.project_detail_id', $dashboard->project_detail_id)
+//                ->get();
+//
+//            $purchases = Purchase::where('purchases.project_detail_id', $dashboard->project_detail_id)
+//                //->where('purchases.approved', true)
+//                ->get();
+//
+//            $dashboard->employees = $employees;
+//            $dashboard->purchases = $purchases;
+//        }
+//
+//        return response()->json($dashboards);
+//    }
+
     public function dashboards(){
-        $dashboards = ProjectDetail::join('projects', 'project_details.project_id', 'projects.project_id')
-            ->join('client_accounts', 'projects.client_account_id', 'client_accounts.client_account_id')
+        $dashboards = ClientAccount::join('clients', 'client_accounts.client_id', 'clients.client_id')
             ->get();
 
+        $projects = Project::where('projects.client_account_id', $dashboards[0]->client_account_id)->get();
 
-        foreach ($dashboards as $dashboard){
-            $employees = TimeSheet::join('users', 'time_sheets.user_id', 'users.id')
-                ->join('company_structures', 'time_sheets.company_structure_id', 'company_structures.company_structure_id')
-                ->where('time_sheets.project_detail_id', $dashboard->project_detail_id)
-                ->get();
-
-            $purchases = Purchase::where('purchases.project_detail_id', $dashboard->project_detail_id)
-                //->where('purchases.approved', true)
-                ->get();
-
-            $dashboard->employees = $employees;
-            $dashboard->purchases = $purchases;
-        }
-
-        return response()->json($dashboards);
+        return response()->json($projects);
     }
 
     public function dashboardDetail($id){

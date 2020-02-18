@@ -23,6 +23,9 @@ Route::middleware('auth:api')->get('v1/user', 'API\V1\AuthController@user');
 Route::middleware('client')->post('v1/issue_new_access_token', 'API\V1\AuthController@issueNewAccessToken');
 
 
+//company structure routes
+Route::middleware('auth:api')->get('/company_structure', 'API\V1\CompanyStructureController@companyStructure');
+
 //user routes
 Route::middleware('auth:api')->get('v1/users', 'API\V1\UserController@users');
 Route::middleware('auth:api')->post('v1/users/store', 'API\V1\UserController@store');
