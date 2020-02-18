@@ -21,16 +21,70 @@
         </div>
 
         <div class="form-group">
+            <label for="txtGender">Gender</label>
+            <select v-model="data.gender" style="width: 300px" id="txtGender" class="form-control">
+                <option value="1" selected>Male</option>
+                <option value="2">Female</option>
+            </select>
+        </div>
+
+        <div class="form-group">
             <label for="txtEmail">Email</label>
             <input v-model="data.email" style="width: 300px" type="email" class="form-control" id="txtEmail" aria-describedby="emailHelp" placeholder="Email">
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
 
         <div class="form-group">
-            <label for="txtName">Position</label>
-            <auto-complete v-model="data.position" :data="positions" selected-text="name" selected-value="id"></auto-complete>
+            <label for="txtUsername">Username</label>
+            <input v-model="data.username" style="width: 300px" type="text" class="form-control" id="txtUsername" aria-describedby="usernameHelp" placeholder="Username">
+            <small id="usernameHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
 
+        <div class="form-group">
+            <label for="txtPassword">Password</label>
+            <input v-model="data.password" style="width: 300px" type="password" class="form-control" id="txtPassword" aria-describedby="passwordHelp" placeholder="Password">
+            <small id="passwordHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+
+        <div class="form-group">
+            <label for="txtConfirmPassword">Confirm Password</label>
+            <input v-model="data.password_confirmation" style="width: 300px" type="password" class="form-control" id="txtConfirmPassword" aria-describedby="confirmPasswordHelp" placeholder="Confirm Password">
+            <small id="confirmPasswordHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+
+        <div class="form-group">
+            <label for="txtName">Position</label>
+            <auto-complete v-model="data.position" :data="positions" selected-text="position" selected-value="position_id"></auto-complete>
+        </div>
+
+        <div class="form-group">
+            <label for="txtSalary">Salary</label>
+            <input v-model="data.salary" style="width: 300px" type="number" class="form-control" id="txtSalary" aria-describedby="salaryHelp" placeholder="Salary">
+            <small id="salaryHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+
+        <div class="form-group">
+            <label for="txtName">Role</label>
+            <auto-complete v-model="data.role" :data="roles" selected-text="role_display_name" selected-value="role_id"></auto-complete>
+        </div>
+
+        <div class="form-group">
+            <label for="txtPhone">Phone</label>
+            <input v-model="data.phone" style="width: 300px" type="text" class="form-control" id="txtPhone" aria-describedby="phoneHelp" placeholder="Phone">
+            <small id="phoneHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+
+        <div class="form-group">
+            <label for="txtStartDate">Start Date</label>
+            <date-picker v-model="data.start_date" id="txtStartDate" aria-describedby="startDateHelp"></date-picker>
+            <small id="startDateHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+
+        <div class="form-group">
+            <label for="txtOfficialDate">Official Date</label>
+            <date-picker v-model="data.official_date" id="txtOfficialDate" aria-describedby="officialDateHelp"></date-picker>
+            <small id="officialDateHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
 
         <div class="form-group">
             <button @click.prevent.stop="save" class="btn btn-primary">Save</button>
@@ -41,40 +95,57 @@
 
 <script>
     import AutoComplete from "../global_components/AutoCompleteSelection";
+    import DatePicker from "../global_components/DatePicker";
     export default {
         name: "AddUser",
         components:{
             'auto-complete': AutoComplete,
+            'date-picker': DatePicker,
         },
         data(){
             return{
                 data:{
                     avatar: null,
                     name: null,
+                    gender: 1,
                     email: null,
+                    username:null,
+                    password: null,
+                    password_confirmation: null,
                     position: null,
+                    salary: null,
+                    role: 1,
+                    phone: null,
+                    start_date: null,
+                    official_date: null,
                 },
-                positions: [
-                    {
-                        id: 1,
-                        name: 'Web Developer'
-                    },
-                    {
-                        id: 2,
-                        name: 'Accountant Executing'
-                    },
-                    {
-                        id: 3,
-                        name: 'Project Manager'
-                    },
-                    {
-                        id: 4,
-                        name: 'Admin'
-                    }
-                ],
+                positions: [],
+                roles: [],
             }
         },
+        created(){
+            this.gettingPosition();
+            this.gettingRoles();
+        },
         methods:{
+            async gettingRoles(){
+                await axios.get('api/v1/getting_roles').then(response => {
+                    if(response.status === 200){
+                        this.roles = response.data;
+                    }
+                }).catch(err => {
+                    console.log(err);
+                })
+            },
+            async gettingPosition(){
+                await axios.get('api/v1/getting_positions').then(response => {
+                    if(response.status === 200){
+                        this.positions = response.data;
+                    }
+                }).catch(err => {
+                    console.log(err);
+                })
+            },
             async save(){
                 //get user token from auth module
                 const userToken = JSON.parse(this.$store.getters.getUserToken);

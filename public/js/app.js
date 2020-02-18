@@ -2885,6 +2885,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Dashboard",
   data: function data() {
@@ -6187,6 +6197,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _global_components_AutoCompleteSelection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../global_components/AutoCompleteSelection */ "./resources/js/components/global_components/AutoCompleteSelection.vue");
+/* harmony import */ var _global_components_DatePicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../global_components/DatePicker */ "./resources/js/components/global_components/DatePicker.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -6234,53 +6245,165 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AddUser",
   components: {
-    'auto-complete': _global_components_AutoCompleteSelection__WEBPACK_IMPORTED_MODULE_1__["default"]
+    'auto-complete': _global_components_AutoCompleteSelection__WEBPACK_IMPORTED_MODULE_1__["default"],
+    'date-picker': _global_components_DatePicker__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
       data: {
         avatar: null,
         name: null,
+        gender: 1,
         email: null,
-        position: null
+        username: null,
+        password: null,
+        password_confirmation: null,
+        position: null,
+        salary: null,
+        role: 1,
+        phone: null,
+        start_date: null,
+        official_date: null
       },
-      positions: [{
-        id: 1,
-        name: 'Web Developer'
-      }, {
-        id: 2,
-        name: 'Accountant Executing'
-      }, {
-        id: 3,
-        name: 'Project Manager'
-      }, {
-        id: 4,
-        name: 'Admin'
-      }]
+      positions: [],
+      roles: []
     };
   },
+  created: function created() {
+    this.gettingPosition();
+    this.gettingRoles();
+  },
   methods: {
-    save: function save() {
+    gettingRoles: function gettingRoles() {
       var _this = this;
 
       return _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var userToken, accessToken;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                _context.next = 2;
+                return axios.get('api/v1/getting_roles').then(function (response) {
+                  if (response.status === 200) {
+                    _this.roles = response.data;
+                  }
+                })["catch"](function (err) {
+                  console.log(err);
+                });
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    gettingPosition: function gettingPosition() {
+      var _this2 = this;
+
+      return _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios.get('api/v1/getting_positions').then(function (response) {
+                  if (response.status === 200) {
+                    _this2.positions = response.data;
+                  }
+                })["catch"](function (err) {
+                  console.log(err);
+                });
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    save: function save() {
+      var _this3 = this;
+
+      return _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var userToken, accessToken;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
                 //get user token from auth module
-                userToken = JSON.parse(_this.$store.getters.getUserToken);
+                userToken = JSON.parse(_this3.$store.getters.getUserToken);
                 accessToken = userToken[0].accessToken;
                 axios.defaults.headers.common['Authorization'] = 'Bearer ' + accessToken;
-                _context.next = 5;
-                return axios.post('api/v1/users/store', _this.data).then(function (response) {
+                _context3.next = 5;
+                return axios.post('api/v1/users/store', _this3.data).then(function (response) {
                   if (response.status === 200) {
                     console.log(response);
                   }
@@ -6290,10 +6413,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 5:
               case "end":
-                return _context.stop();
+                return _context3.stop();
             }
           }
-        }, _callee);
+        }, _callee3);
       }))();
     },
     // start user avatar script
@@ -11736,7 +11859,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n*[data-v-376ddb84]{\n    box-sizing: border-box;\n}\n.header[data-v-376ddb84]{\n    display: flex;\n}\n.header-item[data-v-376ddb84]{\n    background-color: #1b4b72;\n    flex-grow: 1;\n    width: 200px;\n    color: white;\n    padding: 10px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.main-data-row[data-v-376ddb84]{\n    display: flex;\n    transition: 0.3s ease;\n    cursor: pointer;\n}\n.main-data-row[data-v-376ddb84]:hover{\n    background-color: #1b4b72;\n    color: white;\n}\n.main-data-row-item[data-v-376ddb84]{\n    flex-grow: 1;\n    width: 200px;\n    padding: 10px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.sub-one-data-row[data-v-376ddb84]{\n    display: flex;\n}\n.sub-one-data-item[data-v-376ddb84]{\n    flex-grow: 1;\n    width: 200px;\n    padding: 10px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n", ""]);
+exports.push([module.i, "\n*[data-v-376ddb84]{\n    box-sizing: border-box;\n}\n.header[data-v-376ddb84]{\n    display: flex;\n}\n.header-item[data-v-376ddb84]{\n    background-color: #1b4b72;\n    flex-grow: 1;\n    width: 200px;\n    color: white;\n    padding: 10px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.main-data-row[data-v-376ddb84]{\n    display: flex;\n    transition: 0.3s ease;\n    cursor: pointer;\n}\n.main-data-row[data-v-376ddb84]:hover{\n    background-color: #1b4b72;\n    color: white;\n}\n.main-data-row-item[data-v-376ddb84]{\n    flex-grow: 1;\n    width: 200px;\n    padding: 10px;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n.sub-one-data-row[data-v-376ddb84]{\n    display: flex;\n}\n.sub-one-data-item[data-v-376ddb84]{\n    flex-grow: 1;\n    width: 200px;\n    padding: 10px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n", ""]);
 
 // exports
 
@@ -11869,7 +11992,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* start user avatar style*/\n.profile-avatar[data-v-2f5b47ac]{\n    display: inline-block;\n    position: relative;\n}\n.edit-avatar-icon[data-v-2f5b47ac]{\n    padding: 10px;\n    background-color: #fff;\n    border-radius: 50%;\n    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.16);\n    position: absolute;\n    top: -10px;\n    right: -10px;\n    cursor: pointer;\n}\n.remove-avatar-icon[data-v-2f5b47ac]{\n    padding: 6px 8px;\n    background-color: #fff;\n    border-radius: 50%;\n    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.16);\n    position: absolute;\n    bottom: -6px;\n    right: -8px;\n    cursor: pointer;\n    display: none;\n}\n.remove-avatar-icon.show[data-v-2f5b47ac]{\n    display: block;\n}\n.profile-container[data-v-2f5b47ac]{\n    width: 100px;\n    height: 100px;\n    border: 3px solid #fff;\n    border-radius: 5px;\n    overflow: hidden;\n    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.16);\n}\n.profile-container img[data-v-2f5b47ac]{\n    vertical-align: middle;\n    width: 100%;\n    height: 100%;\n    -o-object-fit: cover;\n       object-fit: cover;\n}\n#inputFile[data-v-2f5b47ac]{\n    display: none;\n}\n/* end user avatar style */\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* start user avatar style*/\n.profile-avatar[data-v-2f5b47ac]{\n    display: inline-block;\n    position: relative;\n}\n.edit-avatar-icon[data-v-2f5b47ac]{\n    padding: 10px;\n    background-color: #fff;\n    border-radius: 50%;\n    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.16);\n    position: absolute;\n    top: -10px;\n    right: -10px;\n    cursor: pointer;\n}\n.remove-avatar-icon[data-v-2f5b47ac]{\n    padding: 6px 8px;\n    background-color: #fff;\n    border-radius: 50%;\n    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.16);\n    position: absolute;\n    bottom: -6px;\n    right: -8px;\n    cursor: pointer;\n    display: none;\n}\n.remove-avatar-icon.show[data-v-2f5b47ac]{\n    display: block;\n}\n.profile-container[data-v-2f5b47ac]{\n    width: 100px;\n    height: 100px;\n    border: 3px solid #fff;\n    border-radius: 5px;\n    overflow: hidden;\n    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.16);\n}\n.profile-container img[data-v-2f5b47ac]{\n    vertical-align: middle;\n    width: 100%;\n    height: 100%;\n    -o-object-fit: cover;\n       object-fit: cover;\n}\n#inputFile[data-v-2f5b47ac]{\n    display: none;\n}\n/* end user avatar style */\n", ""]);
 
 // exports
 
@@ -45264,14 +45387,14 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "main-data-row-item" }, [_vm._v("3000$")]),
       _vm._v(" "),
-      _c("div", { staticClass: "main-data-row-item" }, [_vm._v("1300$")]),
+      _vm._m(1),
       _vm._v(" "),
       _c("div", { staticClass: "main-data-row-item" }, [_vm._v("1700$")]),
       _vm._v(" "),
       _c("div", { staticClass: "main-data-row-item" }, [_vm._v("No")])
     ]),
     _vm._v(" "),
-    _vm._m(1)
+    _vm._m(2)
   ])
 }
 var staticRenderFns = [
@@ -45291,6 +45414,29 @@ var staticRenderFns = [
       _c("div", { staticClass: "header-item" }, [_vm._v("Total Profit")]),
       _vm._v(" "),
       _c("div", { staticClass: "header-item" }, [_vm._v("Disabled")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "main-data-row-item" }, [
+      _c("div", [_vm._v("1300$")]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "w-100",
+          staticStyle: { height: "100px", "background-color": "#95999c" }
+        },
+        [
+          _c("p", [_vm._v("Employee : 300$")]),
+          _vm._v(" "),
+          _c("p", [_vm._v("Supply : 300$")]),
+          _vm._v(" "),
+          _c("p", [_vm._v("Third Party : 300$")])
+        ]
+      )
     ])
   },
   function() {
@@ -48931,6 +49077,51 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "txtGender" } }, [_vm._v("Gender")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.data.gender,
+              expression: "data.gender"
+            }
+          ],
+          staticClass: "form-control",
+          staticStyle: { width: "300px" },
+          attrs: { id: "txtGender" },
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.$set(
+                _vm.data,
+                "gender",
+                $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+              )
+            }
+          }
+        },
+        [
+          _c("option", { attrs: { value: "1", selected: "" } }, [
+            _vm._v("Male")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "2" } }, [_vm._v("Female")])
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group" }, [
       _c("label", { attrs: { for: "txtEmail" } }, [_vm._v("Email")]),
       _vm._v(" "),
       _c("input", {
@@ -48968,6 +49159,125 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
+    _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "txtUsername" } }, [_vm._v("Username")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.data.username,
+            expression: "data.username"
+          }
+        ],
+        staticClass: "form-control",
+        staticStyle: { width: "300px" },
+        attrs: {
+          type: "text",
+          id: "txtUsername",
+          "aria-describedby": "usernameHelp",
+          placeholder: "Username"
+        },
+        domProps: { value: _vm.data.username },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.data, "username", $event.target.value)
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "small",
+        { staticClass: "form-text text-muted", attrs: { id: "usernameHelp" } },
+        [_vm._v("We'll never share your email with anyone else.")]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "txtPassword" } }, [_vm._v("Password")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.data.password,
+            expression: "data.password"
+          }
+        ],
+        staticClass: "form-control",
+        staticStyle: { width: "300px" },
+        attrs: {
+          type: "password",
+          id: "txtPassword",
+          "aria-describedby": "passwordHelp",
+          placeholder: "Password"
+        },
+        domProps: { value: _vm.data.password },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.data, "password", $event.target.value)
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "small",
+        { staticClass: "form-text text-muted", attrs: { id: "passwordHelp" } },
+        [_vm._v("We'll never share your email with anyone else.")]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "txtConfirmPassword" } }, [
+        _vm._v("Confirm Password")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.data.password_confirmation,
+            expression: "data.password_confirmation"
+          }
+        ],
+        staticClass: "form-control",
+        staticStyle: { width: "300px" },
+        attrs: {
+          type: "password",
+          id: "txtConfirmPassword",
+          "aria-describedby": "confirmPasswordHelp",
+          placeholder: "Confirm Password"
+        },
+        domProps: { value: _vm.data.password_confirmation },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.data, "password_confirmation", $event.target.value)
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "small",
+        {
+          staticClass: "form-text text-muted",
+          attrs: { id: "confirmPasswordHelp" }
+        },
+        [_vm._v("We'll never share your email with anyone else.")]
+      )
+    ]),
+    _vm._v(" "),
     _c(
       "div",
       { staticClass: "form-group" },
@@ -48977,8 +49287,8 @@ var render = function() {
         _c("auto-complete", {
           attrs: {
             data: _vm.positions,
-            "selected-text": "name",
-            "selected-value": "id"
+            "selected-text": "position",
+            "selected-value": "position_id"
           },
           model: {
             value: _vm.data.position,
@@ -48988,6 +49298,169 @@ var render = function() {
             expression: "data.position"
           }
         })
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "txtSalary" } }, [_vm._v("Salary")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.data.salary,
+            expression: "data.salary"
+          }
+        ],
+        staticClass: "form-control",
+        staticStyle: { width: "300px" },
+        attrs: {
+          type: "number",
+          id: "txtSalary",
+          "aria-describedby": "salaryHelp",
+          placeholder: "Salary"
+        },
+        domProps: { value: _vm.data.salary },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.data, "salary", $event.target.value)
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "small",
+        { staticClass: "form-text text-muted", attrs: { id: "salaryHelp" } },
+        [_vm._v("We'll never share your email with anyone else.")]
+      )
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "form-group" },
+      [
+        _c("label", { attrs: { for: "txtName" } }, [_vm._v("Role")]),
+        _vm._v(" "),
+        _c("auto-complete", {
+          attrs: {
+            data: _vm.roles,
+            "selected-text": "role_display_name",
+            "selected-value": "role_id"
+          },
+          model: {
+            value: _vm.data.role,
+            callback: function($$v) {
+              _vm.$set(_vm.data, "role", $$v)
+            },
+            expression: "data.role"
+          }
+        })
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "txtPhone" } }, [_vm._v("Phone")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.data.phone,
+            expression: "data.phone"
+          }
+        ],
+        staticClass: "form-control",
+        staticStyle: { width: "300px" },
+        attrs: {
+          type: "text",
+          id: "txtPhone",
+          "aria-describedby": "phoneHelp",
+          placeholder: "Phone"
+        },
+        domProps: { value: _vm.data.phone },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.data, "phone", $event.target.value)
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c(
+        "small",
+        { staticClass: "form-text text-muted", attrs: { id: "phoneHelp" } },
+        [_vm._v("We'll never share your email with anyone else.")]
+      )
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "form-group" },
+      [
+        _c("label", { attrs: { for: "txtStartDate" } }, [_vm._v("Start Date")]),
+        _vm._v(" "),
+        _c("date-picker", {
+          attrs: { id: "txtStartDate", "aria-describedby": "startDateHelp" },
+          model: {
+            value: _vm.data.start_date,
+            callback: function($$v) {
+              _vm.$set(_vm.data, "start_date", $$v)
+            },
+            expression: "data.start_date"
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "small",
+          {
+            staticClass: "form-text text-muted",
+            attrs: { id: "startDateHelp" }
+          },
+          [_vm._v("We'll never share your email with anyone else.")]
+        )
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "form-group" },
+      [
+        _c("label", { attrs: { for: "txtOfficialDate" } }, [
+          _vm._v("Official Date")
+        ]),
+        _vm._v(" "),
+        _c("date-picker", {
+          attrs: {
+            id: "txtOfficialDate",
+            "aria-describedby": "officialDateHelp"
+          },
+          model: {
+            value: _vm.data.official_date,
+            callback: function($$v) {
+              _vm.$set(_vm.data, "official_date", $$v)
+            },
+            expression: "data.official_date"
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "small",
+          {
+            staticClass: "form-text text-muted",
+            attrs: { id: "officialDateHelp" }
+          },
+          [_vm._v("We'll never share your email with anyone else.")]
+        )
       ],
       1
     ),

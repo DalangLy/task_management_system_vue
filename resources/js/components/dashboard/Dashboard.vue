@@ -58,7 +58,14 @@
             <div class="main-data-row-item">1</div>
             <div class="main-data-row-item" @click="">Account 1</div>
             <div class="main-data-row-item">3000$</div>
-            <div class="main-data-row-item">1300$</div>
+            <div class="main-data-row-item">
+                <div>1300$</div>
+                <div class="w-100" style="height: 100px;background-color: #95999c">
+                    <p>Employee : 300$</p>
+                    <p>Supply : 300$</p>
+                    <p>Third Party : 300$</p>
+                </div>
+            </div>
             <div class="main-data-row-item">1700$</div>
             <div class="main-data-row-item">No</div>
         </div>
@@ -69,6 +76,9 @@
             <div class="sub-one-data-item">300$</div>
             <div class="sub-one-data-item">700$</div>
         </div>
+
+
+
 
 
     </div>
@@ -216,6 +226,7 @@
         width: 200px;
         padding: 10px;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
     }

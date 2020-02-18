@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
+use App\Position;
+use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -25,7 +27,17 @@ class UserController extends Controller
     public function store(Request $request){
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'gender' => ['required'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'username' => ['required', 'string', 'max:255', 'unique:users'],
+            'password' => ['required', 'min:8', 'confirmed'],
+            'password_confirmation' => ['required', 'min:8'],
+            'position' => ['required'],
+            'salary' => ['required'],
+            'role' => ['required'],
+            'phone' => ['required'],
+            'start_date' => ['required'],
+            'official_date' => ['required'],
         ]);
 
         $photo = null;
@@ -42,12 +54,29 @@ class UserController extends Controller
         User::create([
             'avatar' => $photo,
             'name' => $request->name,
+            'gender_id' => $request->gender,
             'email' => $request->email,
             'email_verified_at' => now(),
-            'username' => uniqid(),
-            'password' => Hash::make('password'),
+            'username' => $request->username?$request->username:uniqid(),
+            'password' => $request->password?Hash::make($request->password):Hash::make('password'),
+            'position_id' => $request->position,
+            'salary' => $request->salary,
+            'role_id' => $request->role,
+            'phone' => $request->phone,
+            'start_date' => $request->start_date,
+            'official_date' => $request->official_date,
             'remember_token' => Str::random(10),
         ]);
         return response()->json(['Created']);
+    }
+
+    public function gettingPositions(){
+        $positions = Position::all();
+        return response()->json($positions);
+    }
+
+    public function gettingRoles(){
+        $roles = Role::all();
+        return response()->json($roles);
     }
 }

@@ -30,6 +30,8 @@ Route::middleware('auth:api')->get('/company_structure', 'API\V1\CompanyStructur
 Route::middleware('auth:api')->get('v1/users', 'API\V1\UserController@users');
 Route::middleware('auth:api')->post('v1/users/store', 'API\V1\UserController@store');
 Route::middleware('auth:api')->get('v1/users/edit/{id}', 'API\V1\UserController@selectedUser');
+Route::middleware('auth:api')->get('v1/getting_positions', 'API\V1\UserController@gettingPositions');
+Route::middleware('auth:api')->get('v1/getting_roles', 'API\V1\UserController@gettingRoles');
 
 //client routes
 Route::middleware('auth:api')->get('v1/clients', 'API\V1\ClientController@clients');
