@@ -8,7 +8,7 @@
             <div ref="datePickerContainerRef" class="date-picker-container">
                 <div class="d-flex flex-row align-items-center justify-content-between my-2">
                     <button class="btn btn-primary" @click.prevent.stop="changeMonth('backwards')"><</button>
-                    <h5 class="font-weight-bold p-0 m-0">{{changeDate.month}}-{{changeDate.year}}</h5>
+                    <h5 class="font-weight-bold p-0 m-0">{{changeDate.month.toString().length<2?'0'+changeDate.month:changeDate.month}}-{{changeDate.year}}</h5>
                     <button class="btn btn-primary" @click.prevent.stop="changeMonth('forwards')">></button>
                 </div>
 
@@ -86,7 +86,9 @@
             },
             displaySelectedDate(){
                 //display day
-                let value = this.changeDate.year +'-'+this.changeDate.month+''+'-'+this.changeDate.day;
+                let month = this.changeDate.month.toString().length < 2?'0'+this.changeDate.month:this.changeDate.month;
+                let day = this.changeDate.day.toString().length < 2?'0'+this.changeDate.day:this.changeDate.day;
+                let value = this.changeDate.year +'-'+month+''+'-'+day;
                 this.$refs.display.innerHTML = value;
 
                 //emit value to component

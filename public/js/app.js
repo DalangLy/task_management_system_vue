@@ -3876,7 +3876,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     displaySelectedDate: function displaySelectedDate() {
       //display day
-      var value = this.changeDate.year + '-' + this.changeDate.month + '' + '-' + this.changeDate.day;
+      var month = this.changeDate.month.toString().length < 2 ? '0' + this.changeDate.month : this.changeDate.month;
+      var day = this.changeDate.day.toString().length < 2 ? '0' + this.changeDate.day : this.changeDate.day;
+      var value = this.changeDate.year + '-' + month + '' + '-' + day;
       this.$refs.display.innerHTML = value; //emit value to component
 
       this.$emit('input', value);
@@ -46232,7 +46234,11 @@ var render = function() {
                 _vm._v(" "),
                 _c("h5", { staticClass: "font-weight-bold p-0 m-0" }, [
                   _vm._v(
-                    _vm._s(_vm.changeDate.month) +
+                    _vm._s(
+                      _vm.changeDate.month.toString().length < 2
+                        ? "0" + _vm.changeDate.month
+                        : _vm.changeDate.month
+                    ) +
                       "-" +
                       _vm._s(_vm.changeDate.year)
                   )
