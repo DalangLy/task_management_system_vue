@@ -3831,10 +3831,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "DatePicker",
   data: function data() {
@@ -11816,7 +11812,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n*[data-v-5f636f78]{\n    box-sizing: border-box;\n}\n.date-picker[data-v-5f636f78]{\n    position: relative;\n    display: inline-block;\n    cursor: pointer;\n}\n.display[data-v-5f636f78]{\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n.date-picker-container[data-v-5f636f78]{\n    border-radius: 5px;\n    border: 1px solid #ced4da;\n    width: 300px;\n    min-height: 250px;\n    background-color: white;\n    padding: 10px;\n    position: absolute;\n    margin-top: 5px;\n    display: none;\n    z-index: 1000;\n}\n.date-picker-container.visible[data-v-5f636f78]{\n    display: block;\n}\n.calendar-container[data-v-5f636f78]{\n}\n.calendar-header[data-v-5f636f78]{\n    display: flex;\n    border-bottom: 1px solid #ced4da;\n    padding-bottom: 3px;\n    margin-bottom: 5px;\n}\n.header-item[data-v-5f636f78]{\n    flex-grow: 1;\n    min-width: 30px;\n    background-color: cornflowerblue;\n    border: 1px solid white;\n    height: 30px;\n    color: white;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    border-radius: 5px;\n}\n.calendar-body[data-v-5f636f78]{\n    display: flex;\n    flex-wrap: wrap;\n}\n.blank-day-item[data-v-5f636f78]{\n    width: 14.2857142857%;\n    border: 1px solid white;\n    height: 35px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n.day-item[data-v-5f636f78]{\n    width: 14.2857142857%;\n    background-color: white;\n    border: 1px solid #ced4da;\n    height: 35px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    cursor: pointer;\n    color: black;\n    border-radius: 5px;\n    transition: 0.3s ease;\n}\n.current-day-highlight[data-v-5f636f78]{\n    background-color: #f7c6c5;\n}\n.day-item[data-v-5f636f78]:hover{\n    background-color: #f7c6c5;\n    transform: scale(1.2);\n    z-index: 10;\n}\n.sunday[data-v-5f636f78]{\n    background-color: red;\n}\n", ""]);
+exports.push([module.i, "\n*[data-v-5f636f78]{\n    box-sizing: border-box;\n}\n.date-picker[data-v-5f636f78]{\n    position: relative;\n    width: 300px;\n}\n.display[data-v-5f636f78]{\n    user-select: none;\n    -webkit-user-select: none;\n    -moz-user-select: none;\n    -ms-user-select: none;\n    cursor: pointer;\n}\n.date-picker-container[data-v-5f636f78]{\n    border-radius: 5px;\n    border: 1px solid #ced4da;\n    width: 300px;\n    min-height: 250px;\n    background-color: white;\n    padding: 10px;\n    position: absolute;\n    margin-top: 5px;\n    display: none;\n    z-index: 1000;\n}\n.d-btn[data-v-5f636f78]{\n    width: 40px;\n    height: 40px;\n    background-color: #95999c;\n    color: white;\n    outline: none;\n    border-radius: 5px;\n    border: none;\n    user-select: none;\n    -webkit-user-select: none;\n    -moz-user-select: none;\n    -ms-user-select: none;\n    cursor: pointer;\n}\n.date-picker-container.visible[data-v-5f636f78]{\n    display: block;\n}\n.calendar-container[data-v-5f636f78]{\n}\n.calendar-header[data-v-5f636f78]{\n    display: grid;\n    grid-template-columns: auto auto auto auto auto auto auto;\n    background-color: #fff;\n    grid-gap: 5px;\n    border-bottom: 1px solid #ced4da;\n    padding-bottom: 3px;\n    margin-bottom: 5px;\n}\n.header-item[data-v-5f636f78]{\n    background-color: #fff;\n    border: 1px solid #d1d1d1;\n    min-height: 30px;\n    color: black;\n    display: flex;\n    min-width: 35px;\n    justify-content: center;\n    align-items: center;\n    user-select: none;\n    -webkit-user-select: none;\n    -moz-user-select: none;\n    -ms-user-select: none;\n    border-radius: 5px;\n}\n.calendar-body[data-v-5f636f78]{\n    display: grid;\n    grid-template-columns: auto auto auto auto auto auto auto;\n    background-color: #fff;\n    grid-gap: 5px;\n}\n.blank-day-item[data-v-5f636f78]{\n    background-color: transparent;\n    border: 1px solid transparent;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    min-height: 30px;\n    user-select: none;\n    -webkit-user-select: none;\n    -moz-user-select: none;\n    -ms-user-select: none;\n}\n.day-item[data-v-5f636f78]{\n    background-color: white;\n    border: 1px solid #ced4da;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    cursor: pointer;\n    color: black;\n    border-radius: 5px;\n    transition: 0.3s ease;\n    min-height: 30px;\n    will-change: transform, background-color, z-index, box-shadow;\n}\n.day-item[data-v-5f636f78]:hover{\n    background-color: #f7c6c5;\n    transform: scale(1.2);\n    z-index: 10;\n    box-shadow: 3px 3px 21px -6px rgba(0,0,0,0.3);\n}\n.sunday[data-v-5f636f78]{\n    color: red;\n}\n.current-day-highlight[data-v-5f636f78]{\n    background-color: #f7c6c5;\n}\n", ""]);
 
 // exports
 
@@ -46179,128 +46175,123 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "div",
-      {
-        staticClass: "date-picker",
-        on: {
-          click: function($event) {
-            $event.preventDefault()
-            $event.stopPropagation()
-            return _vm.showCalendar($event)
-          }
+  return _c(
+    "div",
+    {
+      staticClass: "date-picker",
+      on: {
+        click: function($event) {
+          $event.preventDefault()
+          $event.stopPropagation()
+          return _vm.showCalendar($event)
         }
-      },
-      [
-        _c(
-          "div",
-          {
-            ref: "display",
-            staticClass: "display form-control",
-            staticStyle: { width: "300px" }
-          },
-          [_vm._v("Select Date")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            ref: "datePickerContainerRef",
-            staticClass: "date-picker-container"
-          },
-          [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "d-flex flex-row align-items-center justify-content-between my-2"
-              },
-              [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        $event.stopPropagation()
-                        return _vm.changeMonth("backwards")
-                      }
+      }
+    },
+    [
+      _c(
+        "div",
+        {
+          ref: "display",
+          staticClass: "display form-control",
+          staticStyle: { width: "300px" }
+        },
+        [_vm._v("Select Date")]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { ref: "datePickerContainerRef", staticClass: "date-picker-container" },
+        [
+          _c(
+            "div",
+            {
+              staticClass:
+                "d-flex flex-row align-items-center justify-content-between my-2"
+            },
+            [
+              _c(
+                "button",
+                {
+                  staticClass: "d-btn",
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      $event.stopPropagation()
+                      return _vm.changeMonth("backwards")
                     }
-                  },
-                  [_vm._v("<")]
-                ),
-                _vm._v(" "),
-                _c("h5", { staticClass: "font-weight-bold p-0 m-0" }, [
-                  _vm._v(
-                    _vm._s(
-                      _vm.changeDate.month.toString().length < 2
-                        ? "0" + _vm.changeDate.month
-                        : _vm.changeDate.month
-                    ) +
-                      "-" +
-                      _vm._s(_vm.changeDate.year)
-                  )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        $event.stopPropagation()
-                        return _vm.changeMonth("forwards")
-                      }
-                    }
-                  },
-                  [_vm._v(">")]
+                  }
+                },
+                [_vm._v("←")]
+              ),
+              _vm._v(" "),
+              _c("h5", { staticClass: "font-weight-bold p-0 m-0" }, [
+                _vm._v(
+                  _vm._s(
+                    _vm.changeDate.month.toString().length < 2
+                      ? "0" + _vm.changeDate.month
+                      : _vm.changeDate.month
+                  ) +
+                    "-" +
+                    _vm._s(_vm.changeDate.year)
                 )
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "calendar-container" }, [
-              _vm._m(0),
+              ]),
               _vm._v(" "),
               _c(
-                "div",
-                { staticClass: "calendar-body" },
-                [
-                  _vm._l(_vm.displayCalendar, function(day, index) {
-                    return [
-                      index === 0 && day.dayName !== "Sunday"
-                        ? _vm._l(day.dayRange, function(m) {
-                            return _c("div", { staticClass: "blank-day-item" })
-                          })
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass: "day-item",
-                          class: day.currentDay ? "current-day-highlight" : "",
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              return _vm.dateSelect(day.dayNum)
-                            }
-                          }
-                        },
-                        [_vm._v(_vm._s(day.dayNum))]
-                      )
-                    ]
-                  })
-                ],
-                2
+                "button",
+                {
+                  staticClass: "d-btn",
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      $event.stopPropagation()
+                      return _vm.changeMonth("forwards")
+                    }
+                  }
+                },
+                [_vm._v("→")]
               )
-            ])
-          ]
-        )
-      ]
-    )
-  ])
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "calendar-container" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "calendar-body" },
+              [
+                _vm._l(_vm.displayCalendar, function(day, index) {
+                  return [
+                    index === 0 && day.dayName !== "Sunday"
+                      ? _vm._l(day.dayRange, function(m) {
+                          return _c("div", { staticClass: "blank-day-item" })
+                        })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "day-item",
+                        class: day.currentDay ? "current-day-highlight" : "",
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.dateSelect(day.dayNum)
+                          }
+                        }
+                      },
+                      [_vm._v(_vm._s(day.dayNum))]
+                    )
+                  ]
+                })
+              ],
+              2
+            )
+          ])
+        ]
+      )
+    ]
+  )
 }
 var staticRenderFns = [
   function() {

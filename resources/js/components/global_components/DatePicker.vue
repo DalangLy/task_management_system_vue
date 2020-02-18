@@ -1,45 +1,41 @@
 <template>
-    <div>
+    <div class="date-picker" @click.prevent.stop="showCalendar">
 
-        <div class="date-picker" @click.prevent.stop="showCalendar">
+        <div ref="display" class="display form-control" style="width: 300px">Select Date</div>
 
-            <div ref="display" class="display form-control" style="width: 300px">Select Date</div>
-
-            <div ref="datePickerContainerRef" class="date-picker-container">
-                <div class="d-flex flex-row align-items-center justify-content-between my-2">
-                    <button class="btn btn-primary" @click.prevent.stop="changeMonth('backwards')"><</button>
-                    <h5 class="font-weight-bold p-0 m-0">{{changeDate.month.toString().length<2?'0'+changeDate.month:changeDate.month}}-{{changeDate.year}}</h5>
-                    <button class="btn btn-primary" @click.prevent.stop="changeMonth('forwards')">></button>
-                </div>
-
-                <div class="calendar-container">
-                    <div class="calendar-header">
-                        <div class="header-item">Mon</div>
-                        <div class="header-item">Tue</div>
-                        <div class="header-item">Wed</div>
-                        <div class="header-item">Thu</div>
-                        <div class="header-item">Fri</div>
-                        <div class="header-item">Sat</div>
-                        <div class="header-item sunday">Sun</div>
-                    </div>
-                    <div class="calendar-body">
-                        <template v-for="(day, index) in displayCalendar">
-
-                            <!-- create blank day if start day is not monday-->
-                            <!-- but if start day is monday so dont need to create black date-->
-                            <template v-if="index === 0 && day.dayName !== 'Sunday'">
-                                <div v-for="m in day.dayRange" class="blank-day-item"></div>
-                            </template>
-
-                            <div @click.prevent="dateSelect(day.dayNum)" class="day-item" :class="day.currentDay?'current-day-highlight':''">{{day.dayNum}}</div>
-                        </template>
-
-                    </div>
-                </div>
+        <div ref="datePickerContainerRef" class="date-picker-container">
+            <div class="d-flex flex-row align-items-center justify-content-between my-2">
+                <button class="d-btn" @click.prevent.stop="changeMonth('backwards')">&#8592;</button>
+                <h5 class="font-weight-bold p-0 m-0">{{changeDate.month.toString().length<2?'0'+changeDate.month:changeDate.month}}-{{changeDate.year}}</h5>
+                <button class="d-btn" @click.prevent.stop="changeMonth('forwards')">&#8594;</button>
             </div>
 
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <div class="header-item">Mon</div>
+                    <div class="header-item">Tue</div>
+                    <div class="header-item">Wed</div>
+                    <div class="header-item">Thu</div>
+                    <div class="header-item">Fri</div>
+                    <div class="header-item">Sat</div>
+                    <div class="header-item sunday">Sun</div>
+                </div>
+                <div class="calendar-body">
+                    <template v-for="(day, index) in displayCalendar">
 
+                        <!-- create blank day if start day is not monday-->
+                        <!-- but if start day is monday so dont need to create black date-->
+                        <template v-if="index === 0 && day.dayName !== 'Sunday'">
+                            <div v-for="m in day.dayRange" class="blank-day-item"></div>
+                        </template>
+
+                        <div @click.prevent="dateSelect(day.dayNum)" class="day-item" :class="day.currentDay?'current-day-highlight':''">{{day.dayNum}}</div>
+                    </template>
+
+                </div>
+            </div>
         </div>
+
 
     </div>
 </template>
@@ -258,11 +254,14 @@
     }
     .date-picker{
         position: relative;
-        display: inline-block;
-        cursor: pointer;
+        width: 300px;
     }
     .display{
         user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        cursor: pointer;
     }
     .date-picker-container{
         border-radius: 5px;
@@ -276,6 +275,20 @@
         display: none;
         z-index: 1000;
     }
+    .d-btn{
+        width: 40px;
+        height: 40px;
+        background-color: #95999c;
+        color: white;
+        outline: none;
+        border-radius: 5px;
+        border: none;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        cursor: pointer;
+    }
     .date-picker-container.visible{
         display: block;
     }
@@ -283,42 +296,50 @@
 
     }
     .calendar-header{
-        display: flex;
+        display: grid;
+        grid-template-columns: auto auto auto auto auto auto auto;
+        background-color: #fff;
+        grid-gap: 5px;
         border-bottom: 1px solid #ced4da;
         padding-bottom: 3px;
         margin-bottom: 5px;
     }
     .header-item{
-        flex-grow: 1;
-        min-width: 30px;
-        background-color: cornflowerblue;
-        border: 1px solid white;
-        height: 30px;
-        color: white;
+        background-color: #fff;
+        border: 1px solid #d1d1d1;
+        min-height: 30px;
+        color: black;
         display: flex;
+        min-width: 35px;
         justify-content: center;
         align-items: center;
         user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
         border-radius: 5px;
     }
     .calendar-body{
-        display: flex;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: auto auto auto auto auto auto auto;
+        background-color: #fff;
+        grid-gap: 5px;
     }
     .blank-day-item{
-        width: 14.2857142857%;
-        border: 1px solid white;
-        height: 35px;
+        background-color: transparent;
+        border: 1px solid transparent;
         display: flex;
         justify-content: center;
         align-items: center;
+        min-height: 30px;
         user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
     }
     .day-item{
-        width: 14.2857142857%;
         background-color: white;
         border: 1px solid #ced4da;
-        height: 35px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -327,16 +348,21 @@
         color: black;
         border-radius: 5px;
         transition: 0.3s ease;
-    }
-    .current-day-highlight{
-        background-color: #f7c6c5;
+        min-height: 30px;
+        will-change: transform, background-color, z-index, box-shadow;
     }
     .day-item:hover{
         background-color: #f7c6c5;
         transform: scale(1.2);
         z-index: 10;
+        -webkit-box-shadow: 3px 3px 21px -6px rgba(0,0,0,0.3);
+        -moz-box-shadow: 3px 3px 21px -6px rgba(0,0,0,0.3);
+        box-shadow: 3px 3px 21px -6px rgba(0,0,0,0.3);
     }
     .sunday{
-        background-color: red;
+        color: red;
+    }
+    .current-day-highlight{
+        background-color: #f7c6c5;
     }
 </style>
