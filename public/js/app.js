@@ -3534,6 +3534,91 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/global_components/AnalogTimePicker.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/global_components/AnalogTimePicker.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "TimePicker",
+  data: function data() {
+    return {};
+  },
+  mounted: function mounted() {//test
+    // const hourTick = document.getElementById('hour-tick');
+    //
+    // let second = 0;
+    // setInterval(function(){
+    //     second+=6;
+    //     if(second > 359){
+    //         second = 0;
+    //     }
+    //     hourTick.style.transform = "translateY(-100%) rotateZ("+second+"deg)";
+    // }, 1000);
+  },
+  methods: {
+    moveTick: function moveTick(e) {
+      e.stopPropagation();
+      var x1 = e.offsetX;
+      var y1 = e.offsetY;
+      var xPos = x1 - 100;
+      var yPos = 100 - y1; //console.log("X = "+xPos);
+      //console.log("Y = "+yPos);
+
+      var degree1 = Math.atan2(xPos, yPos) * 180 / Math.PI;
+      var degreeNum = 0;
+
+      if (degree1 < 0) {
+        degreeNum = degree1 + 359;
+      } else {
+        degreeNum = degree1;
+      }
+
+      var ceilDegree = Math.ceil(degreeNum);
+      var degree = document.querySelector('.degree');
+      var x = document.querySelector('.x');
+      var y = document.querySelector('.y'); //degree.innerText = "degree : "+ceilDegree;
+
+      x.innerText = "X = : " + xPos;
+      y.innerText = "Y = : " + yPos;
+      var temp = ceilDegree % 30 === 0 ? ceilDegree : ceilDegree - ceilDegree % 30;
+      degree.innerText = "degree : " + temp;
+      var hourTick = document.getElementById('hour-tick');
+      hourTick.style.transform = "translateY(-100%) rotateZ(" + temp + "deg)";
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/global_components/AutoCompleteSelection.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/global_components/AutoCompleteSelection.vue?vue&type=script&lang=js& ***!
@@ -6059,6 +6144,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 
 
@@ -6181,6 +6269,141 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "TimeSheetMaster"
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timesheet/TimeSheetTemp.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timesheet/TimeSheetTemp.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _global_components_AutoCompleteSelection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../global_components/AutoCompleteSelection */ "./resources/js/components/global_components/AutoCompleteSelection.vue");
+/* harmony import */ var _global_components_DatePicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../global_components/DatePicker */ "./resources/js/components/global_components/DatePicker.vue");
+/* harmony import */ var _global_components_AnalogTimePicker__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../global_components/AnalogTimePicker */ "./resources/js/components/global_components/AnalogTimePicker.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "TimeSheetTemp",
+  components: {
+    'auto-complete': _global_components_AutoCompleteSelection__WEBPACK_IMPORTED_MODULE_1__["default"],
+    'date-picker': _global_components_DatePicker__WEBPACK_IMPORTED_MODULE_2__["default"],
+    'analog-time-picker': _global_components_AnalogTimePicker__WEBPACK_IMPORTED_MODULE_3__["default"]
+  },
+  data: function data() {
+    return {
+      project_details: [],
+      data: [{
+        working_name: 'Ize Cola',
+        working_date: '2010-10-10',
+        start_time: '09:00',
+        end_time: '18:00'
+      }]
+    };
+  },
+  mounted: function mounted() {
+    this.gettingProjectDetails();
+  },
+  methods: {
+    addRow: function addRow() {
+      this.data.push({
+        working_name: 'Ize Cola 1',
+        working_date: '2010-10-10',
+        start_time: '09:00',
+        end_time: '18:00'
+      });
+    },
+    gettingProjectDetails: function gettingProjectDetails() {
+      var _this = this;
+
+      return _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var userToken, accessToken;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                //get user token from auth module
+                userToken = JSON.parse(_this.$store.getters.getUserToken);
+                accessToken = userToken[0].accessToken;
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + accessToken;
+                _context.next = 5;
+                return axios.get('api/v1/project_details').then(function (response) {
+                  if (response.status === 200) {
+                    _this.project_details = response.data;
+                  }
+                })["catch"](function (err) {
+                  console.log(err);
+                });
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    }
+  }
 });
 
 /***/ }),
@@ -11879,6 +12102,25 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 // module
 exports.push([module.i, "\n*[data-v-a2e45a20]{\n    padding: 0;\n    margin: 0;\n    box-sizing: border-box;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;\n}\nbody[data-v-a2e45a20]{\n    color: #757575;\n}\nul[data-v-a2e45a20]{\n    padding: 0;\n    margin: 0;\n    list-style: none;\n}\n\n/*start page container style*/\n.page-container[data-v-a2e45a20]{\n    padding-left: 280px;\n    width: 100%;\n    transition: all 0.3s ease;\n    -webkit-transition: all 0.3s ease;\n    -o-transition: all 0.3s ease;\n}\n.page-container.collapsed[data-v-a2e45a20]{\n    padding-left: 70px;\n}\n/*end page container style*/\n\n/*start header style*/\n.header[data-v-a2e45a20]{\n    position: fixed;\n    right: 0;\n    top: 0;\n    left: 0;\n    height: 60px;\n    border-bottom: 1px solid rgba(0,0,0,.0625);\n    transition: all 0.3s ease;\n    -webkit-transition: all 0.3s ease;\n    -o-transition: all 0.3s ease;\n    background-color: #fff;\n    z-index: 100;\n    padding-left: 280px; /* use padding over margin because it not affect width */\n}\n.header.collapsed[data-v-a2e45a20]{\n    padding-left: 70px;\n}\n.header-container[data-v-a2e45a20]{\n    height: 100%;\n    clear: both;\n    content: \"\";\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n}\n.nav-left[data-v-a2e45a20]{\n    float: left;\n    margin-left: 10px;\n}\n.nav-right[data-v-a2e45a20]{\n    float: right;\n    margin-right: 10px;\n}\n/*end header style*/\n\n/*start side bar style*/\n.sidebar[data-v-a2e45a20]{\n    width: 280px;\n    position: fixed;\n    bottom: 0;\n    left: 0;\n    top: 0;\n    background-color: #fff;\n    z-index: 1000;\n    border-right: 1px solid rgba(0,0,0,.0625);\n    transition: all 0.3s ease;\n    -webkit-transition: all 0.3s ease;\n    -o-transition: all 0.3s ease;\n    overflow: hidden;\n}\n.sidebar.collapsed[data-v-a2e45a20]{\n    width: 70px;\n}\n.sidebar-inner[data-v-a2e45a20]{\n    width: 280px;\n    height: 100%;\n}\n/*end side bar style*/\n\n\n/*start main content style*/\n.main-content[data-v-a2e45a20]{\n    background-color: #f9fafb;\n    min-height: 100vh;\n    padding: 10px;\n    margin-top: 60px; /* to avoid hide content behind header */\n}\n/*end main content style*/\n\n/*start footer style*/\nfooter[data-v-a2e45a20]{\n    height: 70px;\n    width: 100%;\n    background-color: #fff;\n    border-top: 1px solid rgba(0,0,0,.0625);\n}\n.footer-content[data-v-a2e45a20]{\n    width: 100%;\n    height: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n/*end footer style*/\n\n/* start sidebar toggle button style */\n.sidebar-toggle[data-v-a2e45a20]{\n    border: none;\n    background: none;\n    outline: none;\n    cursor: pointer;\n    font-size: 20px;\n}\n/* end sidebar toggle button style */\n\n/* start user avatar style*/\n.user-avatar[data-v-a2e45a20]{\n    width: 40px;\n    height: 40px;\n    background-color: #fff;\n    border-radius: 50%;\n    border: 2px solid #FFC000;\n    cursor: pointer;\n    overflow: hidden;\n}\n.user-avatar img[data-v-a2e45a20]{\n    width: 100%;\n    height: 100%;\n    -o-object-fit: cover;\n       object-fit: cover;\n    vertical-align: middle;\n}\n/* start user avatar style*/\n\n/*start side bar logo style*/\n.sidebar-logo[data-v-a2e45a20]{\n    width: 100%;\n    height: 60px;\n    padding: 10px 5%; /* use percentage to get better sidebar collapsed style */\n    border-bottom: 1px solid rgba(0,0,0,.0625);\n    display: flex;\n    justify-content: flex-start;\n    align-items: center;\n    cursor: pointer;\n    -webkit-user-select: none; /* Safari 3.1+ */\n    -moz-user-select: none; /* Firefox 2+ */\n    -ms-user-select: none; /* IE 10+ */\n    user-select: none; /* Standard syntax */\n    text-decoration: none;\n    color: inherit;\n}\n.peers[data-v-a2e45a20]{\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    transition: all 0.3s ease;\n    -webkit-transition: all 0.3s ease;\n    -o-transition: all 0.3s ease;\n}\n.sidebar-logo-image[data-v-a2e45a20]{\n    width: 40px;\n    height: 40px;\n    transition: all 0.3s ease;\n    -webkit-transition: all 0.3s ease;\n    -o-transition: all 0.3s ease;\n}\n.sidebar-logo-image img[data-v-a2e45a20]{\n    width: 100%;\n    height: 100%;\n    -o-object-fit: contain;\n       object-fit: contain;\n    vertical-align: middle;\n    transition: all 0.3s ease;\n    -webkit-transition: all 0.3s ease;\n    -o-transition: all 0.3s ease;\n}\n.sidebar-logo-title[data-v-a2e45a20]{\n    height: 20px;\n    margin-left: 20px;\n    display: block;\n    transition: all 0.3s ease;\n    -webkit-transition: all 0.3s ease;\n    -o-transition: all 0.3s ease;\n    opacity: 1;\n}\n.sidebar-logo-title img[data-v-a2e45a20]{\n    height: 100%;\n    vertical-align: middle;\n}\n.sidebar-logo-title.collapsed[data-v-a2e45a20]{\n    opacity: 0;\n}\n/*end side bar logo style*/\n\n\n/* start right nav user avatar and name container style */\n.user-avatar-and-name-container[data-v-a2e45a20]{\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    cursor: pointer;\n    -webkit-user-select: none; /* Safari 3.1+ */\n    -moz-user-select: none; /* Firefox 2+ */\n    -ms-user-select: none; /* IE 10+ */\n    user-select: none; /* Standard syntax */\n}\n.user-avatar-and-name-container .username[data-v-a2e45a20]{\n    margin-left: 5px;\n}\n/* end right nav user avatar and name container style */\n\n/* start user account dropdown container style */\n.user-account-dropdown-container[data-v-a2e45a20]{\n    width: 150px;\n    background-color: #fff;\n    position: absolute;\n    top: 65px;\n    right: 5px;\n    border: 1px solid rgba(0,0,0,.0625);\n    z-index: 1001;\n    border-radius: 5px;\n    box-shadow: 0px 0px 5px 0px rgba(168,168,168,1);\n    transition: all 0.3s ease;\n    -webkit-transition: all 0.3s ease;\n    -o-transition: all 0.3s ease;\n    transform: translateX(160px);\n    -webkit-transform: translateX(160px);\n    -o-transform: translateX(160px);\n}\n.user-account-dropdown-container.open[data-v-a2e45a20]{\n    transform: translateX(0);\n    -webkit-transform: translateX(0);\n    -o-transform: translateX(0);\n}\n.user-account-dropdown-container-inner[data-v-a2e45a20]{\n    padding: 10px;\n    width: 100%;\n    height: 100%;\n    display: flex;\n    flex-direction: column;\n}\n.user-account-dropdown-item[data-v-a2e45a20]{\n    text-decoration: none;\n    margin: 10px;\n    color: inherit;\n    transition: color 0.3s ease;\n    -webkit-transition: color 0.3s ease;\n    -o-transition: color 0.3s ease;\n}\n.user-account-dropdown-item[data-v-a2e45a20]:hover{\n    color: black;\n}\n/* end user account dropdown container style */\n\n\n/* start sidebar menu style */\n.sidebar-menu[data-v-a2e45a20]{\n    width: 100%;\n    height: 100vh;\n    overflow: auto;\n}\n.nav-item[data-v-a2e45a20]{\n    text-decoration: none;\n    cursor: pointer;\n}\n.nav-item:hover .title[data-v-a2e45a20]{\n    color: black;\n}\n.mT-30[data-v-a2e45a20]{\n    margin-top: 30px;\n}\n.sidebar-link[data-v-a2e45a20]{\n    padding: 10px 19px;\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    text-decoration: none;\n    color: inherit;\n    cursor: pointer;\n}\n.icon-holder[data-v-a2e45a20]{\n    font-size: 20px;\n    width: 30px;\n    height: 30px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n.sidebar-link .title[data-v-a2e45a20]{\n    margin-left: 22px;\n    transition: color 0.3s ease;\n    -webkit-transition: color 0.3s ease;\n    -o-transition: color 0.3s ease;\n}\n/* end sidebar menu style */\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/global_components/AnalogTimePicker.vue?vue&type=style&index=0&id=7ac1749a&scoped=true&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/global_components/AnalogTimePicker.vue?vue&type=style&index=0&id=7ac1749a&scoped=true&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n*[data-v-7ac1749a]{\n    box-sizing: border-box;\n}\n.time-picker-overlay[data-v-7ac1749a]{\n    background-color: rgba(0,0,0,0.5);\n    width: 100vw;\n    height: 100vh;\n    position: fixed;\n    left: 0;\n    top: 0;\n    z-index: 1000;\n}\n.time-picker[data-v-7ac1749a]{\n    position: fixed;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%);\n    background-color: #fff;\n    z-index: 1001;\n    padding: 10px;\n    border-radius: 5px;\n\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    width: 500px;\n    height: 400px;\n}\n.clock[data-v-7ac1749a]{\n    position: relative;\n    width: 200px;\n    height: 200px;\n    border: 5px solid #fff;\n    border-radius: 50%;\n    display: inline-block;\n    box-shadow: 3px 3px 15px -2px rgba(0,0,0,0.75);\n}\n.clock img[data-v-7ac1749a]{\n    width: 100%;\n    height: 100%;\n    vertical-align: middle;\n    -o-object-fit: contain;\n       object-fit: contain;\n    pointer-events: none;\n}\n.clock-glass[data-v-7ac1749a]{\n    position: absolute;\n    width: 100%;\n    height: 100%;\n    background-color: rgba(0,0,0, 0);\n    border-radius: 50%;\n}\n.hour-tick[data-v-7ac1749a]{\n    width: 1px;\n    height: 40%;\n    background-color: black;\n    position: absolute;\n    left: 50%;\n    top: 50%;\n    transform-origin: 0 100%;\n    transform: translateY(-100%) rotateZ(0deg);\n    will-change: transform;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n.center-dot[data-v-7ac1749a]{\n    width: 5px;\n    height: 5px;\n    background-color: black;\n    border-radius: 50%;\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%);\n}\n", ""]);
 
 // exports
 
@@ -43700,6 +43942,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/global_components/AnalogTimePicker.vue?vue&type=style&index=0&id=7ac1749a&scoped=true&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/global_components/AnalogTimePicker.vue?vue&type=style&index=0&id=7ac1749a&scoped=true&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./AnalogTimePicker.vue?vue&type=style&index=0&id=7ac1749a&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/global_components/AnalogTimePicker.vue?vue&type=style&index=0&id=7ac1749a&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/global_components/AutoCompleteSelection.vue?vue&type=style&index=0&id=57ffeb2c&scoped=true&lang=css&":
 /*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/global_components/AutoCompleteSelection.vue?vue&type=style&index=0&id=57ffeb2c&scoped=true&lang=css& ***!
@@ -46148,6 +46420,61 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/global_components/AnalogTimePicker.vue?vue&type=template&id=7ac1749a&scoped=true&":
+/*!*************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/global_components/AnalogTimePicker.vue?vue&type=template&id=7ac1749a&scoped=true& ***!
+  \*************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "time-picker-overlay" }),
+    _vm._v(" "),
+    _c("div", { staticClass: "time-picker" }, [
+      _c(
+        "div",
+        {
+          staticClass: "clock",
+          on: {
+            mousemove: function($event) {
+              $event.preventDefault()
+              $event.stopPropagation()
+              return _vm.moveTick($event)
+            }
+          }
+        },
+        [
+          _c("div", { staticClass: "hour-tick", attrs: { id: "hour-tick" } }),
+          _vm._v(" "),
+          _c("div", { staticClass: "center-dot" }),
+          _vm._v(" "),
+          _c("div", { staticClass: "clock-glass" })
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "x" }, [_vm._v("0")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "y" }, [_vm._v("0")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "degree" }, [_vm._v("0")])
+    ])
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -48679,293 +49006,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "div",
-      { staticClass: "form-group" },
-      [
-        _c("label", { attrs: { for: "txtProjectDetail" } }, [
-          _vm._v("Work Name")
-        ]),
-        _vm._v(" "),
-        _c("auto-complete", {
-          attrs: {
-            data: _vm.allProjectDetails,
-            "selected-text": "task_name",
-            "selected-value": "project_detail_id",
-            id: "txtProjectDetail",
-            "aria-describedby": "projectDetailHelp"
-          },
-          model: {
-            value: _vm.data.project_detail_id,
-            callback: function($$v) {
-              _vm.$set(_vm.data, "project_detail_id", $$v)
-            },
-            expression: "data.project_detail_id"
-          }
-        }),
-        _vm._v(" "),
-        _c(
-          "small",
-          {
-            staticClass: "form-text text-muted",
-            attrs: { id: "projectDetailHelp" }
-          },
-          [_vm._v("We'll never share your email with anyone else.")]
-        )
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "form-group" },
-      [
-        _c("label", { attrs: { for: "txtWorkingDate" } }, [
-          _vm._v("Working Date")
-        ]),
-        _vm._v(" "),
-        _c("date-picker", {
-          attrs: { id: "txtWorkingDate" },
-          model: {
-            value: _vm.data.working_date,
-            callback: function($$v) {
-              _vm.$set(_vm.data, "working_date", $$v)
-            },
-            expression: "data.working_date"
-          }
-        })
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("div", { staticClass: "d-inline-block" }, [
-        _c("label", { attrs: { for: "txtStartTime" } }, [_vm._v("Start")]),
-        _vm._v(" "),
-        _c(
-          "select",
-          {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.startHour,
-                expression: "startHour"
-              }
-            ],
-            staticClass: "form-control",
-            staticStyle: { width: "150px" },
-            attrs: { id: "txtStartTime" },
-            on: {
-              change: function($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function(o) {
-                    return o.selected
-                  })
-                  .map(function(o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.startHour = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
-              }
-            }
-          },
-          _vm._l(23, function(n, index) {
-            return _c(
-              "option",
-              {
-                domProps: {
-                  value: index.toString().length < 2 ? "0" + index : index
-                }
-              },
-              [
-                _vm._v(
-                  _vm._s(index.toString().length < 2 ? "0" + index : index)
-                )
-              ]
-            )
-          }),
-          0
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "d-inline-block" }, [
-        _c("label"),
-        _vm._v(" "),
-        _c(
-          "select",
-          {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.startMin,
-                expression: "startMin"
-              }
-            ],
-            staticClass: "form-control",
-            staticStyle: { width: "150px" },
-            on: {
-              change: function($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function(o) {
-                    return o.selected
-                  })
-                  .map(function(o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.startMin = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
-              }
-            }
-          },
-          _vm._l(60, function(n, index) {
-            return _c(
-              "option",
-              {
-                domProps: {
-                  value: index.toString().length < 2 ? "0" + index : index
-                }
-              },
-              [
-                _vm._v(
-                  _vm._s(index.toString().length < 2 ? "0" + index : index)
-                )
-              ]
-            )
-          }),
-          0
-        )
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("div", { staticClass: "d-inline-block" }, [
-        _c("label", { attrs: { for: "txtEndTime" } }, [_vm._v("End Date")]),
-        _vm._v(" "),
-        _c(
-          "select",
-          {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.endHour,
-                expression: "endHour"
-              }
-            ],
-            staticClass: "form-control",
-            staticStyle: { width: "150px" },
-            attrs: { id: "txtEndTime" },
-            on: {
-              change: function($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function(o) {
-                    return o.selected
-                  })
-                  .map(function(o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.endHour = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
-              }
-            }
-          },
-          _vm._l(23, function(n, index) {
-            return _c(
-              "option",
-              {
-                domProps: {
-                  value: index.toString().length < 2 ? "0" + index : index
-                }
-              },
-              [
-                _vm._v(
-                  _vm._s(index.toString().length < 2 ? "0" + index : index)
-                )
-              ]
-            )
-          }),
-          0
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "d-inline-block" }, [
-        _c("label"),
-        _vm._v(" "),
-        _c(
-          "select",
-          {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.endMin,
-                expression: "endMin"
-              }
-            ],
-            staticClass: "form-control",
-            staticStyle: { width: "150px" },
-            on: {
-              change: function($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function(o) {
-                    return o.selected
-                  })
-                  .map(function(o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.endMin = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
-              }
-            }
-          },
-          _vm._l(60, function(n, index) {
-            return _c(
-              "option",
-              {
-                domProps: {
-                  value: index.toString().length < 2 ? "0" + index : index
-                }
-              },
-              [
-                _vm._v(
-                  _vm._s(index.toString().length < 2 ? "0" + index : index)
-                )
-              ]
-            )
-          }),
-          0
-        )
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary",
-          on: {
-            click: function($event) {
-              $event.preventDefault()
-              $event.stopPropagation()
-              return _vm.save($event)
-            }
-          }
-        },
-        [_vm._v("Save")]
-      )
-    ])
-  ])
+  return _c("div")
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -48992,6 +49033,97 @@ var render = function() {
   return _c("router-view")
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timesheet/TimeSheetTemp.vue?vue&type=template&id=29927864&scoped=true&":
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/timesheet/TimeSheetTemp.vue?vue&type=template&id=29927864&scoped=true& ***!
+  \**************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("table", { staticClass: "table" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.data, function(item, index) {
+            return _c("tr", [
+              _c("th", { attrs: { scope: "row" } }, [
+                _vm._v(_vm._s(index + 1))
+              ]),
+              _vm._v(" "),
+              _c(
+                "td",
+                [
+                  _c("auto-complete", {
+                    attrs: {
+                      data: _vm.project_details,
+                      "selected-value": "project_detail_id",
+                      "selected-text": "task_name"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(item.working_date))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(item.start_time))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(item.end_time))])
+            ])
+          }),
+          0
+        )
+      ]),
+      _vm._v(" "),
+      _c("analog-time-picker"),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", on: { click: _vm.addRow } },
+        [_vm._v("Add")]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Work Name")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Work Date")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Start Time")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("End Time")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -68474,8 +68606,8 @@ Vue.component('master-component', __webpack_require__(/*! ./components/MasterCom
 
 
  //vue material
+// Vue.use(VueMaterial.default);
 
-Vue.use(VueMaterial["default"]);
 var app = new Vue({
   el: '#app',
   store: _vuex_store__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -69614,6 +69746,93 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Layout_vue_vue_type_template_id_a2e45a20_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Layout_vue_vue_type_template_id_a2e45a20_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/global_components/AnalogTimePicker.vue":
+/*!************************************************************************!*\
+  !*** ./resources/js/components/global_components/AnalogTimePicker.vue ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AnalogTimePicker_vue_vue_type_template_id_7ac1749a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AnalogTimePicker.vue?vue&type=template&id=7ac1749a&scoped=true& */ "./resources/js/components/global_components/AnalogTimePicker.vue?vue&type=template&id=7ac1749a&scoped=true&");
+/* harmony import */ var _AnalogTimePicker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AnalogTimePicker.vue?vue&type=script&lang=js& */ "./resources/js/components/global_components/AnalogTimePicker.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _AnalogTimePicker_vue_vue_type_style_index_0_id_7ac1749a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AnalogTimePicker.vue?vue&type=style&index=0&id=7ac1749a&scoped=true&lang=css& */ "./resources/js/components/global_components/AnalogTimePicker.vue?vue&type=style&index=0&id=7ac1749a&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _AnalogTimePicker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AnalogTimePicker_vue_vue_type_template_id_7ac1749a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AnalogTimePicker_vue_vue_type_template_id_7ac1749a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "7ac1749a",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/global_components/AnalogTimePicker.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/global_components/AnalogTimePicker.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/global_components/AnalogTimePicker.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnalogTimePicker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./AnalogTimePicker.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/global_components/AnalogTimePicker.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnalogTimePicker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/global_components/AnalogTimePicker.vue?vue&type=style&index=0&id=7ac1749a&scoped=true&lang=css&":
+/*!*********************************************************************************************************************************!*\
+  !*** ./resources/js/components/global_components/AnalogTimePicker.vue?vue&type=style&index=0&id=7ac1749a&scoped=true&lang=css& ***!
+  \*********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AnalogTimePicker_vue_vue_type_style_index_0_id_7ac1749a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./AnalogTimePicker.vue?vue&type=style&index=0&id=7ac1749a&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/global_components/AnalogTimePicker.vue?vue&type=style&index=0&id=7ac1749a&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AnalogTimePicker_vue_vue_type_style_index_0_id_7ac1749a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AnalogTimePicker_vue_vue_type_style_index_0_id_7ac1749a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AnalogTimePicker_vue_vue_type_style_index_0_id_7ac1749a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AnalogTimePicker_vue_vue_type_style_index_0_id_7ac1749a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AnalogTimePicker_vue_vue_type_style_index_0_id_7ac1749a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/global_components/AnalogTimePicker.vue?vue&type=template&id=7ac1749a&scoped=true&":
+/*!*******************************************************************************************************************!*\
+  !*** ./resources/js/components/global_components/AnalogTimePicker.vue?vue&type=template&id=7ac1749a&scoped=true& ***!
+  \*******************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnalogTimePicker_vue_vue_type_template_id_7ac1749a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./AnalogTimePicker.vue?vue&type=template&id=7ac1749a&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/global_components/AnalogTimePicker.vue?vue&type=template&id=7ac1749a&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnalogTimePicker_vue_vue_type_template_id_7ac1749a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnalogTimePicker_vue_vue_type_template_id_7ac1749a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -71710,6 +71929,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/timesheet/TimeSheetTemp.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/timesheet/TimeSheetTemp.vue ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TimeSheetTemp_vue_vue_type_template_id_29927864_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TimeSheetTemp.vue?vue&type=template&id=29927864&scoped=true& */ "./resources/js/components/timesheet/TimeSheetTemp.vue?vue&type=template&id=29927864&scoped=true&");
+/* harmony import */ var _TimeSheetTemp_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TimeSheetTemp.vue?vue&type=script&lang=js& */ "./resources/js/components/timesheet/TimeSheetTemp.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _TimeSheetTemp_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TimeSheetTemp_vue_vue_type_template_id_29927864_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TimeSheetTemp_vue_vue_type_template_id_29927864_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "29927864",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/timesheet/TimeSheetTemp.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/timesheet/TimeSheetTemp.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/timesheet/TimeSheetTemp.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TimeSheetTemp_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./TimeSheetTemp.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timesheet/TimeSheetTemp.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TimeSheetTemp_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/timesheet/TimeSheetTemp.vue?vue&type=template&id=29927864&scoped=true&":
+/*!********************************************************************************************************!*\
+  !*** ./resources/js/components/timesheet/TimeSheetTemp.vue?vue&type=template&id=29927864&scoped=true& ***!
+  \********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TimeSheetTemp_vue_vue_type_template_id_29927864_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./TimeSheetTemp.vue?vue&type=template&id=29927864&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/timesheet/TimeSheetTemp.vue?vue&type=template&id=29927864&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TimeSheetTemp_vue_vue_type_template_id_29927864_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TimeSheetTemp_vue_vue_type_template_id_29927864_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/users/AddUser.vue":
 /*!***************************************************!*\
   !*** ./resources/js/components/users/AddUser.vue ***!
@@ -72304,8 +72592,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_leave_request_AddLeaveRequest__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ../components/leave_request/AddLeaveRequest */ "./resources/js/components/leave_request/AddLeaveRequest.vue");
 /* harmony import */ var _components_timesheet_TimeSheetMaster__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ../components/timesheet/TimeSheetMaster */ "./resources/js/components/timesheet/TimeSheetMaster.vue");
 /* harmony import */ var _components_timesheet_TimeSheet__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ../components/timesheet/TimeSheet */ "./resources/js/components/timesheet/TimeSheet.vue");
-/* harmony import */ var _components_company_CompanyMaster__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ../components/company/CompanyMaster */ "./resources/js/components/company/CompanyMaster.vue");
-/* harmony import */ var _components_company_CompanyInfo__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ../components/company/CompanyInfo */ "./resources/js/components/company/CompanyInfo.vue");
+/* harmony import */ var _components_timesheet_TimeSheetTemp__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ../components/timesheet/TimeSheetTemp */ "./resources/js/components/timesheet/TimeSheetTemp.vue");
+/* harmony import */ var _components_company_CompanyMaster__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ../components/company/CompanyMaster */ "./resources/js/components/company/CompanyMaster.vue");
+/* harmony import */ var _components_company_CompanyInfo__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ../components/company/CompanyInfo */ "./resources/js/components/company/CompanyInfo.vue");
 
 
 
@@ -72369,6 +72658,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
  //time sheet routes
 
 
+
  //
 
 
@@ -72407,11 +72697,11 @@ var routes = [{
     }]
   }, {
     path: '/company',
-    component: _components_company_CompanyMaster__WEBPACK_IMPORTED_MODULE_47__["default"],
+    component: _components_company_CompanyMaster__WEBPACK_IMPORTED_MODULE_48__["default"],
     children: [{
       path: '/company',
       name: 'company',
-      component: _components_company_CompanyInfo__WEBPACK_IMPORTED_MODULE_48__["default"]
+      component: _components_company_CompanyInfo__WEBPACK_IMPORTED_MODULE_49__["default"]
     }]
   }, {
     path: '/timesheets',
@@ -72419,7 +72709,7 @@ var routes = [{
     children: [{
       path: '/timesheets',
       name: 'timesheets',
-      component: _components_timesheet_TimeSheet__WEBPACK_IMPORTED_MODULE_46__["default"]
+      component: _components_timesheet_TimeSheetTemp__WEBPACK_IMPORTED_MODULE_47__["default"]
     }]
   }, {
     path: '/clients',

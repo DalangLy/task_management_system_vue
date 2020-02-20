@@ -1,50 +1,53 @@
 <template>
     <div>
 
-        <div class="form-group">
-            <label for="txtProjectDetail">Work Name</label>
-            <auto-complete v-model="data.project_detail_id" :data="allProjectDetails" selected-text="task_name" selected-value="project_detail_id" id="txtProjectDetail" aria-describedby="projectDetailHelp"></auto-complete>
-            <small id="projectDetailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-        </div>
+<!--        <div class="form-group">-->
+<!--            <label for="txtProjectDetail">Work Name</label>-->
+<!--            <auto-complete v-model="data.project_detail_id" :data="allProjectDetails" selected-text="task_name" selected-value="project_detail_id" id="txtProjectDetail" aria-describedby="projectDetailHelp"></auto-complete>-->
+<!--            <small id="projectDetailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+<!--        </div>-->
 
-        <div class="form-group">
-            <label for="txtWorkingDate">Working Date</label>
-            <date-picker v-model="data.working_date" id="txtWorkingDate"></date-picker>
-        </div>
+<!--        <div class="form-group">-->
+<!--            <label for="txtWorkingDate">Working Date</label>-->
+<!--            <date-picker v-model="data.working_date" id="txtWorkingDate"></date-picker>-->
+<!--        </div>-->
 
-        <div class="form-group">
-            <div class="d-inline-block">
-                <label for="txtStartTime">Start</label>
-                <select v-model="startHour" class="form-control" style="width: 150px;" id="txtStartTime">
-                    <option v-for="(n, index) in 23" :value="index.toString().length < 2?'0'+index:index">{{index.toString().length < 2?'0'+index:index}}</option>
-                </select>
-            </div>
-            <div class="d-inline-block">
-                <label></label>
-                <select v-model="startMin" class="form-control" style="width: 150px;">
-                    <option v-for="(n, index) in 60" :value="index.toString().length < 2?'0'+index:index">{{index.toString().length < 2?'0'+index:index}}</option>
-                </select>
-            </div>
-        </div>
+<!--        <div class="form-group">-->
+<!--            <div class="d-inline-block">-->
+<!--                <label for="txtStartTime">Start</label>-->
+<!--                <select v-model="startHour" class="form-control" style="width: 150px;" id="txtStartTime">-->
+<!--                    <option v-for="(n, index) in 23" :value="index.toString().length < 2?'0'+index:index">{{index.toString().length < 2?'0'+index:index}}</option>-->
+<!--                </select>-->
+<!--            </div>-->
+<!--            <div class="d-inline-block">-->
+<!--                <label></label>-->
+<!--                <select v-model="startMin" class="form-control" style="width: 150px;">-->
+<!--                    <option v-for="(n, index) in 60" :value="index.toString().length < 2?'0'+index:index">{{index.toString().length < 2?'0'+index:index}}</option>-->
+<!--                </select>-->
+<!--            </div>-->
+<!--        </div>-->
 
-        <div class="form-group">
-            <div class="d-inline-block">
-                <label for="txtEndTime">End Date</label>
-                <select v-model="endHour" class="form-control" style="width: 150px;" id="txtEndTime">
-                    <option v-for="(n, index) in 23" :value="index.toString().length < 2?'0'+index:index">{{index.toString().length < 2?'0'+index:index}}</option>
-                </select>
-            </div>
-            <div class="d-inline-block">
-                <label></label>
-                <select v-model="endMin" class="form-control" style="width: 150px;">
-                    <option v-for="(n, index) in 60" :value="index.toString().length < 2?'0'+index:index">{{index.toString().length < 2?'0'+index:index}}</option>
-                </select>
-            </div>
-        </div>
+<!--        <div class="form-group">-->
+<!--            <div class="d-inline-block">-->
+<!--                <label for="txtEndTime">End Date</label>-->
+<!--                <select v-model="endHour" class="form-control" style="width: 150px;" id="txtEndTime">-->
+<!--                    <option v-for="(n, index) in 23" :value="index.toString().length < 2?'0'+index:index">{{index.toString().length < 2?'0'+index:index}}</option>-->
+<!--                </select>-->
+<!--            </div>-->
+<!--            <div class="d-inline-block">-->
+<!--                <label></label>-->
+<!--                <select v-model="endMin" class="form-control" style="width: 150px;">-->
+<!--                    <option v-for="(n, index) in 60" :value="index.toString().length < 2?'0'+index:index">{{index.toString().length < 2?'0'+index:index}}</option>-->
+<!--                </select>-->
+<!--            </div>-->
+<!--        </div>-->
 
-        <div class="form-group">
-            <button @click.prevent.stop="save" class="btn btn-primary">Save</button>
-        </div>
+<!--        <div class="form-group">-->
+<!--            <button @click.prevent.stop="save" class="btn btn-primary">Save</button>-->
+<!--        </div>-->
+
+
+
 
     </div>
 </template>

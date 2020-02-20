@@ -26,7 +26,6 @@
         <link rel="stylesheet" href="https://unpkg.com/vue-material/dist/vue-material.min.css">
         <link rel="stylesheet" href="https://unpkg.com/vue-material/dist/theme/default.css">
 
-
     </head>
     <body>
         <div id="app">
