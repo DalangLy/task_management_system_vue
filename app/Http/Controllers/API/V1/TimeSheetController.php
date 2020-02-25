@@ -12,24 +12,27 @@ use Illuminate\Support\Facades\Auth;
 class TimeSheetController extends Controller
 {
     public function store(Request $request){
-        $request->validate([
-            'project_detail_id' => 'required',
-            'working_date' => 'required',
-            'startTime' => 'required',
-            'endTime' => 'required',
-        ]);
+//        $request->validate([
+//            'project_detail_id' => 'required',
+//            'working_date' => 'required',
+//            'start_time' => 'required',
+//            'end_time' => 'required',
+//        ]);
+
 
         $companyStructureId = CompanyStructure::where('using', true)->first()->company_structure_id;
 
-        TimeSheet::create([
-            'user_id' => Auth::id(),
-            'current_work_salary' => Auth::user()->salary,
-            'project_detail_id' => $request->project_detail_id,
-            'working_date' => $request->working_date,
-            'start_time' => $request->startTime,
-            'end_time' => $request->endTime,
-            'company_structure_id' => $companyStructureId,
-        ]);
+        foreach ($request[0] as $item){
+            TimeSheet::create([
+                'user_id' => Auth::id(),
+                'current_work_salary' => Auth::user()->salary,
+                'project_detail_id' => $item['project_detail_id'],
+                'working_date' => $item['working_date'],
+                'start_time' => $item['start_time'],
+                'end_time' => $item['end_time'],
+                'company_structure_id' => $companyStructureId,
+            ]);
+        }
 
         return response()->json(['created']);
     }

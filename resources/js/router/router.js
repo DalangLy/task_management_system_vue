@@ -79,7 +79,6 @@ import AddLeaveRequest from "../components/leave_request/AddLeaveRequest";
 //time sheet routes
 import TimeSheetMaster from "../components/timesheet/TimeSheetMaster";
 import TimeSheet from "../components/timesheet/TimeSheet";
-import TimeSheetTemp from "../components/timesheet/TimeSheetTemp";
 
 //
 import CompanyMaster from "../components/company/CompanyMaster";
@@ -143,7 +142,7 @@ const routes = [
                     {
                         path: '/timesheets',
                         name: 'timesheets',
-                        component: TimeSheetTemp,
+                        component: TimeSheet,
                     }
                 ]
             },
