@@ -16,69 +16,40 @@
 
 
 
-<!--        <table class="table">-->
-<!--            <thead class="thead-dark">-->
-<!--            <tr>-->
-<!--                <th class="text-center align-middle" scope="col">#</th>-->
-<!--                <th class="text-center align-middle" scope="col">Task Name</th>-->
-<!--                <th class="text-center align-middle" scope="col">Account</th>-->
-<!--                <th class="text-center align-middle" scope="col">Fee</th>-->
-<!--                <th class="text-center align-middle" scope="col">Expense</th>-->
-<!--                <th class="text-center align-middle" scope="col">Profit/Loss</th>-->
-<!--                <th class="text-center align-middle" scope="col">Finished</th>-->
-<!--                <th class="text-center align-middle" scope="col">Action</th>-->
-<!--            </tr>-->
-<!--            </thead>-->
-<!--            <tbody>-->
-<!--                <tr v-for="(data, index) in allData">-->
-<!--                    <th class="align-middle" scope="row">{{index+1}}</th>-->
-<!--                    <td class="align-middle">{{data.task_name}}</td>-->
-<!--                    <td class="align-middle">{{data.client_account}}</td>-->
-<!--                    <td class="align-middle">{{data.fee}}$</td>-->
-<!--                    <td class="align-middle">{{splitFloatingPointerNumberToTwoDigitAfterComma(getTotalExpense(data.project_detail_id)+getTotalPSupply(data.project_detail_id))}}$</td>-->
-<!--                    <td class="align-middle">{{splitFloatingPointerNumberToTwoDigitAfterComma(calculateProfit(data.fee, getTotalExpense(data.project_detail_id)+getTotalPSupply(data.project_detail_id)))}}$</td>-->
-<!--                    <td class="align-middle">{{data.finished?'Yes':'No'}}</td>-->
-<!--                    <td class="align-middle">-->
-<!--                        <button @click.prevent.stop="$router.push({name: 'dashboard.detail', params: { dashboardId: data.project_detail_id }})" class="btn btn-warning"><i class="fas fa-eye"></i></button>-->
-<!--                    </td>-->
-<!--                </tr>-->
-<!--            </tbody>-->
-<!--        </table>-->
+        <div class="d-flex flex-row p-1">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th class="text-center align-middle" scope="col">#</th>
+                    <th class="text-center align-middle" scope="col">Task Name</th>
+                    <th class="text-center align-middle" scope="col">Account</th>
+                    <th class="text-center align-middle" scope="col">Fee</th>
+                    <th class="text-center align-middle" scope="col">Expense</th>
+                    <th class="text-center align-middle" scope="col">Profit/Loss</th>
+                    <th class="text-center align-middle" scope="col">Finished</th>
+                    <th class="text-center align-middle" scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(data, index) in allData">
+                        <th class="align-middle" scope="row">{{index+1}}</th>
+                        <td class="align-middle">{{data.task_name}}</td>
+                        <td class="align-middle">{{data.client_account}}</td>
+                        <td class="align-middle">{{data.fee}}$</td>
+                        <td class="align-middle">{{splitFloatingPointerNumberToTwoDigitAfterComma(getTotalExpense(data.project_detail_id)+getTotalPSupply(data.project_detail_id))}}$</td>
+                        <td class="align-middle">{{splitFloatingPointerNumberToTwoDigitAfterComma(calculateProfit(data.fee, getTotalExpense(data.project_detail_id)+getTotalPSupply(data.project_detail_id)))}}$</td>
+                        <td class="align-middle">{{data.finished?'Yes':'No'}}</td>
+                        <td class="align-middle">
+                            <button @click.prevent.stop="$router.push({name: 'dashboard.detail', params: { dashboardId: data.project_detail_id }})" class="btn btn-warning"><i class="fas fa-eye"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
+            <div class="table-row-detail-container">
 
-        <div class="header">
-            <div class="header-item">#</div>
-            <div class="header-item">Account</div>
-            <div class="header-item">Total Fee</div>
-            <div class="header-item">Total Expense</div>
-            <div class="header-item">Total Profit</div>
-            <div class="header-item">Disabled</div>
-        </div>
-        <div class="main-data-row">
-            <div class="main-data-row-item">1</div>
-            <div class="main-data-row-item" @click="">Account 1</div>
-            <div class="main-data-row-item">3000$</div>
-            <div class="main-data-row-item">
-                <div>1300$</div>
-                <div class="w-100" style="height: 100px;background-color: #95999c">
-                    <p>Employee : 300$</p>
-                    <p>Supply : 300$</p>
-                    <p>Third Party : 300$</p>
-                </div>
             </div>
-            <div class="main-data-row-item">1700$</div>
-            <div class="main-data-row-item">No</div>
         </div>
-        <div class="sub-one-data-row">
-            <div class="sub-one-data-item"></div>
-            <div class="sub-one-data-item">Project 1</div>
-            <div class="sub-one-data-item">1000$</div>
-            <div class="sub-one-data-item">300$</div>
-            <div class="sub-one-data-item">700$</div>
-        </div>
-
-
-
 
 
     </div>
@@ -240,5 +211,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+    .table-row-detail-container{
+        width: 300px;
+        height: 300px;
+        background-color: #fff;
+        border: 1px solid gray;
     }
 </style>

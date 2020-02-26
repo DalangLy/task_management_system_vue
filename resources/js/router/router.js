@@ -13,7 +13,7 @@ import Layout from '../components/dashboard/Layout'
 
 //dashboard
 import DashboardMaster from "../components/dashboard/DashboardMaster";
-import Dashboard from "../components/dashboard/Dashboard";
+import Dashboard from "../components/dashboard/DashboardTemp";
 import DashboardDetail from "../components/dashboard/DashboardDetail";
 
 //user routes

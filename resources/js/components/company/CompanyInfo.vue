@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>Company Name : {{data.company_name}}</h1>
-        <h5>Working Hour : {{data.working_hours}}</h5>
+        <h5>Working Hour : {{data.working_hours}} Hours</h5>
         <h5>Start Hour : {{data.starting_hour}}</h5>
         <h5>End Hour : {{data.end_hour}}</h5>
         <h2>Relax Time</h2>

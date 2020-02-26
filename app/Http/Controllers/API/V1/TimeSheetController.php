@@ -6,6 +6,7 @@ use App\CompanyStructure;
 use App\Http\Controllers\Controller;
 use App\ProjectDetail;
 use App\TimeSheet;
+use App\TimeSheetDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,13 +24,17 @@ class TimeSheetController extends Controller
         $companyStructureId = CompanyStructure::where('using', true)->first()->company_structure_id;
 
         foreach ($request[0] as $item){
-            TimeSheet::create([
+            $timeSheetId = TimeSheet::create([
                 'user_id' => Auth::id(),
-                'current_work_salary' => Auth::user()->salary,
                 'project_detail_id' => $item['project_detail_id'],
-                'working_date' => $item['working_date'],
+            ])->time_sheet_id;
+
+            TimeSheetDetail::create([
+                'time_sheet_id' => $timeSheetId,
+                'work_date' => $item['working_date'],
                 'start_time' => $item['start_time'],
                 'end_time' => $item['end_time'],
+                'current_salary' => Auth::user()->salary,
                 'company_structure_id' => $companyStructureId,
             ]);
         }
