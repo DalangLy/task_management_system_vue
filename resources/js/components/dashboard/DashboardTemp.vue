@@ -1,27 +1,38 @@
 <template>
     <div>
 
+
+        <drop-down-table></drop-down-table>
+
+
+
+
+
+        <div class="my-5"></div>
+
+
         <div class="dashboard-container">
             <table class="table table-striped">
                 <thead class="thead-dark">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Task</th>
-                    <th scope="col">Fee</th>
-                    <th scope="col">Expense</th>
-                    <th scope="col">Profit/Loss</th>
-                    <th scope="col">Finished</th>
-                </tr>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Task</th>
+                        <th scope="col">Fee</th>
+                        <th scope="col">Expense</th>
+                        <th scope="col">Profit/Loss</th>
+                        <th scope="col">Finished</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr @click.prevent.stop="showTaskDetail(d.employees, d.purchases)" v-for="(d, index) in dashboards" style="cursor:pointer;">
-                    <th scope="row">{{(index+1)}}</th>
-                    <td>{{d.task}}</td>
-                    <td>{{d.fee}}$</td>
-                    <td>{{d.expense}}$</td>
-                    <td>{{d.profit}}$</td>
-                    <td>{{d.finished}}</td>
-                </tr>
+                    <tr @click.prevent.stop="showTaskDetail(d.employees, d.purchases)" v-for="(d, index) in dashboards" style="cursor:pointer;">
+                        <th scope="row">{{(index+1)}}</th>
+                        <td>{{d.task}}</td>
+                        <td>{{d.fee}}$</td>
+                        <td>{{d.expense}}$</td>
+                        <td>{{d.profit}}$</td>
+                        <td>{{d.finished}}</td>
+                    </tr>
+
                 </tbody>
             </table>
 
@@ -41,10 +52,12 @@
 
 <script>
     import SideDashboardDetail from "./SideDashboardDetail";
+    import DropDownTable from "./DropDownTable";
     export default {
         name: "DashboardTemp",
         components:{
             'side-detail': SideDashboardDetail,
+            'drop-down-table': DropDownTable,
         },
         data(){
             return{
