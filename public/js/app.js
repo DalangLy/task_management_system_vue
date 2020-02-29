@@ -2907,7 +2907,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SideDashboardDetail__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SideDashboardDetail */ "./resources/js/components/dashboard/SideDashboardDetail.vue");
-/* harmony import */ var _DropDownTable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DropDownTable */ "./resources/js/components/dashboard/DropDownTable.vue");
+/* harmony import */ var _DropDownTableTestOne__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DropDownTableTestOne */ "./resources/js/components/dashboard/DropDownTableTestOne.vue");
 //
 //
 //
@@ -2966,7 +2966,7 @@ __webpack_require__.r(__webpack_exports__);
   name: "DashboardTemp",
   components: {
     'side-detail': _SideDashboardDetail__WEBPACK_IMPORTED_MODULE_0__["default"],
-    'drop-down-table': _DropDownTable__WEBPACK_IMPORTED_MODULE_1__["default"]
+    'drop-down-table': _DropDownTableTestOne__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
@@ -3093,10 +3093,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/DropDownTable.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/DropDownTable.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/DropDownTableTestOne.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/DropDownTableTestOne.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -3123,29 +3123,149 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "DropDownTable",
-  data: function data() {
-    return {};
-  },
+  name: "DropDownTableTestOne",
   methods: {
-    showContent: function showContent(event) {
-      var contentRef = event.target.parentNode.nextElementSibling; //this work if the clicked element has child
+    showProjects: function showProjects(e) {
+      var projectRowContainer = e.target.parentNode.nextElementSibling;
+      var projectCount = this.countChildRow(projectRowContainer, 'project-row');
+      var paddingSize = 10 * 2;
 
-      console.log(event.target);
+      if (projectRowContainer.clientHeight <= 0) {
+        projectRowContainer.style.height = 50 * projectCount + paddingSize + 'px';
+      } else {
+        //collapse project row container
+        projectRowContainer.style.height = '0'; //find all work-row-container (child) and collapse all sub children
 
-      if (contentRef) {
-        if (contentRef.classList.contains('show')) {
-          contentRef.classList.remove('show');
-          var child = contentRef.nextElementSibling;
-
-          if (child) {
-            child.classList.remove('show');
-          }
-        } else {
-          contentRef.classList.add('show');
-        }
+        var workRowContainers = document.querySelectorAll('.' + projectRowContainer.className + ' .work-row-container');
+        workRowContainers.forEach(function (workRowContainer) {
+          workRowContainer.style.height = '0';
+        });
       }
+    },
+    showWorks: function showWorks(e) {
+      //current selected workRowContainer
+      var selectedWorkRowContainer = e.target.parentNode.nextElementSibling; //find current selected parent-project-row-container
+
+      var currentParentProjectRowContainer = selectedWorkRowContainer.parentElement.parentElement; //set variables
+
+      var workCount = this.countChildRow(selectedWorkRowContainer, 'work-row');
+      var paddingSize = 10 * 2;
+      var currentParentProjectRowContainerHeight = this.getCurrentParentProjectRowContainerHeight(currentParentProjectRowContainer);
+
+      if (selectedWorkRowContainer.clientHeight <= 0) {
+        //resize parent (project row container)
+        currentParentProjectRowContainer.style.height = currentParentProjectRowContainerHeight + (50 * workCount + paddingSize) + 'px'; //resize child of selected item (work-row-container)
+
+        selectedWorkRowContainer.style.height = 50 * workCount + paddingSize + 'px';
+      } else {
+        selectedWorkRowContainer.style.height = '0'; //resize its parents
+
+        currentParentProjectRowContainer.style.height = currentParentProjectRowContainerHeight - (50 * workCount + paddingSize) + 'px';
+      }
+    },
+    countChildRow: function countChildRow(childRowContainer, childRowClassName) {
+      var childRows = childRowContainer.getElementsByClassName(childRowClassName);
+      return childRows.length;
+    },
+    getCurrentParentProjectRowContainerHeight: function getCurrentParentProjectRowContainerHeight(selectedProjectRowContainer) {
+      return selectedProjectRowContainer.clientHeight;
     }
   }
 });
@@ -12398,10 +12518,10 @@ exports.push([module.i, "\n.dashboard-container[data-v-74076d32]{\n    display: 
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/DropDownTable.vue?vue&type=style&index=0&id=7e846c47&scoped=true&lang=css&":
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/DropDownTable.vue?vue&type=style&index=0&id=7e846c47&scoped=true&lang=css& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/DropDownTableTestOne.vue?vue&type=style&index=0&id=d300b746&scoped=true&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/DropDownTableTestOne.vue?vue&type=style&index=0&id=d300b746&scoped=true&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12410,7 +12530,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n*[data-v-7e846c47]{\n    box-sizing: border-box;\n}\n.parent-row[data-v-7e846c47]{\n    width: 300px;\n    height: 70px;\n    background-color: #385d7a;\n    cursor: pointer;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    transition: 0.3s ease;\n    color: white;\n}\n.parent-row[data-v-7e846c47]:hover{\n    background-color: #1b97cc;\n}\n.content[data-v-7e846c47]{\n    height: 100%;\n    width: 100%;\n    padding: 10px;\n}\n.child-row[data-v-7e846c47]{\n    width: 300px;\n    background-color: #95999c;\n    height: 0;\n    transition: 0.3s ease;\n    will-change: height;\n    overflow: hidden;\n    cursor: pointer;\n}\n.child-row.show[data-v-7e846c47]{\n    height: 70px;\n}\n.one[data-v-7e846c47]{\n    background-color: #546c8f;\n}\n.two[data-v-7e846c47]{\n    background-color: #548f7e;\n}\n", ""]);
+exports.push([module.i, "\n.bg-account[data-v-d300b746]{\n    background-color: #858585;\n}\n.bg-account-light[data-v-d300b746]{\n    background-color: #fff;\n}\n.bg-project[data-v-d300b746]{\n    background-color: #bfbfbf;\n}\n.bg-project-light[data-v-d300b746]{\n    background-color: #fff;\n}\n.bg-work[data-v-d300b746]{\n    background-color: #ededed;\n}\n.account-row[data-v-d300b746]{\n    width: 300px;\n    height: 50px;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    cursor: pointer;\n    overflow: hidden;\n    margin: 1px 0;\n}\n.content[data-v-d300b746]{\n    width: 100%;\n    height: 100%;\n    padding: 10px;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    color: white;\n    justify-content: center;\n}\n.project-row-container[data-v-d300b746]{\n    width: 300px;\n    overflow: hidden;\n    height: 0;\n    transition: 0.3s ease;\n    will-change: height;\n}\n.project-row[data-v-d300b746]{\n    width: 100%;\n    height: 50px;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    cursor: pointer;\n    overflow: hidden;\n    margin: 1px 0;\n}\n.work-row-container[data-v-d300b746]{\n    width: 100%;\n    overflow: hidden;\n    height: 0;\n    transition: 0.3s ease;\n    will-change: height;\n}\n.work-row[data-v-d300b746]{\n    width: 100%;\n    height: 50px;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    cursor: pointer;\n    overflow: hidden;\n    margin: 1px 0;\n}\n", ""]);
 
 // exports
 
@@ -44278,15 +44398,15 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/DropDownTable.vue?vue&type=style&index=0&id=7e846c47&scoped=true&lang=css&":
-/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/DropDownTable.vue?vue&type=style&index=0&id=7e846c47&scoped=true&lang=css& ***!
-  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/DropDownTableTestOne.vue?vue&type=style&index=0&id=d300b746&scoped=true&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/DropDownTableTestOne.vue?vue&type=style&index=0&id=d300b746&scoped=true&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./DropDownTable.vue?vue&type=style&index=0&id=7e846c47&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/DropDownTable.vue?vue&type=style&index=0&id=7e846c47&scoped=true&lang=css&");
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./DropDownTableTestOne.vue?vue&type=style&index=0&id=d300b746&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/DropDownTableTestOne.vue?vue&type=style&index=0&id=d300b746&scoped=true&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -46262,10 +46382,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/DropDownTable.vue?vue&type=template&id=7e846c47&scoped=true&":
-/*!**************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/DropDownTable.vue?vue&type=template&id=7e846c47&scoped=true& ***!
-  \**************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/DropDownTableTestOne.vue?vue&type=template&id=d300b746&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard/DropDownTableTestOne.vue?vue&type=template&id=d300b746&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -46281,34 +46401,88 @@ var render = function() {
     _c(
       "div",
       {
-        staticClass: "parent-row",
+        staticClass: "account-row",
         on: {
           click: function($event) {
             $event.preventDefault()
             $event.stopPropagation()
-            return _vm.showContent($event)
+            return _vm.showProjects($event)
           }
         }
       },
-      [_c("div", { staticClass: "content" }, [_vm._v("Parent")])]
+      [
+        _c("div", { staticClass: "content bg-account" }, [
+          _vm._v("\n            Account\n        ")
+        ])
+      ]
     ),
     _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "child-row one",
-        on: {
-          click: function($event) {
-            $event.preventDefault()
-            $event.stopPropagation()
-            return _vm.showContent($event)
-          }
-        }
-      },
-      [_vm._m(0)]
-    ),
-    _vm._v(" "),
-    _vm._m(1)
+    _c("div", { staticClass: "project-row-container" }, [
+      _c("div", { staticClass: "content bg-account-light" }, [
+        _c(
+          "div",
+          {
+            staticClass: "project-row",
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                $event.stopPropagation()
+                return _vm.showWorks($event)
+              }
+            }
+          },
+          [
+            _c("div", { staticClass: "content bg-project" }, [
+              _vm._v("\n                    Project\n                ")
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "project-row",
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                $event.stopPropagation()
+                return _vm.showWorks($event)
+              }
+            }
+          },
+          [
+            _c("div", { staticClass: "content bg-project" }, [
+              _vm._v("\n                    Project\n                ")
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _vm._m(1),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "project-row",
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                $event.stopPropagation()
+                return _vm.showWorks($event)
+              }
+            }
+          },
+          [
+            _c("div", { staticClass: "content bg-project" }, [
+              _vm._v("\n                    Project\n                ")
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _vm._m(2)
+      ])
+    ])
   ])
 }
 var staticRenderFns = [
@@ -46316,17 +46490,72 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "content border" }, [
-      _vm._v("\n            Content\n            "),
-      _c("button", { staticClass: "btn btn-primary" }, [_vm._v("hello")])
+    return _c("div", { staticClass: "work-row-container" }, [
+      _c("div", { staticClass: "content bg-project-light" }, [
+        _c("div", { staticClass: "work-row" }, [
+          _c("div", { staticClass: "content bg-work" }, [
+            _vm._v(
+              "\n                            Work 1\n                        "
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "work-row" }, [
+          _c("div", { staticClass: "content bg-work" }, [
+            _vm._v(
+              "\n                            Work 2\n                        "
+            )
+          ])
+        ])
+      ])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "child-row two" }, [
-      _c("div", { staticClass: "content" }, [_vm._v("Content 1")])
+    return _c("div", { staticClass: "work-row-container" }, [
+      _c("div", { staticClass: "content bg-project-light" }, [
+        _c("div", { staticClass: "work-row" }, [
+          _c("div", { staticClass: "content bg-work" }, [
+            _vm._v(
+              "\n                            Work 1\n                        "
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "work-row" }, [
+          _c("div", { staticClass: "content bg-work" }, [
+            _vm._v(
+              "\n                            Work 2\n                        "
+            )
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "work-row-container" }, [
+      _c("div", { staticClass: "content bg-project-light" }, [
+        _c("div", { staticClass: "work-row" }, [
+          _c("div", { staticClass: "content bg-work" }, [
+            _vm._v(
+              "\n                            Work 1\n                        "
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "work-row" }, [
+          _c("div", { staticClass: "content bg-work" }, [
+            _vm._v(
+              "\n                            Work 2\n                        "
+            )
+          ])
+        ])
+      ])
     ])
   }
 ]
@@ -70467,18 +70696,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/DropDownTable.vue":
-/*!*************************************************************!*\
-  !*** ./resources/js/components/dashboard/DropDownTable.vue ***!
-  \*************************************************************/
+/***/ "./resources/js/components/dashboard/DropDownTableTestOne.vue":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/dashboard/DropDownTableTestOne.vue ***!
+  \********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _DropDownTable_vue_vue_type_template_id_7e846c47_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DropDownTable.vue?vue&type=template&id=7e846c47&scoped=true& */ "./resources/js/components/dashboard/DropDownTable.vue?vue&type=template&id=7e846c47&scoped=true&");
-/* harmony import */ var _DropDownTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DropDownTable.vue?vue&type=script&lang=js& */ "./resources/js/components/dashboard/DropDownTable.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _DropDownTable_vue_vue_type_style_index_0_id_7e846c47_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DropDownTable.vue?vue&type=style&index=0&id=7e846c47&scoped=true&lang=css& */ "./resources/js/components/dashboard/DropDownTable.vue?vue&type=style&index=0&id=7e846c47&scoped=true&lang=css&");
+/* harmony import */ var _DropDownTableTestOne_vue_vue_type_template_id_d300b746_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DropDownTableTestOne.vue?vue&type=template&id=d300b746&scoped=true& */ "./resources/js/components/dashboard/DropDownTableTestOne.vue?vue&type=template&id=d300b746&scoped=true&");
+/* harmony import */ var _DropDownTableTestOne_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DropDownTableTestOne.vue?vue&type=script&lang=js& */ "./resources/js/components/dashboard/DropDownTableTestOne.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _DropDownTableTestOne_vue_vue_type_style_index_0_id_d300b746_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DropDownTableTestOne.vue?vue&type=style&index=0&id=d300b746&scoped=true&lang=css& */ "./resources/js/components/dashboard/DropDownTableTestOne.vue?vue&type=style&index=0&id=d300b746&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -70489,66 +70718,66 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _DropDownTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _DropDownTable_vue_vue_type_template_id_7e846c47_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _DropDownTable_vue_vue_type_template_id_7e846c47_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _DropDownTableTestOne_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DropDownTableTestOne_vue_vue_type_template_id_d300b746_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _DropDownTableTestOne_vue_vue_type_template_id_d300b746_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "7e846c47",
+  "d300b746",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/dashboard/DropDownTable.vue"
+component.options.__file = "resources/js/components/dashboard/DropDownTableTestOne.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/DropDownTable.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************!*\
-  !*** ./resources/js/components/dashboard/DropDownTable.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************/
+/***/ "./resources/js/components/dashboard/DropDownTableTestOne.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/DropDownTableTestOne.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DropDownTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./DropDownTable.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/DropDownTable.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DropDownTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DropDownTableTestOne_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./DropDownTableTestOne.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/DropDownTableTestOne.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DropDownTableTestOne_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/DropDownTable.vue?vue&type=style&index=0&id=7e846c47&scoped=true&lang=css&":
-/*!**********************************************************************************************************************!*\
-  !*** ./resources/js/components/dashboard/DropDownTable.vue?vue&type=style&index=0&id=7e846c47&scoped=true&lang=css& ***!
-  \**********************************************************************************************************************/
+/***/ "./resources/js/components/dashboard/DropDownTableTestOne.vue?vue&type=style&index=0&id=d300b746&scoped=true&lang=css&":
+/*!*****************************************************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/DropDownTableTestOne.vue?vue&type=style&index=0&id=d300b746&scoped=true&lang=css& ***!
+  \*****************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DropDownTable_vue_vue_type_style_index_0_id_7e846c47_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./DropDownTable.vue?vue&type=style&index=0&id=7e846c47&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/DropDownTable.vue?vue&type=style&index=0&id=7e846c47&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DropDownTable_vue_vue_type_style_index_0_id_7e846c47_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DropDownTable_vue_vue_type_style_index_0_id_7e846c47_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DropDownTable_vue_vue_type_style_index_0_id_7e846c47_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DropDownTable_vue_vue_type_style_index_0_id_7e846c47_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DropDownTable_vue_vue_type_style_index_0_id_7e846c47_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DropDownTableTestOne_vue_vue_type_style_index_0_id_d300b746_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./DropDownTableTestOne.vue?vue&type=style&index=0&id=d300b746&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/DropDownTableTestOne.vue?vue&type=style&index=0&id=d300b746&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DropDownTableTestOne_vue_vue_type_style_index_0_id_d300b746_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DropDownTableTestOne_vue_vue_type_style_index_0_id_d300b746_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DropDownTableTestOne_vue_vue_type_style_index_0_id_d300b746_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DropDownTableTestOne_vue_vue_type_style_index_0_id_d300b746_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DropDownTableTestOne_vue_vue_type_style_index_0_id_d300b746_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/DropDownTable.vue?vue&type=template&id=7e846c47&scoped=true&":
-/*!********************************************************************************************************!*\
-  !*** ./resources/js/components/dashboard/DropDownTable.vue?vue&type=template&id=7e846c47&scoped=true& ***!
-  \********************************************************************************************************/
+/***/ "./resources/js/components/dashboard/DropDownTableTestOne.vue?vue&type=template&id=d300b746&scoped=true&":
+/*!***************************************************************************************************************!*\
+  !*** ./resources/js/components/dashboard/DropDownTableTestOne.vue?vue&type=template&id=d300b746&scoped=true& ***!
+  \***************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DropDownTable_vue_vue_type_template_id_7e846c47_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./DropDownTable.vue?vue&type=template&id=7e846c47&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/DropDownTable.vue?vue&type=template&id=7e846c47&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DropDownTable_vue_vue_type_template_id_7e846c47_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DropDownTableTestOne_vue_vue_type_template_id_d300b746_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./DropDownTableTestOne.vue?vue&type=template&id=d300b746&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard/DropDownTableTestOne.vue?vue&type=template&id=d300b746&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DropDownTableTestOne_vue_vue_type_template_id_d300b746_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DropDownTable_vue_vue_type_template_id_7e846c47_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DropDownTableTestOne_vue_vue_type_template_id_d300b746_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
