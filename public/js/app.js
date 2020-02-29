@@ -3215,8 +3215,64 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "DropDownTableTestOne",
+  props: ['data'],
   methods: {
     showProjects: function showProjects(e) {
       var projectRowContainer = e.target.parentNode.nextElementSibling;
@@ -3229,7 +3285,7 @@ __webpack_require__.r(__webpack_exports__);
         //collapse project row container
         projectRowContainer.style.height = '0'; //find all work-row-container (child) and collapse all sub children
 
-        var workRowContainers = document.querySelectorAll('.' + projectRowContainer.className + ' .work-row-container');
+        var workRowContainers = projectRowContainer.querySelectorAll('.' + projectRowContainer.className + ' .work-row-container');
         workRowContainers.forEach(function (workRowContainer) {
           workRowContainer.style.height = '0';
         });
@@ -3262,6 +3318,13 @@ __webpack_require__.r(__webpack_exports__);
     },
     getCurrentParentProjectRowContainerHeight: function getCurrentParentProjectRowContainerHeight(selectedProjectRowContainer) {
       return selectedProjectRowContainer.clientHeight;
+    }
+  },
+  computed: {
+    displayData: function displayData() {
+      if (this.data.length > 0) {
+        return this.data;
+      }
     }
   }
 });
@@ -12526,7 +12589,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.bg-account[data-v-7e846c47]{\n    background-color: #858585;\n}\n.bg-account-light[data-v-7e846c47]{\n    background-color: #fff;\n}\n.bg-project[data-v-7e846c47]{\n    background-color: #bfbfbf;\n}\n.bg-project-light[data-v-7e846c47]{\n    background-color: #fff;\n}\n.bg-work[data-v-7e846c47]{\n    background-color: #ededed;\n}\n.parent-row[data-v-7e846c47]{\n    width: 100%;\n    height: 50px;\n    user-select: none;\n    -webkit-user-select: none;\n    -ms-user-select: none;\n    -moz-user-select: none;\n    -o-user-select: none;\n    cursor: pointer;\n    overflow: hidden;\n    margin: 1px 0;\n}\n.content[data-v-7e846c47]{\n    width: 100%;\n    height: 100%;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    color: white;\n    justify-content: center;\n    padding: 5px;\n    transition: 0.3s ease;\n    -webkit-transition: 0.3s ease;\n    -moz-transition: 0.3s ease;\n    -o-transition: 0.3s ease;\n    -ms-transition: 0.3s ease;\n    will-change: background-color;\n}\n.child-row-container[data-v-7e846c47]{\n    width: 100%;\n    overflow: hidden;\n    height: 0;\n    transition: 0.3s ease;\n    -webkit-transition: 0.3s ease;\n    -moz-transition: 0.3s ease;\n    -o-transition: 0.3s ease;\n    -ms-transition: 0.3s ease;\n    will-change: height;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* start dropdown table style */\n.bg-account[data-v-7e846c47]{\n    background-color: #858585;\n}\n.bg-account-light[data-v-7e846c47]{\n    background-color: #fff;\n}\n.bg-project[data-v-7e846c47]{\n    background-color: #bfbfbf;\n}\n.bg-project-light[data-v-7e846c47]{\n    background-color: #fff;\n}\n.bg-work[data-v-7e846c47]{\n    background-color: #ededed;\n}\n.parent-row[data-v-7e846c47]{\n    width: 100%;\n    height: 50px;\n    user-select: none;\n    -webkit-user-select: none;\n    -ms-user-select: none;\n    -moz-user-select: none;\n    -o-user-select: none;\n    cursor: pointer;\n    overflow: hidden;\n    margin: 1px 0;\n}\n.content[data-v-7e846c47]{\n    width: 100%;\n    height: 100%;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    color: white;\n    justify-content: center;\n    padding: 5px;\n    transition: 0.3s ease;\n    -webkit-transition: 0.3s ease;\n    -moz-transition: 0.3s ease;\n    -o-transition: 0.3s ease;\n    -ms-transition: 0.3s ease;\n    will-change: background-color;\n}\n.child-row-container[data-v-7e846c47]{\n    width: 100%;\n    overflow: hidden;\n    height: 0;\n    transition: 0.3s ease;\n    -webkit-transition: 0.3s ease;\n    -moz-transition: 0.3s ease;\n    -o-transition: 0.3s ease;\n    -ms-transition: 0.3s ease;\n    will-change: height;\n}\n/* start dropdown table style */\n", ""]);
 
 // exports
 
@@ -46290,7 +46353,7 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("drop-down-table"),
+      _c("drop-down-table", { attrs: { data: _vm.dashboards } }),
       _vm._v(" "),
       _c("div", { staticClass: "my-5" }),
       _vm._v(" "),
@@ -46408,7 +46471,7 @@ var render = function() {
       },
       [
         _c("div", { staticClass: "content bg-account" }, [
-          _vm._v("\n            Account\n        ")
+          _vm._v("\n            Account\n            ")
         ])
       ]
     ),
@@ -46455,7 +46518,51 @@ var render = function() {
           ]
         ),
         _vm._v(" "),
-        _vm._m(1),
+        _vm._m(1)
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "parent-row",
+        on: {
+          click: function($event) {
+            $event.preventDefault()
+            $event.stopPropagation()
+            return _vm.showProjects($event)
+          }
+        }
+      },
+      [
+        _c("div", { staticClass: "content bg-account" }, [
+          _vm._v("\n            Account\n            ")
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "child-row-container" }, [
+      _c("div", { staticClass: "content bg-account-light" }, [
+        _c(
+          "div",
+          {
+            staticClass: "parent-row project-row",
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                $event.stopPropagation()
+                return _vm.showWorks($event)
+              }
+            }
+          },
+          [
+            _c("div", { staticClass: "content bg-project" }, [
+              _vm._v("\n                    Project\n                ")
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _vm._m(2),
         _vm._v(" "),
         _c(
           "div",
@@ -46476,12 +46583,40 @@ var render = function() {
           ]
         ),
         _vm._v(" "),
-        _vm._m(2)
+        _vm._m(3)
       ])
     ])
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "child-row-container work-row-container" },
+      [
+        _c("div", { staticClass: "content bg-project-light" }, [
+          _c("div", { staticClass: "parent-row work-row" }, [
+            _c("div", { staticClass: "content bg-work" }, [
+              _vm._v(
+                "\n                            Work 1\n                        "
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "parent-row work-row" }, [
+            _c("div", { staticClass: "content bg-work" }, [
+              _vm._v(
+                "\n                            Work 2\n                        "
+              )
+            ])
+          ])
+        ])
+      ]
+    )
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

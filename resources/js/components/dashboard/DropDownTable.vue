@@ -1,10 +1,14 @@
 <template>
     <div style="width: 80%">
 
-
+        <!-- start account list row -->
         <div class="parent-row" @click.prevent.stop="showProjects($event)"> <!--project row-->
             <div class="content bg-account">
+
+                <!-- start row content-->
                 Account
+                <!-- end row content-->
+
             </div>
         </div>
         <div class="child-row-container">
@@ -72,6 +76,57 @@
                 </div>
                 <!-- end project list row -->
 
+
+
+            </div>
+        </div>
+        <!-- end account list row -->
+
+        <!-- start account list row -->
+        <div class="parent-row" @click.prevent.stop="showProjects($event)"> <!--project row-->
+            <div class="content bg-account">
+
+                <!-- start row content-->
+                Account
+                <!-- end row content-->
+
+            </div>
+        </div>
+        <div class="child-row-container">
+            <div class="content bg-account-light">
+
+
+                <!-- start project list row -->
+                <div class="parent-row project-row" @click.prevent.stop="showWorks($event)">
+                    <div class="content bg-project">
+                        Project
+                    </div>
+                </div><!-- project-row class use with js-->
+                <div class="child-row-container work-row-container"> <!-- work-row-container class use with js-->
+                    <div class="content bg-project-light">
+
+
+                        <!-- start work list row-->
+                        <div class="parent-row work-row"><!-- work-row class use with js-->
+                            <div class="content bg-work">
+                                Work 1
+                            </div>
+                        </div>
+                        <!-- end work list row -->
+
+                        <!-- work list 2-->
+                        <div class="parent-row work-row">
+                            <div class="content bg-work">
+                                Work 2
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <!-- end project list row -->
+
+
                 <!-- start project list row -->
                 <div class="parent-row project-row" @click.prevent.stop="showWorks($event)">
                     <div class="content bg-project">
@@ -106,7 +161,7 @@
 
             </div>
         </div>
-
+        <!-- end account list row -->
 
     </div>
 </template>
@@ -114,6 +169,7 @@
 <script>
     export default {
         name: "DropDownTableTestOne",
+        props: ['data'],
         methods:{
             showProjects(e){
                 const projectRowContainer = e.target.parentNode.nextElementSibling;
@@ -127,7 +183,7 @@
                     projectRowContainer.style.height = '0';
 
                     //find all work-row-container (child) and collapse all sub children
-                    const workRowContainers = document.querySelectorAll('.'+projectRowContainer.className+' .work-row-container');
+                    const workRowContainers = projectRowContainer.querySelectorAll('.'+projectRowContainer.className+' .work-row-container');
                     workRowContainers.forEach(workRowContainer => {
                         workRowContainer.style.height = '0';
                     });
@@ -166,11 +222,19 @@
             getCurrentParentProjectRowContainerHeight(selectedProjectRowContainer){
                 return selectedProjectRowContainer.clientHeight;
             }
+        },
+        computed:{
+            displayData(){
+                if(this.data.length > 0){
+                    return this.data;
+                }
+            }
         }
     }
 </script>
 
 <style scoped>
+    /* start dropdown table style */
     .bg-account{
         background-color: #858585;
     }
@@ -225,4 +289,5 @@
         -ms-transition: 0.3s ease;
         will-change: height;
     }
+    /* start dropdown table style */
 </style>

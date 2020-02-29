@@ -2,7 +2,7 @@
     <div>
 
 
-        <drop-down-table></drop-down-table>
+        <drop-down-table :data="dashboards"></drop-down-table>
 
 
 
