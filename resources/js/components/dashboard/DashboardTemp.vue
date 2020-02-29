@@ -52,7 +52,7 @@
 
 <script>
     import SideDashboardDetail from "./SideDashboardDetail";
-    import DropDownTable from "./DropDownTableTestOne";
+    import DropDownTable from "./DropDownTable";
     export default {
         name: "DashboardTemp",
         components:{

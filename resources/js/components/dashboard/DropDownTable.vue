@@ -1,47 +1,110 @@
 <template>
-    <div>
+    <div style="width: 80%">
 
 
-        <!-- one row -->
-        <div class="parent-row" @click.prevent.stop="showContent($event)">
-            <div class="content">Client Account 1</div>
-        </div>
-        <div class="child-row" @click.prevent.stop="showContent($event)">
-            <div class="content">
-                Content
-                <button class="btn btn-primary">hello</button>
+        <div class="parent-row" @click.prevent.stop="showProjects($event)"> <!--project row-->
+            <div class="content bg-account">
+                Account
             </div>
         </div>
-        <div class="child-row">
-            <div class="content">Content 1</div>
-        </div>
+        <div class="child-row-container">
+            <div class="content bg-account-light">
 
-        <!-- one row -->
-        <div class="parent-row" @click.prevent.stop="showContent($event)">
-            <div class="content">Parent</div>
-        </div>
-        <div class="child-row" @click.prevent.stop="showContent($event)">
-            <div class="content">
-                Content
-                <button class="btn btn-primary">hello</button>
-            </div>
-        </div>
-        <div class="child-row">
-            <div class="content">Content 1</div>
-        </div>
 
-        <!-- one row -->
-        <div class="parent-row" @click.prevent.stop="showContent($event)">
-            <div class="content">Parent</div>
-        </div>
-        <div class="child-row" @click.prevent.stop="showContent($event)">
-            <div class="content">
-                Content
-                <button class="btn btn-primary">hello</button>
+                <!-- start project list row -->
+                <div class="parent-row project-row" @click.prevent.stop="showWorks($event)">
+                    <div class="content bg-project">
+                        Project
+                    </div>
+                </div><!-- project-row class use with js-->
+                <div class="child-row-container work-row-container"> <!-- work-row-container class use with js-->
+                    <div class="content bg-project-light">
+
+
+                        <!-- start work list row-->
+                        <div class="parent-row work-row"><!-- work-row class use with js-->
+                            <div class="content bg-work">
+                                Work 1
+                            </div>
+                        </div>
+                        <!-- end work list row -->
+
+                        <!-- work list 2-->
+                        <div class="parent-row work-row">
+                            <div class="content bg-work">
+                                Work 2
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <!-- end project list row -->
+
+
+                <!-- start project list row -->
+                <div class="parent-row project-row" @click.prevent.stop="showWorks($event)">
+                    <div class="content bg-project">
+                        Project
+                    </div>
+                </div><!-- project-row class use with js-->
+                <div class="child-row-container work-row-container"> <!-- work-row-container class use with js-->
+                    <div class="content bg-project-light">
+
+
+                        <!-- start work list row-->
+                        <div class="parent-row work-row"><!-- work-row class use with js-->
+                            <div class="content bg-work">
+                                Work 1
+                            </div>
+                        </div>
+                        <!-- end work list row -->
+
+                        <!-- work list 2-->
+                        <div class="parent-row work-row">
+                            <div class="content bg-work">
+                                Work 2
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <!-- end project list row -->
+
+                <!-- start project list row -->
+                <div class="parent-row project-row" @click.prevent.stop="showWorks($event)">
+                    <div class="content bg-project">
+                        Project
+                    </div>
+                </div><!-- project-row class use with js-->
+                <div class="child-row-container work-row-container"> <!-- work-row-container class use with js-->
+                    <div class="content bg-project-light">
+
+
+                        <!-- start work list row-->
+                        <div class="parent-row work-row"><!-- work-row class use with js-->
+                            <div class="content bg-work">
+                                Work 1
+                            </div>
+                        </div>
+                        <!-- end work list row -->
+
+                        <!-- work list 2-->
+                        <div class="parent-row work-row">
+                            <div class="content bg-work">
+                                Work 2
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <!-- end project list row -->
+
+
+
             </div>
-        </div>
-        <div class="child-row">
-            <div class="content">Content 1</div>
         </div>
 
 
@@ -50,78 +113,110 @@
 
 <script>
     export default {
-        name: "DropDownTable",
-        data(){
-            return{
-
-            }
-        },
+        name: "DropDownTableTestOne",
         methods:{
-            showContent(event){
-                const contentRef = event.target.parentNode.nextElementSibling;//this work if the clicked element has child
+            showProjects(e){
+                const projectRowContainer = e.target.parentNode.nextElementSibling;
+                const projectCount = this.countChildRow(projectRowContainer,'project-row');
+                const paddingSize = 5 * 2;// 2 = left and right, 5 = padding 5px
 
-                if(contentRef){
-                    if(contentRef.classList.contains('show')){
-                        contentRef.classList.remove('show');
-                        const child = contentRef.nextElementSibling;
-                        if(child){
-                            child.classList.remove('show');
-                        }
-                    }else{
-                        contentRef.classList.add('show');
-                    }
+                if(projectRowContainer.clientHeight <= 0){
+                    projectRowContainer.style.height = ((50 * projectCount)+paddingSize)+'px';
+                }else{
+                    //collapse project row container
+                    projectRowContainer.style.height = '0';
+
+                    //find all work-row-container (child) and collapse all sub children
+                    const workRowContainers = document.querySelectorAll('.'+projectRowContainer.className+' .work-row-container');
+                    workRowContainers.forEach(workRowContainer => {
+                        workRowContainer.style.height = '0';
+                    });
                 }
             },
-            async gettingData(){
-                await axios.get('api/v1/positioins').then(response => {
-                    if(response.status === 200){
-                        console.log(response);
-                    }
-                })
+            showWorks(e){
+                //current selected workRowContainer
+                const selectedWorkRowContainer = e.target.parentNode.nextElementSibling;
+
+                //find current selected parent-project-row-container
+                const currentParentProjectRowContainer = selectedWorkRowContainer.parentElement.parentElement;
+
+                //set variables
+                const workCount = this.countChildRow(selectedWorkRowContainer, 'work-row');
+                const paddingSize = 5 * 2;
+
+                const currentParentProjectRowContainerHeight = this.getCurrentParentProjectRowContainerHeight(currentParentProjectRowContainer);
+
+                if(selectedWorkRowContainer.clientHeight <= 0){
+                    //resize parent (project row container)
+                    currentParentProjectRowContainer.style.height = currentParentProjectRowContainerHeight + ((50*workCount)+paddingSize)+'px';
+
+                    //resize child of selected item (work-row-container)
+                    selectedWorkRowContainer.style.height = (50*workCount)+paddingSize+'px';
+                }else{
+                    selectedWorkRowContainer.style.height = '0';
+
+                    //resize its parents
+                    currentParentProjectRowContainer.style.height = currentParentProjectRowContainerHeight - ((50*workCount)+paddingSize)+'px';
+                }
+            },
+            countChildRow(childRowContainer, childRowClassName){
+                const childRows = childRowContainer.getElementsByClassName(childRowClassName);
+                return childRows.length;
+            },
+            getCurrentParentProjectRowContainerHeight(selectedProjectRowContainer){
+                return selectedProjectRowContainer.clientHeight;
             }
         }
     }
 </script>
 
 <style scoped>
-    *{
-        box-sizing: border-box;
+    .bg-account{
+        background-color: #858585;
+    }
+    .bg-account-light{
+        background-color: #fff;
+    }
+    .bg-project{
+        background-color: #bfbfbf;
+    }
+    .bg-project-light{
+        background-color: #fff;
+    }
+    .bg-work{
+        background-color: #ededed;
     }
     .parent-row{
-        width: 300px;
-        height: 70px;
-        background-color: #385d7a;
-        cursor: pointer;
+        width: 100%;
+        height: 50px;
         user-select: none;
         -webkit-user-select: none;
-        -moz-user-select: none;
         -ms-user-select: none;
-        transition: 0.3s ease;
-        -webkit-transition: 0.3s ease;
-        -o-transition: 0.3s ease;
-        -moz-transition: 0.3s ease;
-        color: white;
-        will-change: background-color;
-    }
-    .parent-row:hover{
-        background-color: #1b97cc;
+        -moz-user-select: none;
+        -o-user-select: none;
+        cursor: pointer;
+        overflow: hidden;
+        margin: 1px 0;
     }
     .content{
-        height: 100%;
         width: 100%;
-        padding: 10px;
+        height: 100%;
         display: flex;
-        justify-content: center;
+        flex-direction: column;
         align-items: center;
-        border-bottom: 1px solid #c7c7c7;
-        user-select: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
+        color: white;
+        justify-content: center;
+        padding: 5px;
+        transition: 0.3s ease;
+        -webkit-transition: 0.3s ease;
+        -moz-transition: 0.3s ease;
+        -o-transition: 0.3s ease;
+        -ms-transition: 0.3s ease;
+        will-change: background-color;
     }
-    .child-row{
-        width: 300px;
-        background-color: #fff;
+    .child-row-container{
+        width: 100%;
+        overflow: hidden;
         height: 0;
         transition: 0.3s ease;
         -webkit-transition: 0.3s ease;
@@ -129,10 +224,5 @@
         -o-transition: 0.3s ease;
         -ms-transition: 0.3s ease;
         will-change: height;
-        overflow: hidden;
-        cursor: pointer;
-    }
-    .child-row.show{
-        height: 70px;
     }
 </style>
