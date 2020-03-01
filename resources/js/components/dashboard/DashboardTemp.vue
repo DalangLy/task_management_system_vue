@@ -1,8 +1,16 @@
 <template>
     <div>
 
+        <h3>Dashboard</h3>
+        <!-- start breadcrumb-->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+            </ol>
+        </nav>
+        <!-- start breadcrumb-->
 
-        <drop-down-table :data="dashboards"></drop-down-table>
+        <drop-down-table :data="accounts"></drop-down-table>
 
 
 
@@ -61,6 +69,124 @@
         },
         data(){
             return{
+                accounts: [
+                    {
+                        id: 1,
+                        task: 'Task 1',
+                        fee: 300,
+                        expense: 100,
+                        profit: -200,
+                        finished: false,
+                        projects: [
+                            {
+                                project_id: 1,
+                                project_name: 'Project 1',
+                                fee: 200,
+                                expense: 100,
+                                profit: 100,
+                                finished: false,
+                                works: [
+                                    {
+                                        id: 1,
+                                        work_name: 'work 1',
+                                        fee: 200,
+                                        expense: 100,
+                                        profit: 100,
+                                        finished: false,
+                                    },
+                                    {
+                                        id: 2,
+                                        work_name: 'work 2',
+                                        fee: 200,
+                                        expense: 100,
+                                        profit: 100,
+                                        finished: false,
+                                    },
+                                    {
+                                        id: 3,
+                                        work_name: 'work 3',
+                                        fee: 200,
+                                        expense: 100,
+                                        profit: 100,
+                                        finished: false,
+                                    }
+                                ]
+                            },
+                            {
+                                project_id: 1,
+                                project_name: 'Project 2',
+                                fee: 200,
+                                expense: 100,
+                                profit: 100,
+                                finished: false,
+                                works: [
+                                    {
+                                        id: 1,
+                                        work_name: 'work 1',
+                                        fee: 200,
+                                        expense: 100,
+                                        profit: 100,
+                                        finished: false,
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        task: 'Task 2',
+                        fee: 300,
+                        expense: 100,
+                        profit: 200,
+                        finished: false,
+                        projects: [
+                            {
+                                project_id: 1,
+                                project_name: 'Project 3',
+                                fee: 200,
+                                expense: 100,
+                                profit: 100,
+                                finished: false,
+                                works: [
+                                    {
+                                        id: 1,
+                                        work_name: 'work 1',
+                                        fee: 200,
+                                        expense: 100,
+                                        profit: 100,
+                                        finished: false,
+                                    }
+                                ]
+                            },
+                            {
+                                project_id: 1,
+                                project_name: 'Project 4',
+                                fee: 200,
+                                expense: 100,
+                                profit: 100,
+                                finished: false,
+                                works: [
+                                    {
+                                        id: 1,
+                                        work_name: 'work 1',
+                                        fee: 200,
+                                        expense: 100,
+                                        profit: 100,
+                                        finished: false,
+                                    },
+                                    {
+                                        id: 2,
+                                        work_name: 'work 2',
+                                        fee: 200,
+                                        expense: 100,
+                                        profit: 100,
+                                        finished: false,
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
                 dashboards: [
                     {
                         id: 1,

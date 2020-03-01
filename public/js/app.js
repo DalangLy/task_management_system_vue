@@ -2960,6 +2960,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2970,6 +2978,104 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      accounts: [{
+        id: 1,
+        task: 'Task 1',
+        fee: 300,
+        expense: 100,
+        profit: -200,
+        finished: false,
+        projects: [{
+          project_id: 1,
+          project_name: 'Project 1',
+          fee: 200,
+          expense: 100,
+          profit: 100,
+          finished: false,
+          works: [{
+            id: 1,
+            work_name: 'work 1',
+            fee: 200,
+            expense: 100,
+            profit: 100,
+            finished: false
+          }, {
+            id: 2,
+            work_name: 'work 2',
+            fee: 200,
+            expense: 100,
+            profit: 100,
+            finished: false
+          }, {
+            id: 3,
+            work_name: 'work 3',
+            fee: 200,
+            expense: 100,
+            profit: 100,
+            finished: false
+          }]
+        }, {
+          project_id: 1,
+          project_name: 'Project 2',
+          fee: 200,
+          expense: 100,
+          profit: 100,
+          finished: false,
+          works: [{
+            id: 1,
+            work_name: 'work 1',
+            fee: 200,
+            expense: 100,
+            profit: 100,
+            finished: false
+          }]
+        }]
+      }, {
+        id: 2,
+        task: 'Task 2',
+        fee: 300,
+        expense: 100,
+        profit: 200,
+        finished: false,
+        projects: [{
+          project_id: 1,
+          project_name: 'Project 3',
+          fee: 200,
+          expense: 100,
+          profit: 100,
+          finished: false,
+          works: [{
+            id: 1,
+            work_name: 'work 1',
+            fee: 200,
+            expense: 100,
+            profit: 100,
+            finished: false
+          }]
+        }, {
+          project_id: 1,
+          project_name: 'Project 4',
+          fee: 200,
+          expense: 100,
+          profit: 100,
+          finished: false,
+          works: [{
+            id: 1,
+            work_name: 'work 1',
+            fee: 200,
+            expense: 100,
+            profit: 100,
+            finished: false
+          }, {
+            id: 2,
+            work_name: 'work 2',
+            fee: 200,
+            expense: 100,
+            profit: 100,
+            finished: false
+          }]
+        }]
+      }],
       dashboards: [{
         id: 1,
         task: 'Task 1',
@@ -3157,12 +3263,86 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "DropDownTableTestOne",
   props: ['data'],
   methods: {
+    //start dropdown table function
     showProjects: function showProjects(e) {
-      var projectRowContainer = e.target.parentNode.nextElementSibling;
+      var parentRow = e.target.parentElement.parentElement.parentElement.parentElement;
+      var projectRowContainer = parentRow.nextElementSibling;
       var projectCount = this.countChildRow(projectRowContainer, 'project-row');
       var paddingSize = 5 * 2; // 2 = left and right, 5 = padding 5px
 
@@ -3179,8 +3359,9 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     showWorks: function showWorks(e) {
-      //current selected workRowContainer
-      var selectedWorkRowContainer = e.target.parentNode.nextElementSibling; //find current selected parent-project-row-container
+      var childRow = e.target.parentElement.parentElement.parentElement.parentElement; //current selected workRowContainer
+
+      var selectedWorkRowContainer = childRow.nextElementSibling; //find current selected parent-project-row-container
 
       var currentParentProjectRowContainer = selectedWorkRowContainer.parentElement.parentElement; //set variables
 
@@ -3205,6 +3386,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     getCurrentParentProjectRowContainerHeight: function getCurrentParentProjectRowContainerHeight(selectedProjectRowContainer) {
       return selectedProjectRowContainer.clientHeight;
+    },
+    //end dropdown table functions
+    getId: function getId(id) {
+      console.log(id);
     }
   },
   computed: {
@@ -12476,7 +12661,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* start dropdown table style */\n.bg-account[data-v-7e846c47]{\n    background-color: #858585;\n}\n.bg-account-light[data-v-7e846c47]{\n    background-color: #fff;\n}\n.bg-project[data-v-7e846c47]{\n    background-color: #bfbfbf;\n}\n.bg-project-light[data-v-7e846c47]{\n    background-color: #fff;\n}\n.bg-work[data-v-7e846c47]{\n    background-color: #ededed;\n}\n.parent-row[data-v-7e846c47]{\n    width: 100%;\n    height: 50px;\n    user-select: none;\n    -webkit-user-select: none;\n    -ms-user-select: none;\n    -moz-user-select: none;\n    -o-user-select: none;\n    cursor: pointer;\n    overflow: hidden;\n    margin: 1px 0;\n}\n.content[data-v-7e846c47]{\n    width: 100%;\n    height: 100%;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    color: white;\n    justify-content: center;\n    padding: 5px;\n    transition: 0.3s ease;\n    -webkit-transition: 0.3s ease;\n    -moz-transition: 0.3s ease;\n    -o-transition: 0.3s ease;\n    -ms-transition: 0.3s ease;\n    will-change: background-color;\n}\n.child-row-container[data-v-7e846c47]{\n    width: 100%;\n    overflow: hidden;\n    height: 0;\n    transition: 0.3s ease;\n    -webkit-transition: 0.3s ease;\n    -moz-transition: 0.3s ease;\n    -o-transition: 0.3s ease;\n    -ms-transition: 0.3s ease;\n    will-change: height;\n}\n/* start dropdown table style */\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* start dropdown table style */\n.bg-account[data-v-7e846c47]{\n    background-color: #2B7B9B;\n}\n.bg-account[data-v-7e846c47]:hover{\n    background-color: #005B7F;\n}\n.bg-account-light[data-v-7e846c47]{\n    background-color: #fff;\n}\n.bg-project[data-v-7e846c47]{\n    background-color: #01BAAD;\n}\n.bg-project[data-v-7e846c47]:hover{\n    background-color: #008077;\n}\n.bg-project-light[data-v-7e846c47]{\n    background-color: #fff;\n}\n.bg-work[data-v-7e846c47]{\n    background-color: #58C785;\n}\n.bg-work[data-v-7e846c47]:hover{\n    background-color: #007F33;\n}\n.parent-row[data-v-7e846c47]{\n    width: 100%;\n    height: 50px;\n    user-select: none;\n    -webkit-user-select: none;\n    -ms-user-select: none;\n    -moz-user-select: none;\n    -o-user-select: none;\n    cursor: pointer;\n    overflow: hidden;\n    margin: 1px 0;\n}\n.content[data-v-7e846c47]{\n    width: 100%;\n    height: 100%;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    color: white;\n    justify-content: center;\n    transition: 0.3s ease;\n    -webkit-transition: 0.3s ease;\n    -moz-transition: 0.3s ease;\n    -o-transition: 0.3s ease;\n    -ms-transition: 0.3s ease;\n    will-change: background-color;\n}\n.default-padding[data-v-7e846c47]{\n    padding: 5px;\n}\n.child-padding[data-v-7e846c47]{\n    padding: 5px 0 5px 20px;\n}\n.child-row-container[data-v-7e846c47]{\n    width: 100%;\n    overflow: hidden;\n    height: 0;\n    transition: 0.3s ease;\n    -webkit-transition: 0.3s ease;\n    -moz-transition: 0.3s ease;\n    -o-transition: 0.3s ease;\n    -ms-transition: 0.3s ease;\n    will-change: height;\n}\n/* start dropdown table style */\n", ""]);
 
 // exports
 
@@ -46240,7 +46425,11 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("drop-down-table", { attrs: { data: _vm.dashboards } }),
+      _c("h3", [_vm._v("Dashboard")]),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _c("drop-down-table", { attrs: { data: _vm.accounts } }),
       _vm._v(" "),
       _c("div", { staticClass: "my-5" }),
       _vm._v(" "),
@@ -46249,7 +46438,7 @@ var render = function() {
         { staticClass: "dashboard-container" },
         [
           _c("table", { staticClass: "table table-striped" }, [
-            _vm._m(0),
+            _vm._m(1),
             _vm._v(" "),
             _c(
               "tbody",
@@ -46305,6 +46494,23 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("nav", { attrs: { "aria-label": "breadcrumb" } }, [
+      _c("ol", { staticClass: "breadcrumb" }, [
+        _c(
+          "li",
+          {
+            staticClass: "breadcrumb-item active",
+            attrs: { "aria-current": "page" }
+          },
+          [_vm._v("Dashboard")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "thead-dark" }, [
       _c("tr", [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
@@ -46343,51 +46549,399 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticStyle: { width: "80%" } }, [
-    _c(
-      "div",
-      {
-        staticClass: "parent-row",
-        on: {
-          click: function($event) {
-            $event.preventDefault()
-            $event.stopPropagation()
-            return _vm.showProjects($event)
-          }
-        }
-      },
-      [
-        _c("div", { staticClass: "content bg-account" }, [
-          _vm._v("\n            Account\n            ")
-        ])
-      ]
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "child-row-container" }, [
-      _c("div", { staticClass: "content bg-account-light" }, [
-        _c(
-          "div",
-          {
-            staticClass: "parent-row project-row",
-            on: {
-              click: function($event) {
-                $event.preventDefault()
-                $event.stopPropagation()
-                return _vm.showWorks($event)
+  return _c(
+    "div",
+    { staticStyle: { width: "80%" } },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _vm._l(_vm.displayData, function(item, index) {
+        return [
+          _c(
+            "div",
+            {
+              staticClass: "parent-row",
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  $event.stopPropagation()
+                  return _vm.getId(1)
+                }
               }
-            }
-          },
-          [
-            _c("div", { staticClass: "content bg-project" }, [
-              _vm._v("\n                    Project\n                ")
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _vm._m(0)
-      ])
-    ])
-  ])
+            },
+            [
+              _c("div", { staticClass: "content default-padding bg-account" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "d-flex flex-row justify-content-center align-items-center h-100 w-100"
+                  },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "flex-grow-1 d-flex justify-content-center align-items-center h-100",
+                        staticStyle: { width: "40px" }
+                      },
+                      [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-outline-light rounded-circle",
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                $event.stopPropagation()
+                                return _vm.showProjects($event)
+                              }
+                            }
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "fas fa-chevron-down",
+                              staticStyle: { "pointer-events": "none" }
+                            })
+                          ]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "flex-grow-1 d-flex justify-content-center align-items-center h-100",
+                        staticStyle: { width: "50px" }
+                      },
+                      [_vm._v(_vm._s(index + 1))]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "flex-grow-1 d-flex justify-content-center align-items-center h-100",
+                        staticStyle: { width: "100px" }
+                      },
+                      [_vm._v(_vm._s(item.task))]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "flex-grow-1 d-flex justify-content-center align-items-center h-100",
+                        staticStyle: { width: "100px" }
+                      },
+                      [_vm._v(_vm._s(item.fee) + "$")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "flex-grow-1 d-flex justify-content-center align-items-center h-100",
+                        staticStyle: { width: "100px" }
+                      },
+                      [_vm._v(_vm._s(item.expense) + "$")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "flex-grow-1 d-flex justify-content-center align-items-center h-100",
+                        class: item.profit < 0 ? "bg-danger" : "",
+                        staticStyle: { width: "100px" }
+                      },
+                      [_vm._v(_vm._s(item.profit) + "$")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "flex-grow-1 d-flex justify-content-center align-items-center h-100",
+                        staticStyle: { width: "40px" }
+                      },
+                      [_vm._v(_vm._s(item.finished ? "Yes" : "No"))]
+                    ),
+                    _vm._v(" "),
+                    _vm._m(1, true)
+                  ]
+                )
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "child-row-container" }, [
+            _c(
+              "div",
+              { staticClass: "content child-padding bg-account-light" },
+              [
+                _vm._l(item.projects, function(project, index) {
+                  return [
+                    _c("div", { staticClass: "parent-row project-row" }, [
+                      _c(
+                        "div",
+                        { staticClass: "content default-padding bg-project" },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "d-flex flex-row justify-content-center align-items-center h-100 w-100"
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "flex-grow-1 d-flex justify-content-center align-items-center h-100",
+                                  staticStyle: { width: "calc(40px - 20px)" }
+                                },
+                                [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "btn btn-outline-light rounded-circle",
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          $event.stopPropagation()
+                                          return _vm.showWorks($event)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass: "fas fa-chevron-down",
+                                        staticStyle: {
+                                          "pointer-events": "none"
+                                        }
+                                      })
+                                    ]
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "flex-grow-1 d-flex justify-content-center align-items-center h-100",
+                                  staticStyle: { width: "50px" }
+                                },
+                                [_vm._v(_vm._s(index + 1))]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "flex-grow-1 d-flex justify-content-center align-items-center h-100",
+                                  staticStyle: { width: "100px" }
+                                },
+                                [_vm._v(_vm._s(project.project_name))]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "flex-grow-1 d-flex justify-content-center align-items-center h-100",
+                                  staticStyle: { width: "100px" }
+                                },
+                                [_vm._v(_vm._s(project.fee) + "$")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "flex-grow-1 d-flex justify-content-center align-items-center h-100",
+                                  staticStyle: { width: "100px" }
+                                },
+                                [_vm._v(_vm._s(project.expense) + "$")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "flex-grow-1 d-flex justify-content-center align-items-center h-100",
+                                  class: project.profit < 0 ? "bg-danger" : "",
+                                  staticStyle: { width: "100px" }
+                                },
+                                [_vm._v(_vm._s(project.profit) + "$")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "flex-grow-1 d-flex justify-content-center align-items-center h-100",
+                                  staticStyle: { width: "40px" }
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(project.finished ? "Yes" : "No")
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _vm._m(2, true)
+                            ]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "child-row-container work-row-container" },
+                      [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "content child-padding bg-project-light"
+                          },
+                          [
+                            _vm._l(project.works, function(work, index) {
+                              return [
+                                _c(
+                                  "div",
+                                  { staticClass: "parent-row work-row" },
+                                  [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "content default-padding bg-work"
+                                      },
+                                      [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "d-flex flex-row justify-content-center align-items-center h-100 w-100"
+                                          },
+                                          [
+                                            _c("div", {
+                                              staticClass:
+                                                "flex-grow-1 d-flex justify-content-center align-items-center h-100",
+                                              staticStyle: {
+                                                width: "calc(40px - 40px)"
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "flex-grow-1 d-flex justify-content-center align-items-center h-100",
+                                                staticStyle: { width: "50px" }
+                                              },
+                                              [_vm._v(_vm._s(index + 1))]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "flex-grow-1 d-flex justify-content-center align-items-center h-100",
+                                                staticStyle: { width: "100px" }
+                                              },
+                                              [_vm._v(_vm._s(work.work_name))]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "flex-grow-1 d-flex justify-content-center align-items-center h-100",
+                                                staticStyle: { width: "100px" }
+                                              },
+                                              [_vm._v(_vm._s(work.fee) + "$")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "flex-grow-1 d-flex justify-content-center align-items-center h-100",
+                                                staticStyle: { width: "100px" }
+                                              },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(work.expense) + "$"
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "flex-grow-1 d-flex justify-content-center align-items-center h-100",
+                                                class:
+                                                  work.profit < 0
+                                                    ? "bg-danger"
+                                                    : "",
+                                                staticStyle: { width: "100px" }
+                                              },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(work.profit) + "$"
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "flex-grow-1 d-flex justify-content-center align-items-center h-100",
+                                                staticStyle: { width: "40px" }
+                                              },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    work.finished ? "Yes" : "No"
+                                                  )
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _vm._m(3, true)
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ]
+                            })
+                          ],
+                          2
+                        )
+                      ]
+                    )
+                  ]
+                })
+              ],
+              2
+            )
+          ])
+        ]
+      })
+    ],
+    2
+  )
 }
 var staticRenderFns = [
   function() {
@@ -46396,24 +46950,167 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "child-row-container work-row-container" },
+      {
+        staticClass: "w-100 overflow-hidden mb-2",
+        staticStyle: { height: "50px", "user-select": "none" }
+      },
       [
-        _c("div", { staticClass: "content bg-project-light" }, [
-          _c("div", { staticClass: "parent-row work-row" }, [
-            _c("div", { staticClass: "content bg-work" }, [
-              _vm._v(
-                "\n                            Work 1\n                        "
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "parent-row work-row" }, [
-            _c("div", { staticClass: "content bg-work" }, [
-              _vm._v(
-                "\n                            Work 2\n                        "
-              )
-            ])
-          ])
+        _c(
+          "div",
+          {
+            staticClass:
+              "bg-primary w-100 h-100 d-flex flex-column align-items-center justify-content-center font-weight-bold text-white",
+            staticStyle: { padding: "5px" }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "d-flex flex-row justify-content-center align-items-center h-100 w-100"
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "flex-grow-1 d-flex justify-content-center align-items-center h-100",
+                    staticStyle: { width: "40px" }
+                  },
+                  [
+                    _c("i", {
+                      staticClass: "fas fa-stream",
+                      staticStyle: { "pointer-events": "none" }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "flex-grow-1 d-flex justify-content-center align-items-center h-100",
+                    staticStyle: { width: "50px" }
+                  },
+                  [_vm._v("#")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "flex-grow-1 d-flex justify-content-center align-items-center h-100",
+                    staticStyle: { width: "100px" }
+                  },
+                  [_vm._v("Name")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "flex-grow-1 d-flex justify-content-center align-items-center h-100",
+                    staticStyle: { width: "100px" }
+                  },
+                  [_vm._v("Fee")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "flex-grow-1 d-flex justify-content-center align-items-center h-100",
+                    staticStyle: { width: "100px" }
+                  },
+                  [_vm._v("Expense")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "flex-grow-1 d-flex justify-content-center align-items-center h-100",
+                    staticStyle: { width: "100px" }
+                  },
+                  [_vm._v("Profit/Loss")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "flex-grow-1 d-flex justify-content-center align-items-center h-100",
+                    staticStyle: { width: "40px" }
+                  },
+                  [_vm._v("Finished")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "flex-grow-1 d-flex justify-content-center align-items-center h-100",
+                    staticStyle: { width: "100px" }
+                  },
+                  [_vm._v("Actions")]
+                )
+              ]
+            )
+          ]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "flex-grow-1 d-flex justify-content-center align-items-center h-100",
+        staticStyle: { width: "100px" }
+      },
+      [
+        _c("button", { staticClass: "btn btn-light" }, [
+          _c("i", { staticClass: "fas fa-eye" })
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "flex-grow-1 d-flex justify-content-center align-items-center h-100",
+        staticStyle: { width: "100px" }
+      },
+      [
+        _c("button", { staticClass: "btn btn-light" }, [
+          _c("i", { staticClass: "fas fa-eye" })
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "flex-grow-1 d-flex justify-content-center align-items-center h-100",
+        staticStyle: { width: "100px" }
+      },
+      [
+        _c("button", { staticClass: "btn btn-light" }, [
+          _c("i", { staticClass: "fas fa-eye" })
         ])
       ]
     )
